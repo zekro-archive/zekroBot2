@@ -1,0 +1,19 @@
+{
+  "name": "zekrobot2",
+  "version": "0.1.0-alpha",
+  "description": "Rework of the original JDA zekroBot",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "node src/main.js debug",
+    "start": "node src/main.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "discordjs-cmds": "^0.5.1",
+    "extendutils": "^0.2.1",
+    "colors": "^1.1.2",
+    "coffeescript": "^2.0.3"
+  }
+}
