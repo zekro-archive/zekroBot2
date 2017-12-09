@@ -8,3 +8,5 @@ class CmdHandler {
         return this.cmd
     }
 }
+
+exports.CmdHandler = CmdHandler

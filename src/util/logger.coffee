@@ -7,4 +7,4 @@ exports.error = (content) ->
 
 exports.info = (content) ->
     content.split('\n').forEach (s) ->
-        console.log """#{"[ERROR]".cyan} #{s}"""
+        console.log """#{"[INFO]".cyan} #{s}"""
