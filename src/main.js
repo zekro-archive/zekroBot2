@@ -6,6 +6,7 @@ const fs = require('fs')
 
 const Logger = require('../src/util/logger')
 const { CmdHandler } = require('./core/cmdhandler')
+const { MySql } = require('./core/mysql')
 
 const package = require('../package.json')
 exports.VERSION = package.version
@@ -17,6 +18,8 @@ else {
     Logger.error("Cant't find 'config.json' file!\nPlease download it here: " + "http://bot2.zekro.de/dl/config".bgRed)
     process.exit(-1)
 }
+
+exports.mysql = new MySql(config.mysql)
 
 // Client and CommandHandler setup
 exports.client = new Client()

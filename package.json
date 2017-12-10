@@ -1,6 +1,6 @@
 {
   "name": "zekrobot2",
-  "version": "0.1.0-alpha",
+  "version": "0.2.0-alpha",
   "description": "Rework of the original JDA zekroBot",
   "main": "src/main.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "discordjs-cmds": "^0.5.1",
     "extendutils": "^0.2.1",
     "colors": "^1.1.2",
-    "coffeescript": "^2.0.3"
+    "coffeescript": "^2.0.3",
+    "mysql": "^2.15.0"
   }
 }
