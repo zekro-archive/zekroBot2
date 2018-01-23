@@ -1,6 +1,7 @@
 const Main = require('../main')
 const { CmdParser } = require('discordjs-cmds')
 const Embeds = require('../util/embeds')
+const Guildpres = require('../util/guildpres')
 
 
 /*
@@ -27,6 +28,8 @@ class CmdHandler {
         })
 
         this.cmd.setHost(Main.config.hostacc)
+
+        Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
         this.cmd
             // INFO COMMAND
@@ -68,6 +71,7 @@ class CmdHandler {
                 this.cmd.type.SETTING,
                 99
             )
+            // SAY COMMAND
             .register(
                 require('../commands/say').ex,
                 'say',
@@ -80,6 +84,7 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 3
             )
+            // EVAL COMMAND
             .register(
                 require('../commands/eval').ex,
                 'eval',
@@ -89,6 +94,16 @@ class CmdHandler {
                 `\`${prefix}eval objects\`\n`,
                 this.cmd.type.ADMIN,
                 99
+            )
+            // PREFIX COMMAND
+            .register(
+                require('../commands/prefix').ex,
+                'prefix',
+                ['pre', 'guildpre', 'guildprefix'],
+                `\`${prefix}prefix <new prefix>\`\n` +
+                `\`${prefix}prefix\`\n`,
+                this.cmd.type.GUILDADMIN,
+                5
             )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
