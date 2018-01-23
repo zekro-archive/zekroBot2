@@ -9,7 +9,7 @@ exports.error = (chan, cont, title) ->
         .setColor Statics.COLORS.error
     if title
         emb.setTitle title
-    chan.sendMessage '', emb
+    chan.send '', emb
         .then (m) -> msg = m
     return msg
 
@@ -21,6 +21,6 @@ exports.default = (chan, cont, title) ->
         .setColor Statics.COLORS.main
     if title
         emb.setTitle title
-    chan.sendMessage '', emb
+    chan.send '', emb
         .then (m) -> msg = m
     return msg

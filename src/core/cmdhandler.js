@@ -1,5 +1,6 @@
 const Main = require('../main')
 const { CmdParser } = require('discordjs-cmds')
+const Embeds = require('../util/embeds')
 
 
 /*
@@ -21,6 +22,10 @@ class CmdHandler {
 
         this.cmd.addType('DEBUG')
 
+        this.cmd.setOptions({
+            guildonwerperm: 4,
+        })
+
         this.cmd
             // INFO COMMAND
             .register(
@@ -41,6 +46,7 @@ class CmdHandler {
                 'DEBUG',
                 5
             )
+            // PERMS COMMAND
             .register(
                 require('../commands/perms').ex,
                 'perms',
@@ -61,7 +67,12 @@ class CmdHandler {
                 4
             )
 
-        this.cmd.event.on('commandFailed', (type, msg, err) => console.log(type, err))
+        this.cmd.event.on('commandFailed', (type, msg, err) => 
+            console.log(type, err)
+        )
+        this.cmd.event.on('commandFailed', (type, msg, err) => 
+            Embeds.error(msg.channel, `Error Type: *\`${type}\`*\n\nError:\n\`\`\`\n${err}\n\`\`\``, "COMMAND ERROR")
+        )
 
         return this.cmd
     }
