@@ -66,6 +66,18 @@ class CmdHandler {
                 this.cmd.type.SETTING,
                 4
             )
+            .register(
+                require('../commands/say').ex,
+                'say',
+                ['saymsg'],
+                'Send an embed message with the bot',
+                `\`${prefix}say <message>\`\n` +
+                `\`${prefix}say -e <message>\`\n` +
+                `\`${prefix}say -e:<color> <message>\`\n` +
+                `\`${prefix}say colors\`\n`,
+                this.cmd.type.CHAT,
+                3
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
