@@ -14,3 +14,12 @@ exports.get = (cb) => {
         }
     })
 }
+
+exports.getGuild = (guild, cb) => {
+    exports.get(pres => {
+        if (guild.id in pres)
+            cb(pres[guild.id])
+        else
+            cb(null)
+    })
+}
