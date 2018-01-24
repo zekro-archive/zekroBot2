@@ -32,6 +32,17 @@ class CmdHandler {
         Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
         this.cmd
+            // AUTOROLE COMMAND
+            .register(
+                require('../commands/autorole').ex,
+                'autorole',
+                ['guildrole', 'joinrole'],
+                'Set the role users will automatically get after joining the guild',
+                `\`${prefix}autorole <role>\`\n` + 
+                `\`${prefix}autorole reset\`\n`,
+                this.cmd.type.GUILDADMIN,
+                5
+            )
             // INFO COMMAND
             .register(
                 require('../commands/info').ex, 
@@ -105,12 +116,13 @@ class CmdHandler {
                 require('../commands/prefix').ex,
                 'prefix',
                 ['pre', 'guildpre', 'guildprefix'],
-                'Register a guild specific prefix'
+                'Register a guild specific prefix',
                 `\`${prefix}prefix <new prefix>\`\n` +
                 `\`${prefix}prefix\`\n`,
                 this.cmd.type.GUILDADMIN,
                 5
             )
+            // CLEAR COMMAND
             .register(
                 require('../commands/clear').ex,
                 'clear',

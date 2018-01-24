@@ -24,3 +24,6 @@ exports.default = (chan, cont, title) ->
     chan.send '', emb
         .then (m) -> msg = m
     return msg
+
+exports.invalidInput = (chan, cmd) ->
+    exports.error chan, "Please enter `help #{cmd}` to get information how to use this command.", "INVALID INPUT"

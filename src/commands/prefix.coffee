@@ -26,6 +26,6 @@ exports.ex = (msg, args) ->
             else
                 Main.mysql.query "INSERT INTO guilds (guild, prefix) VALUES ('#{guild.id}', '#{pre}')"
             Embeds.default chan, "Changed prefix for this guild to ```#{pre}```\n\nYou can still use the core prefix `#{Main.config.prefix}` instead of the guild specific prefix."
-            Guildpres.get(dbpres => Main.cmd.setGuildPres(dbpres))
+            Guildpres.get((dbpres) -> Main.cmd.setGuildPres(dbpres))
         else
             Embeds.error chan, "An unexpected error occured while saving to database: ```#{err}```", "UNEXPECTED ERROR"
