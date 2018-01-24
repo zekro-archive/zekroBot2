@@ -44,6 +44,11 @@ exports.ex = (msg, args) ->
         Embeds.error chan, "Please use `help perms` to get information about this command!", "INVALID INPUT"
         return
 
+    if args[0] == "reset" and parseInt(args[1]) > 0
+        Main.mysql.query "DELETE FROM perms WHERE guild = '#{guild.id}' && lvl = '#{args[1]}'"
+        Embeds.default chan, "Reset roles for permission level **#{args[1]}**."
+        return
+
     if parseInt(args[0]) < 1
         Embeds.error chan, "Please use `help perms` to get information about this command!", "INVALID INPUT"
         return

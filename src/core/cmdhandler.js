@@ -1,6 +1,7 @@
 const Main = require('../main')
 const { CmdParser } = require('discordjs-cmds')
 const Embeds = require('../util/embeds')
+const Guildpres = require('../util/guildpres')
 
 
 /*
@@ -23,8 +24,12 @@ class CmdHandler {
         this.cmd.addType('DEBUG')
 
         this.cmd.setOptions({
-            guildonwerperm: 4,
+            guildonwerperm: 5,
         })
+
+        this.cmd.setHost(Main.config.hostacc)
+
+        Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
         this.cmd
             // INFO COMMAND
@@ -44,7 +49,7 @@ class CmdHandler {
                 'Just for testing purposes', 
                 null, 
                 'DEBUG',
-                5
+                99
             )
             // PERMS COMMAND
             .register(
@@ -52,9 +57,11 @@ class CmdHandler {
                 'perms',
                 ['permroles', 'perm', 'permlvl'],
                 'Set the permission levels for specific roles',
-                `\`${prefix}perms <LVL>, <role1>, <role2>, ...\`\n\`${prefix}perms list\``,
+                `\`${prefix}perms <LVL>, <role1>, <role2>, ...\`\n` + 
+                `\`${prefix}perms list\`\n` +
+                `\`${prefix}perms reset <lvl>\``,
                 this.cmd.type.SETTING,
-                4
+                5
             )
             // GAME COMMAND
             .register(
@@ -62,9 +69,46 @@ class CmdHandler {
                 'game', 
                 ['playing', 'botmsg'], 
                 'Set messages the bot should show in playing text', 
-                `\`${prefix}game <message 1>, <message 2>, ...\`\n\`${prefix}game reset\``,
+                `\`${prefix}game msg <message 1>, <message 2>, ...\`\n` +
+                `\`${prefix}game type <playing, streaming, listening, watching>\`\n` +
+                `\`${prefix}game url <twitch url>\`\n` +
+                `\`${prefix}game reset\``,
                 this.cmd.type.SETTING,
-                4
+                99
+            )
+            // SAY COMMAND
+            .register(
+                require('../commands/say').ex,
+                'say',
+                ['saymsg'],
+                'Send an embed message with the bot',
+                `\`${prefix}say <message>\`\n` +
+                `\`${prefix}say -e <message>\`\n` +
+                `\`${prefix}say -e:<color> <message>\`\n` +
+                `\`${prefix}say colors\`\n`,
+                this.cmd.type.CHAT,
+                3
+            )
+            // EVAL COMMAND
+            .register(
+                require('../commands/eval').ex,
+                'eval',
+                ['evaluate', 'exec'],
+                'evaluate code with this command',
+                `\`${prefix}eval <js code>\`\n` +
+                `\`${prefix}eval objects\`\n`,
+                this.cmd.type.ADMIN,
+                99
+            )
+            // PREFIX COMMAND
+            .register(
+                require('../commands/prefix').ex,
+                'prefix',
+                ['pre', 'guildpre', 'guildprefix'],
+                `\`${prefix}prefix <new prefix>\`\n` +
+                `\`${prefix}prefix\`\n`,
+                this.cmd.type.GUILDADMIN,
+                5
             )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 

@@ -1,7 +1,7 @@
 Main = require '../main' 
 Logger = require '../util/logger'
-
 client = Main.client
+Settings = require '../core/settings'
 
 client.on 'ready', ->
     Logger.info """
@@ -12,7 +12,17 @@ client.on 'ready', ->
                 Running on #{client.guilds.array().length} servers.
                 """
     console.log "\n\n"
-    client.user.setActivity """zekros Tutorials. | #{Main.VERSION} | zb:help""", {url: "http://twitch.tv/zekrotja", type: 3}
+
+    Settings.getGame (curr) ->
+        if curr
+            client.user.setActivity((if curr.name then curr.name else "zekro.de | #{Main.config.prefix}help"),
+                                    { 
+                                        type: if curr.type then curr.type else 0
+                                        url: if curr.url then curr.url else "http://twitch.tv/zekrotja"
+                                    }
+            )
+        else
+            client.user.setActivity """zekros Tutorials. | #{Main.VERSION} | zb:help""", {url: "http://twitch.tv/zekrotja", type: 3}
 
     Main.mysql.query "SELECT * FROM perms", (err, res) ->
         if !err and res
