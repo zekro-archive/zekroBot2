@@ -87,7 +87,7 @@ class CmdHandler {
                 `\`${prefix}say -e:<color> <message>\`\n` +
                 `\`${prefix}say colors\`\n`,
                 this.cmd.type.CHAT,
-                3
+                2
             )
             // EVAL COMMAND
             .register(
@@ -109,6 +109,16 @@ class CmdHandler {
                 `\`${prefix}prefix\`\n`,
                 this.cmd.type.GUILDADMIN,
                 5
+            )
+            .register(
+                require('../commands/clear').ex,
+                'clear',
+                ['purge', 'clean'],
+                `\`${prefix}clear <ammount>\`\n` +
+                `\`${prefix}clear <user> <ammount>\`\n` +
+                `\`${prefix}prefix\`\n`,
+                this.cmd.type.MODERATION,
+                4
             )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
