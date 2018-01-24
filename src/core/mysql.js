@@ -28,36 +28,12 @@ class MySql {
     }
 
     query(command, cb) {
-        this.con.query(command, cb)
-    }
-
-    getData(table, key, whereKey, whereValue, cb) {
-        this.con.query(`SELECT * FROM ${table} WHERE '${whereKey}' = '${whereValue}'`, (err, res) => {
-            if (err)
-                cb(err, null)
-            else
-                cb(null, res[0][key])
-        })
-    }
-
-    existsData(table, whereKey, whereValue, cb) {
-        this.con.query(`SELECT * FROM ${table} WHERE '${whereKey}' = '${whereValue}'`, (err, res) => {
-            if (err)
-                cb(false, 'ERROR')
-            else if (res.length == 0)
-                cb(false, 'EMPTY_RES')
-            else
-                cb(true, 'TRUE')
-        })
-    }
-
-    setData(table, key, value, whereKey, whereValue, cb) {
-        this.existsData(table, whereKey, whereValue, (state) => {
-            if (state)
-                this.con.query(`UPDATE ${table} SET '${key}' = '${value}' WHERE '${whereKey}' = '${whereValue}'`, cb)
-            else
-                this.con.query(`INSERT INTO ${table} (${whereKey}, ${key}) VALUES ('${whereValue}', '${value}')`, cb)
-        })
+        try {
+            this.con.query(command, cb)
+        } catch (e) {
+            console.log(e)
+            cb(null, null)
+        }
     }
 }
 

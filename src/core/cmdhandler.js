@@ -69,7 +69,9 @@ class CmdHandler {
                 'game', 
                 ['playing', 'botmsg'], 
                 'Set messages the bot should show in playing text', 
-                `\`${prefix}game <message 1>, <message 2>, ...\`\n` +
+                `\`${prefix}game msg <message 1>, <message 2>, ...\`\n` +
+                `\`${prefix}game type <playing, streaming, listening, watching>\`\n` +
+                `\`${prefix}game url <twitch url>\`\n` +
                 `\`${prefix}game reset\``,
                 this.cmd.type.SETTING,
                 99
