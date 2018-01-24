@@ -10,6 +10,7 @@ const { MySql } = require('./core/mysql')
 
 const package = require('../package.json')
 exports.VERSION = package.version
+exports.package = package
 
 // Config loader
 if (!fs.existsSync('../config.json'))
