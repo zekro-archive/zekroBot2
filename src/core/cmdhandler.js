@@ -105,6 +105,7 @@ class CmdHandler {
                 require('../commands/prefix').ex,
                 'prefix',
                 ['pre', 'guildpre', 'guildprefix'],
+                'Register a guild specific prefix'
                 `\`${prefix}prefix <new prefix>\`\n` +
                 `\`${prefix}prefix\`\n`,
                 this.cmd.type.GUILDADMIN,
@@ -114,8 +115,9 @@ class CmdHandler {
                 require('../commands/clear').ex,
                 'clear',
                 ['purge', 'clean'],
+                'Clear an ammount of messages in a chat',
                 `\`${prefix}clear <ammount>\`\n` +
-                `\`${prefix}clear <user> <ammount>\`\n` +
+                `\`${prefix}clear <ammount> <user>\`\n` +
                 `\`${prefix}prefix\`\n`,
                 this.cmd.type.MODERATION,
                 4

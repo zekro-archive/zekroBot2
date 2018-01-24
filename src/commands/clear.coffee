@@ -19,17 +19,17 @@ exports.ex = (msg, args) ->
 
     if args.length == 0
         clear chan, 1
-    else if args.length == 1
+    else if args.length > 1
         ammount = parseInt args[0]
         if 0 < ammount < 301
-            clear chan, ammount
+            if args.length > 1
+                memb = guild.members.find (m) -> m.id == args[1..].join(' ').replace(/[<@!>]/g, '')
+                if not memb
+                    memb = guild.members.find (m) -> m.displayName.toLowerCase().indexOf(args[1..].join(' ').toLowerCase()) > -1
+                if not memb
+                    Embeds.error chan, "Can not fetch any members to the input ```#{args[1..].join(' ')}```", "INVALID INPUT"
+                    return
+            clear chan, ammount, memb
         else
             Embeds.error chan, "Please neter a valid number of messages.\n*Currently, max. 300 messages can be cleared at once.*", "INVALID INPUT"
-            return
-    else if args.length >= 2
-        memb = guild.members.find (m) -> m.id == args[0].replace(/[<@>]/g)
-        if not memb
-            memb = guild.members.find (m) -> m.displayName.toLowerCase().indexOf(args[0].toLowerCase()) > -1
-        if not memb
-            Embeds.error chan, "Can not fetch any members to the input ```#{args[0]}```", "INVALID INPUT"
             return
