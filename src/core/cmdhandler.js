@@ -24,10 +24,10 @@ class CmdHandler {
         this.cmd.addType('DEBUG')
 
         this.cmd.setOptions({
-            guildonwerperm: 5,
+            guildownerperm: 5,
         })
 
-        this.cmd.setHost(Main.config.hostacc)
+        this.cmd.setHost(Main.config.hostid)
 
         Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
