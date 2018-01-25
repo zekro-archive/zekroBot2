@@ -19,7 +19,7 @@ exports.ex = (msg, args) ->
 
     if args.length == 0
         clear chan, 1
-    else if args.length > 1
+    else if args.length >= 1
         ammount = parseInt args[0]
         if 0 < ammount < 301
             if args.length > 1

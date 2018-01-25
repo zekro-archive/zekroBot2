@@ -32,6 +32,16 @@ class CmdHandler {
         Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
         this.cmd
+            .register(
+                require('../commands/user').ex,
+                'user',
+                ['member', 'userinfo', 'uinfo', 'profile'],
+                'Get information about user on guild',
+                `\`${prefix}user <user>\`\n` + 
+                `\`${prefix}user\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
             // AUTOROLE COMMAND
             .register(
                 require('../commands/autorole').ex,

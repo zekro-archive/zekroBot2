@@ -28,4 +28,3 @@ client.on 'ready', ->
         if !err and res
             res.forEach (r) ->
                 Main.cmd.setPerms r.roles.split(','), parseInt r.lvl
-                Logger.info "Set roles [#{r.roles}] to permlvl #{r.lvl}"
