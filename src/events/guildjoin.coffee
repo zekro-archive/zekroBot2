@@ -2,6 +2,7 @@ Main = require '../main'
 Logger = require '../util/logger'
 client = Main.client
 Settings = require '../core/settings'
+Embeds = require('../util/embeds')
 
 client.on 'guildMemberAdd', (memb) ->
     if !memb.user.bot

@@ -11,7 +11,7 @@ client.on 'ready', ->
                 -------------------------
                 Running on #{client.guilds.array().length} servers.
                 """
-    console.log "\n\n"
+    console.log "\n"
 
     Settings.getGame (curr) ->
         if curr
@@ -28,3 +28,5 @@ client.on 'ready', ->
         if !err and res
             res.forEach (r) ->
                 Main.cmd.setPerms r.roles.split(','), parseInt r.lvl
+
+    Main.loadModLoader()

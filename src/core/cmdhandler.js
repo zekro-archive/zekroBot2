@@ -33,6 +33,15 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/quote').ex,
+                'quote',
+                ['q'],
+                'Quote a message of any channel in the guild',
+                `\`${prefix}user <messageID>\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
+            .register(
                 require('../commands/user').ex,
                 'user',
                 ['member', 'userinfo', 'uinfo', 'profile'],
