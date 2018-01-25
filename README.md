@@ -43,3 +43,10 @@ Then you should set up your MySql Database for the bot.
 ### MySql Database Setup
 
 Just login to a web interface like PhpMyAdmin and import the **`zekroBot2.sql`** file you can find in the root directory of the repository, or execute the code in that file.
+
+> Also it is recommendet to create a specific user for the bot to use this database only having permissions accessing this database. Use the following to create such a user:
+```sql
+GRANT USAGE ON *.* TO 'zekroBot2'@'%' IDENTIFIED BY PASSWORD PASSWORD('USER PASSWORD HERE');
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER ON `zekroBot2`.* TO 'zekroBot2'@'%';
+```
