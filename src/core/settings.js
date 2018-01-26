@@ -9,7 +9,7 @@ exports.getGame = (cb) => {
             out = {}
             res.forEach(r => {
                 switch (r.key) {
-                    case 'game.key':
+                    case 'game.name':
                         out.name = r.value
                         break
                     case 'game.type':

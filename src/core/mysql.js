@@ -1,8 +1,11 @@
 const MySqlMod = require('mysql')
+const fs = require('fs')
 const Logger = require('../util/logger')
 
 class MySql {
     constructor(config) {
+
+        this.config = config
 
         this.con = MySqlMod.createConnection({
             host:     config.host,
