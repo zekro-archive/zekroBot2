@@ -33,6 +33,15 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/guild').ex,
+                'guild',
+                ['guildstats', 'server'],
+                'Get information about guild',
+                `\`${prefix}guild\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            .register(
                 require('../commands/vote').ex,
                 'vote',
                 ['poll'],

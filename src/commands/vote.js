@@ -10,7 +10,7 @@ const Statics = require('../util/statics')
 const emojis = '\u0031\u20E3 \u0032\u20E3 \u0033\u20E3 \u0034\u20E3 \u0035\u20E3 \u0036\u20E3 \u0037\u20E3 \u0038\u20E3 \u0039\u20E3 \u0030\u20E3'.split(' ')
 var polls = {}
 
-exports.load = () => Poll.load().then(() => console.log(polls))
+exports.load = () => Poll.load()
 
 class Poll {
 
@@ -36,7 +36,7 @@ class Poll {
                         Embeds.error(this.msg.channel, `You can only vote once, <@!${user.id}>`).then(m => {
                             setTimeout(() => m.delete(), 3000)
                         })
-                    else
+                    else if (!ans)
                         this.save()
                     reaction.remove(user)
                 }
@@ -61,6 +61,8 @@ class Poll {
         this.msg.channel.send('', this.emb)
         this.msg.channel.send('', new Discord.RichEmbed().setDescription(`Poll closed.`).setColor(Statics.COLORS.main))
         this.msg.delete()
+        let tempans = this.ans
+        delete polls[this.memb.id]
         this.delete()
     }
 
@@ -80,6 +82,7 @@ class Poll {
                 guild: this.msg.member.guild.id,
                 member: this.msg.member.id
             },
+            member: this.memb.id,
             topic: this.topic,
             poss: this.poss,
             ans: this.ans
@@ -100,13 +103,13 @@ class Poll {
                         let data = JSON.parse(r.data)
                         let guild = client.guilds.find(g => g.id == data.msg.guild)
                         let poll = new Poll(
-                            guild.members.find(m => m.id == data.msg.member),
+                            guild.members.find(m => m.id == data.member),
                             guild.channels.find(c => c.id == data.msg.channel),
                             data.topic,
                             data.poss,
                             data.ans
                         )
-                        polls[data.msg.member] = poll
+                        polls[r.membid] = poll
                         resolve()
                     })
                 }
@@ -133,6 +136,15 @@ exports.ex = (msg, args) => {
     }
     else {
         switch (args[0]) {
+            case 'close':
+            case 'stop':
+            case 'end':
+                if (memb.id in polls)
+                    polls[memb.id].close()
+                else
+                    Embeds.error(chan, 'You can only close a vote if you created one before.')
+                break
+
             default:
                 let cont = args.join(' ').split(/( *\| *)/gm).filter((a, i) => i % 2 == 0)
                 if (!(memb.id in polls)) {
@@ -145,5 +157,4 @@ exports.ex = (msg, args) => {
                 break
         }
     }
-
 }
