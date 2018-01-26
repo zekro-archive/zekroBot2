@@ -5,5 +5,7 @@ Embeds = require '../util/embeds'
 
 
 exports.ex = (msg, args) ->
-    Main.mysql.query "SELECT * FROM guilds", (err, res) ->
-        console.log(res[1].prefix.length)
+    msg.channel.send('test').then (msg) ->
+        msgString = JSON.stringify msg
+        recMsg = JSON.parse msgString
+        recMsg.edit 'Edited from JSON object, yay! :D'

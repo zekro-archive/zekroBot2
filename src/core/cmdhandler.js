@@ -33,6 +33,15 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/vote').ex,
+                'vote',
+                ['poll'],
+                'Create a vote',
+                null,
+                this.cmd.type.CHAT,
+                0
+            )
+            .register(
                 require('../commands/quote').ex,
                 'quote',
                 ['q'],

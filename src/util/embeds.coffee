@@ -9,9 +9,7 @@ exports.error = (chan, cont, title) ->
         .setColor Statics.COLORS.error
     if title
         emb.setTitle title
-    chan.send '', emb
-        .then (m) -> msg = m
-    return msg
+    return chan.send '', emb
 
 
 exports.default = (chan, cont, title) ->
@@ -21,9 +19,7 @@ exports.default = (chan, cont, title) ->
         .setColor Statics.COLORS.main
     if title
         emb.setTitle title
-    chan.send '', emb
-        .then (m) -> msg = m
-    return msg
+    return chan.send '', emb
 
 exports.invalidInput = (chan, cmd) ->
     exports.error chan, "Please enter `help #{cmd}` to get information how to use this command.", "INVALID INPUT"
