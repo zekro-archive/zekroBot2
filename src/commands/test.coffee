@@ -5,7 +5,4 @@ Embeds = require '../util/embeds'
 
 
 exports.ex = (msg, args) ->
-    msg.channel.send('test').then (msg) ->
-        msgString = JSON.stringify msg
-        recMsg = JSON.parse msgString
-        recMsg.edit 'Edited from JSON object, yay! :D'
+    console.log args.join('-')

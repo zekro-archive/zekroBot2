@@ -33,6 +33,15 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/restart').ex,
+                'restart',
+                [],
+                'Restart the bot',
+                `\`${prefix}restart\n`,
+                this.cmd.type.ADMIN,
+                100
+            )
+            .register(
                 require('../commands/mvall').ex,
                 'mvall',
                 ['moveall', 'mv'],
@@ -106,7 +115,7 @@ class CmdHandler {
                 'Just for testing purposes', 
                 null, 
                 'DEBUG',
-                99
+                999
             )
             // PERMS COMMAND
             .register(
@@ -131,7 +140,7 @@ class CmdHandler {
                 `\`${prefix}game url <twitch url>\`\n` +
                 `\`${prefix}game reset\``,
                 this.cmd.type.SETTING,
-                99
+                999
             )
             // SAY COMMAND
             .register(
@@ -155,7 +164,7 @@ class CmdHandler {
                 `\`${prefix}eval <js code>\`\n` +
                 `\`${prefix}eval objects\`\n`,
                 this.cmd.type.ADMIN,
-                99
+                999
             )
             // PREFIX COMMAND
             .register(
