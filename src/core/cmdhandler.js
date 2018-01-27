@@ -33,6 +33,16 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/id').ex,
+                'id',
+                ['whois', 'whatis', 'identify'],
+                'Get elements by ID or IDs of elements',
+                `\`${prefix}id <ID>\n` +
+                `\`${prefix}id <name>\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            .register(
                 require('../commands/restart').ex,
                 'restart',
                 [],
