@@ -33,6 +33,33 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/mvall').ex,
+                'mvall',
+                ['moveall', 'mv'],
+                'Move all members in current channel to another',
+                `\`${prefix}mvall <channel>\`\n`,
+                this.cmd.type.MODERATION,
+                2
+            )
+            .register(
+                require('../commands/guild').ex,
+                'guild',
+                ['guildstats', 'server'],
+                'Get information about guild',
+                `\`${prefix}guild\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            .register(
+                require('../commands/vote').ex,
+                'vote',
+                ['poll'],
+                'Create a vote',
+                null,
+                this.cmd.type.CHAT,
+                0
+            )
+            .register(
                 require('../commands/quote').ex,
                 'quote',
                 ['q'],

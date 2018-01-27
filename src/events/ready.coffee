@@ -30,3 +30,5 @@ client.on 'ready', ->
                 Main.cmd.setPerms r.roles.split(','), parseInt r.lvl
 
     Main.loadModLoader()
+
+    require('../commands/vote').load()
