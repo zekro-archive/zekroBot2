@@ -33,6 +33,15 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/mvall').ex,
+                'mvall',
+                ['moveall', 'mv'],
+                'Move all members in current channel to another',
+                `\`${prefix}mvall <channel>\`\n`,
+                this.cmd.type.MODERATION,
+                2
+            )
+            .register(
                 require('../commands/guild').ex,
                 'guild',
                 ['guildstats', 'server'],
