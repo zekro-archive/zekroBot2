@@ -73,16 +73,3 @@ exports.ex = (msg, args) ->
                 Embeds.error chan, "An error occured while setting the values to the database: ```#{err}```", "UNEXPECTED ERROR"
                 return
     Embeds.default chan, "Successfully set roles ```#{roles.map((r) -> r.name).join(', ')}``` to permission level **#{lvl}**"
-
-
-    # roleentry = roles.map((r) -> r.id).join(',')
-    # Main.mysql.query "SELECT * FROM perms WHERE guild = '#{guild.id}' && lvl = '#{lvl}'", (err, res) ->
-    #     if !err
-    #         if res and res.length > 0
-    #             Main.mysql.query "UPDATE perms SET roles = '#{roleentry}' WHERE guild = '#{guild.id}' && lvl = '#{lvl}'"
-    #         else
-    #             Main.mysql.query "INSERT INTO perms (guild, lvl, roles) VALUES ('#{guild.id}', '#{lvl}', '#{roleentry}')"
-    #         Main.cmd.setPerms roles.map((r) -> r.id), lvl 
-    #         Embeds.default chan, "Successfully set roles ```#{roles.map((r) -> r.name).join(', ')}``` to permission level **#{lvl}**"
-    #     else
-    #         Embeds.error chan, "An error occured while setting the values to the database: ```#{err}```", "UNEXPECTED ERROR"
