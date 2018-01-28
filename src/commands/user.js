@@ -8,8 +8,8 @@ const util = require('util');
 
 function parse(chan, memb) {
 
-    function _ornull(value) {
-        return value ? value : '<n/a>'
+    function _ornull(value, replacer) {
+        return value ? value : (replacer ? replacer : '<n/a>')
     }
 
     let maxrole = memb.highestRole
@@ -26,7 +26,7 @@ function parse(chan, memb) {
         .addField('Current Status', memb.presence.status)
         .addField('Joined Guild At', _ornull(memb.joinedAt))
         .addField('Created Account At', _ornull(user.createdAt))
-        .addField('Permission Level', _ornull(permlvl))
+        .addField('Permission Level', _ornull(permlvl, '0'))
         .addField('Roles', memb.roles.array().slice(1).map(r => `<@&${r.id}>`).join(', '))
         .addField('User Level', '*Comming soon*')
         .addField('Recent Reports', '*Comming soon*')
