@@ -33,6 +33,16 @@ class CmdHandler {
 
         this.cmd
             .register(
+                require('../commands/broadcast').ex,
+                'broadcast',
+                ['bcast', 'bc'],
+                'Send messages to all servers or server owners',
+                `\`${prefix}broadcast owners <msg>\n` +
+                `\`${prefix}broadcast all <msg>\n`,
+                this.cmd.type.ADMIN,
+                999
+            )
+            .register(
                 require('../commands/id').ex,
                 'id',
                 ['whois', 'whatis', 'identify'],
