@@ -27,7 +27,7 @@ client.on 'ready', ->
     Main.mysql.query "SELECT * FROM perms", (err, res) ->
         if !err and res
             res.forEach (r) ->
-                Main.cmd.setPerms r.roles.split(','), parseInt r.lvl
+                Main.cmd.setPerms r.role, r.lvl
 
     Main.loadModLoader()
 

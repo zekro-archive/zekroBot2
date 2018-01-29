@@ -21,8 +21,7 @@ exports.ex = (msg, args) ->
         if args.indexOf('colors') > -1
             Embeds.default msg.channel, "Available colors: ```#{Object.keys(colors).join(', ')}```"
             return
-        argstr = ""
-        argstr += arg + " " for arg in args
+        argstr = args.join(' ')
         if argstr.toLowerCase().indexOf("-e") > -1 and argstr.toLowerCase().indexOf("-e") < 1
             color = colors.gold
             if argstr.toLowerCase().indexOf("-e:") > -1

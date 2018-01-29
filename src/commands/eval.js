@@ -51,13 +51,12 @@ exports.ex = (msg, args) => {
     channel.send('', new Discord.RichEmbed()
         .setColor(success ? 0x76FF03 : 0xd50000)
         .setTitle(success ? "Eval Output" : "Eval Error")
-        .setDescription(`\`\`\`${res.length != 0 ? res : "no eval output"}\`\`\``)
+        .setDescription(
+            'for command:' +
+            `\`\`\`js\n${cmd}\`\`\`` +
+            'output:' + 
+            `\`\`\`${res.length != 0 ? res : "no eval output"}\`\`\``
+        )
     )
-    /*
-    .then(m => {
-        msg.delete();
-        setTimeout(() => m.delete(), 10000);
-    });
-    */
 
 }

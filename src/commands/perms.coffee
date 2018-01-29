@@ -22,20 +22,14 @@ exports.ex = (msg, args) ->
     if args.indexOf('list') == 0
         Main.mysql.query "SELECT * FROM perms WHERE guild = '#{guild.id}'", (err, res) ->
             if !err
-                out = ""
+                out_map = {}
                 if res and res.length > 0
                     res.forEach (r) ->
-                        rolenames = r.roles.split(',').map(`(rid) => {
-                            let cr = guild.roles.find((tr) => tr.id == rid)
-                            if (cr)
-                                return cr.name
-                            else
-                                return "<deleted role>"
-                        }`).join(', ')
-                        out += "LVL **#{r.lvl}**\n```#{rolenames}```\n\n"
+                        out_map[r.lvl] = if out_map[r.lvl] then "#{out_map[r.lvl]}, #{r.role}" else r.role
+                    out = Object.keys(out_map).map((lvl) -> "`#{lvl}`  -  <@&#{out_map[lvl]}>").join('\n')
                 else
                     out = "No role permissions defined."
-                Embeds.default chan, out
+                Embeds.default chan, out, 'Permission Levels'
             else
                 Embeds.error chan, "An error occured while setting the values to the database: ```#{err}```", "UNEXPECTED ERROR"
         return
@@ -44,16 +38,20 @@ exports.ex = (msg, args) ->
         Embeds.error chan, "Please use `help perms` to get information about this command!", "INVALID INPUT"
         return
 
-    if args[0] == "reset" and parseInt(args[1]) > 0
+    if args[0] == "reset" and parseInt(args[1]) >= 0
         Main.mysql.query "DELETE FROM perms WHERE guild = '#{guild.id}' && lvl = '#{args[1]}'"
         Embeds.default chan, "Reset roles for permission level **#{args[1]}**."
         return
 
-    if parseInt(args[0]) < 1
+    if parseInt(args[0]) < 0
         Embeds.error chan, "Please use `help perms` to get information about this command!", "INVALID INPUT"
         return
 
     lvl = args[0]
+    if !(parseInt(lvl) >= 0)
+        Embeds.error(chan, 'Please enter a valid level to set for role(s).')
+        return
+
     roleinvs = args[1..].join(' ').split(',').map((s) -> s.replace(/^ /g, ''))
 
     roles = getRoles(roleinvs, guild, msg)
@@ -61,13 +59,13 @@ exports.ex = (msg, args) ->
         Embeds.error chan, "Can not find any role with the identifiers ```#{args[1..].join(', ')}```", "INVALID INPUT"
         return
 
-    roleentry = roles.map((r) -> r.id).join(',')
-    Main.mysql.query "SELECT * FROM perms WHERE guild = '#{guild.id}' && lvl = '#{lvl}'", (err, res) ->
-        if !err
-            if res and res.length > 0
-                Main.mysql.query "UPDATE perms SET roles = '#{roleentry}' WHERE guild = '#{guild.id}' && lvl = '#{lvl}'"
+    Main.cmd.setPerms roles.map((r) -> r.id), lvl
+    roles.forEach (r) ->
+        Main.mysql.query "UPDATE perms SET lvl = '#{lvl}' WHERE role = '#{r.id}'", (err, res) ->
+            if !err and res
+                if res.affectedRows == 0
+                    Main.mysql.query "INSERT INTO perms (role, lvl, guild) VALUES ('#{r.id}', '#{lvl}', '#{guild.id}')"
             else
-                Main.mysql.query "INSERT INTO perms (guild, lvl, roles) VALUES ('#{guild.id}', '#{lvl}', '#{roleentry}')"
-            Embeds.default chan, "Successfully set roles ```#{roles.map((r) -> r.name).join(', ')}``` to permission level **#{lvl}**"
-        else
-            Embeds.error chan, "An error occured while setting the values to the database: ```#{err}```", "UNEXPECTED ERROR"
+                Embeds.error chan, "An error occured while setting the values to the database: ```#{err}```", "UNEXPECTED ERROR"
+                return
+    Embeds.default chan, "Successfully set roles ```#{roles.map((r) -> r.name).join(', ')}``` to permission level **#{lvl}**"
