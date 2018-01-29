@@ -31,7 +31,18 @@ class CmdHandler {
 
         Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
-        this.cmd
+        this.cmd   
+            .register(
+                require('../commands/autochannel').ex,
+                'autochannel',
+                ['autochan', 'ac', 'autochans'],
+                'Manage automatic voice channels',
+                `\`${prefix}autochannel set <channel>\n` +
+                `\`${prefix}autochannel unset <channel>\n` +
+                `\`${prefix}autochannel create <list>\n`,
+                this.cmd.type.GUILDADMIN,
+                3
+            )
             .register(
                 require('../commands/broadcast').ex,
                 'broadcast',

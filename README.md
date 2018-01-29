@@ -33,7 +33,7 @@ $ git clone https://github.com/zekrotja/zekroBot2
 
 Then, you need to install all npm-packages
 ```
-$ npm i
+$ npm install
 ```
 
 After that, open up the **`config.json`** file. Enter there your bot account credentials, your User ID to set you as the host of the bot, and the MySql credentials.
@@ -51,7 +51,7 @@ GRANT USAGE ON *.* TO 'zekroBot2'@'%' IDENTIFIED BY PASSWORD PASSWORD('USER PASS
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER ON `zekroBot2`.* TO 'zekroBot2'@'%';
 ```
 
-After that, you can start up the bot with
+After that, you can start the bot with
 ```
 $ npm start
 ```
