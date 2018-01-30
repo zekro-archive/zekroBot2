@@ -30,6 +30,14 @@ exports.ex = (msg, args) ->
                             ```
                             *This user is the user registered in the bot's root config as **host**. So this user has the highest permission level and is responsible for all administration tasks for this bot.*
                             """
+                .addField   "InviteLink",
+                            """
+                            Get this bot on your own server with the following Link:
+                            :point_right:  **[INVITE](https://discordapp.com/oauth2/authorize?client_id=#{client.user.id}&scope=bot&permissions=#{Statics.INVPERMS})**
+                            ```
+                            https://discordapp.com/oauth2/authorize?client_id=#{client.user.id}&scope=bot&permissions=#{Statics.INVPERMS}
+                            ```
+                            """
                 .addField   "GitHub Repository", "[**zekroTJA/zekroBot2**](https://github.com/zekroTJA/zekroBot2)"
                 .addField   "Contributors", 
                             ":white_small_square:  [**zekro**](https://github.com/zekroTJA)"
