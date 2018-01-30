@@ -4,6 +4,7 @@ const Mysql = Main.mysql
 
 
 var autochans = {}
+var tempchans = []
 
 
 exports.set = (chan, guild) => {
@@ -27,3 +28,41 @@ client.on('ready', () => {
             res.forEach(r => autochans[r.chan] = r.guild)
     })
 })
+
+client.on('voiceStateUpdate', (mold, mnew) => {
+    let vold = mold.voiceChannel
+    let vnew = mnew.voiceChannel
+
+    if (vold != vnew) {
+        if (vnew && vnew.id in autochans)
+            createTempChan(vnew, c => {
+                mnew.setVoiceChannel(c)
+            })
+        if (vold && tempchans.indexOf(vold.id) > -1 && vold.members.array().length == 0) {
+            deleteTempChan(vold)
+        }
+    }
+})
+
+function createTempChan(vc, cb) {
+    if (!cb)
+        cb = (c) => {}
+    vc.clone(`[TMP] ${vc.name}`).then(c => {
+        c.setParent(vc.parent).then(c1 => {
+            c.setPosition(vc.position + 1)
+        }).catch(e => {
+            c.setPosition(vc.position + 1)
+        })
+        tempchans.push(c.id)
+        cb(c)
+    })
+}
+
+function deleteTempChan(vc, cb) {
+    if (!cb)
+        cb = () => {}
+    vc.delete().then(() => {
+        tempchans = tempchans.filter(cid => cid != vc.id)
+        cb()
+    })
+}
