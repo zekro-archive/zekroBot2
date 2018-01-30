@@ -14,7 +14,9 @@ class MySql {
             database: config.database
         })
 
-        this.connect()
+        this.connect({
+            charset: 'utf8mb4'
+        })
     }
 
     connect() {

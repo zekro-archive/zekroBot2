@@ -4,6 +4,7 @@ client = Main.client
 Discord = require 'discord.js'
 Embeds = require '../util/embeds'
 ACHandler = require '../core/autochanhandler'
+Settings = require '../core/settings'
 
 
 
@@ -26,6 +27,19 @@ exports.ex = (msg, args) ->
 
     switch args[0]
 
+        when 'pre', 'prefix'
+            if args.length < 2
+                Embeds.invalidInput chan, 'autochannel'
+                return
+            if args[1] == 'off'
+                Mysql.query "UPDATE guilds SET autochanprefix = '' WHERE guild = '#{guild.id}'"
+                Embeds.default chan, 'Reset autochannel prefix.'
+            else
+                Mysql.query "UPDATE guilds SET autochanprefix = '#{args[1]}' WHERE guild = '#{guild.id}'", (err, res) ->
+                    if !err and res
+                        if res.affectedRows == 0
+                            Mysql.query "INSERT INTO guilds (guild, autochanprefix) VALUES ('#{guild.id}', '#{args[1]}')"
+                Embeds.default chan, "Set autochannel prefix to `#{args[1]}`.\n*You can reset with with `autochannel prefix off`.*"
         when 'add', 'set', 'create'
             if args.length < 2
                 Embeds.invalidInput chan, 'autochannel'
@@ -34,6 +48,10 @@ exports.ex = (msg, args) ->
             if !vchan
                 Embeds.error chan, "Can not fetch any voice channel to the input ```#{query}```"
             else
+                Settings.getAutochanPre guild, (pre) ->
+                    console.log pre
+                    if (pre)
+                        vchan.setName "#{pre} #{chan.name}"
                 Mysql.query "SELECT * FROM autochans WHERE chan = '#{vchan.id}'", (err, res) ->
                     if !err and res
                         if res.length > 0
@@ -54,6 +72,9 @@ exports.ex = (msg, args) ->
             if !vchan
                 Embeds.error chan, "Can not fetch any voice channel to the input ```#{query}```"
             else
+                Settings.getAutochanPre guild, (pre) ->
+                    if (pre)
+                        vchan.setName vchan.name.split(' ')[1..].join(' ')
                 Mysql.query "SELECT * FROM autochans WHERE chan = '#{vchan.id}'", (err, res) ->
                     if !err and res
                         if res.length == 0
