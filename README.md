@@ -47,4 +47,4 @@ Currently, the system is in a very early development phase, so please stay tuned
 
 # Modules
 
-[👉 **Wiki: Modules**](https://github.com/zekroTJA/zekroBot2/wiki/Modukes)
+[👉 **Wiki: Modules**](https://github.com/zekroTJA/zekroBot2/wiki/Modules)
