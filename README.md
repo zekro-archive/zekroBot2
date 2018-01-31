@@ -77,22 +77,328 @@ $ npm start
 
 # Commands & Functions
 
-### Autochannel
+### autochannel
 
-> Set and unset autochannels.<br>
-> Also you can set prefixes for autochannels *(beta)*.
+> Manage automatic voice channels
 
 | | |
-| --------- | -------- |
+| --------- | --------- |
 | Permission | 3 |
 | Group | GUILDADMIN |
-| Aliases | autochan, ac, autochans |
+| Aliases | - autochan</br>- ac</br>- autochans |
 
 **Usage**
 
 ```php
-zb:autochannel set <VoiceChannel(ID/Name)>     // Set a voice channels as autochannel
-zb:autochannel unset <VoiceChannel(ID/Name)>   // Unset a autochannel to normal voice channel
-zb:autochannel prefix <string>                 // Set a prefix autochannels will get at setting them
-                                               // This is currently WIP - emotes does not work currently
+zb:autochannel set <channel>
+zb:autochannel unset <channel>
+zb:autochannel create <list>
 ```
+
+
+### broadcast
+
+> Send messages to all servers or server owners
+
+| | |
+| --------- | --------- |
+| Permission | 999 |
+| Group | ADMIN |
+| Aliases | - bcast</br>- bc |
+
+**Usage**
+
+```php
+zb:broadcast owners <msg>
+zb:broadcast all <msg>
+```
+
+
+### id
+
+> Get elements by ID or IDs of elements
+
+| | |
+| --------- | --------- |
+| Permission | 0 |
+| Group | MISC |
+| Aliases | - whois</br>- whatis</br>- identify |
+
+**Usage**
+
+```php
+zb:id <ID>
+zb:id <name>
+```
+
+
+### restart
+
+> Restart the bot
+
+| | |
+| --------- | --------- |
+| Permission | 100 |
+| Group | ADMIN |
+| Aliases |  |
+
+**Usage**
+
+```php
+zb:restart
+```
+
+
+### mvall
+
+> Move all members in current channel to another
+
+| | |
+| --------- | --------- |
+| Permission | 2 |
+| Group | MODERATION |
+| Aliases | - moveall</br>- mv |
+
+**Usage**
+
+```php
+zb:mvall <channel>
+```
+
+
+### guild
+
+> Get information about guild
+
+| | |
+| --------- | --------- |
+| Permission | 0 |
+| Group | MISC |
+| Aliases | - guildstats</br>- server |
+
+**Usage**
+
+```php
+zb:guild
+```
+
+
+### vote
+
+> Create a vote
+
+| | |
+| --------- | --------- |
+| Permission | 0 |
+| Group | CHAT |
+| Aliases | - poll |
+
+**Usage**
+
+```php
+zb:vote <title> | <answer 1> | <answer 2> | <...>
+zb:vote close
+```
+
+
+### quote
+
+> Quote a message of any channel in the guild
+
+| | |
+| --------- | --------- |
+| Permission | 0 |
+| Group | CHAT |
+| Aliases | - q |
+
+**Usage**
+
+```php
+zb:user <messageID>
+```
+
+
+### user
+
+> Get information about user on guild
+
+| | |
+| --------- | --------- |
+| Permission | 0 |
+| Group | MISC |
+| Aliases | - member</br>- userinfo</br>- uinfo</br>- profile |
+
+**Usage**
+
+```php
+zb:user <user>
+zb:user
+```
+
+
+### autorole
+
+> Set the role users will automatically get after joining the guild
+
+| | |
+| --------- | --------- |
+| Permission | 5 |
+| Group | GUILDADMIN |
+| Aliases | - guildrole</br>- joinrole |
+
+**Usage**
+
+```php
+zb:autorole <role>
+zb:autorole reset
+```
+
+
+### info
+
+> Get info about the bot
+
+| | |
+| --------- | --------- |
+| Permission | 0 |
+| Group | MISC |
+| Aliases | - about |
+
+**Usage**
+
+```php
+zb:info
+```
+
+
+### test
+
+> Just for testing purposes
+
+| | |
+| --------- | --------- |
+| Permission | 999 |
+| Group | DEBUG |
+| Aliases |  |
+
+**Usage**
+
+```php
+no help
+```
+
+
+### perms
+
+> Set the permission levels for specific roles
+
+| | |
+| --------- | --------- |
+| Permission | 5 |
+| Group | SETTING |
+| Aliases | - permroles</br>- perm</br>- permlvl |
+
+**Usage**
+
+```php
+zb:perms <LVL>, <role1>, <role2>, ...
+zb:perms list
+zb:perms reset <lvl>
+```
+
+
+### game
+
+> Set messages the bot should show in playing text
+
+| | |
+| --------- | --------- |
+| Permission | 999 |
+| Group | SETTING |
+| Aliases | - playing</br>- botmsg |
+
+**Usage**
+
+```php
+zb:game msg <message 1>, <message 2>, ...
+zb:game type <playing, streaming, listening, watching>
+zb:game url <twitch url>
+zb:game reset
+```
+
+
+### say
+
+> Send an embed message with the bot
+
+| | |
+| --------- | --------- |
+| Permission | 2 |
+| Group | CHAT |
+| Aliases | - saymsg |
+
+**Usage**
+
+```php
+zb:say <message>
+zb:say -e <message>
+zb:say -e:<color> <message>
+zb:say colors
+```
+
+
+### eval
+
+> evaluate code with this command
+
+| | |
+| --------- | --------- |
+| Permission | 999 |
+| Group | ADMIN |
+| Aliases | - evaluate</br>- exec |
+
+**Usage**
+
+```php
+zb:eval <js code>
+zb:eval objects
+```
+
+
+### prefix
+
+> Register a guild specific prefix
+
+| | |
+| --------- | --------- |
+| Permission | 5 |
+| Group | GUILDADMIN |
+| Aliases | - pre</br>- guildpre</br>- guildprefix |
+
+**Usage**
+
+```php
+zb:prefix <new prefix>
+zb:prefix
+```
+
+
+### clear
+
+> Clear an ammount of messages in a chat
+
+| | |
+| --------- | --------- |
+| Permission | 4 |
+| Group | MODERATION |
+| Aliases | - purge</br>- clean |
+
+**Usage**
+
+```php
+zb:clear <ammount>
+zb:clear <ammount> <user>
+zb:prefix
+```
+
+

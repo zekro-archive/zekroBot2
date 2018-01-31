@@ -95,7 +95,8 @@ class CmdHandler {
                 'vote',
                 ['poll'],
                 'Create a vote',
-                null,
+                `\`${prefix}vote <title> | <answer 1> | <answer 2> | <...>\`\n` +
+                `\`${prefix}vote close\`\n`,
                 this.cmd.type.CHAT,
                 0
             )
@@ -135,7 +136,7 @@ class CmdHandler {
                 'info', 
                 ['about'], 
                 'Get info about the bot', 
-                `\`${prefix}info\``, 
+                `\`${prefix}info\`\n`, 
                 this.cmd.type.MISC
             )
             // TEST COMMAND
@@ -144,7 +145,7 @@ class CmdHandler {
                 'test', 
                 [], 
                 'Just for testing purposes', 
-                null, 
+                'no help\n', 
                 'DEBUG',
                 999
             )
@@ -156,7 +157,7 @@ class CmdHandler {
                 'Set the permission levels for specific roles',
                 `\`${prefix}perms <LVL>, <role1>, <role2>, ...\`\n` + 
                 `\`${prefix}perms list\`\n` +
-                `\`${prefix}perms reset <lvl>\``,
+                `\`${prefix}perms reset <lvl>\`\n`,
                 this.cmd.type.SETTING,
                 5
             )
@@ -169,7 +170,7 @@ class CmdHandler {
                 `\`${prefix}game msg <message 1>, <message 2>, ...\`\n` +
                 `\`${prefix}game type <playing, streaming, listening, watching>\`\n` +
                 `\`${prefix}game url <twitch url>\`\n` +
-                `\`${prefix}game reset\``,
+                `\`${prefix}game reset\`\n`,
                 this.cmd.type.SETTING,
                 999
             )
