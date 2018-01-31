@@ -39,7 +39,7 @@ class CmdHandler {
                 'Manage automatic voice channels',
                 `\`${prefix}autochannel set <channel>\n` +
                 `\`${prefix}autochannel unset <channel>\n` +
-                `\`${prefix}autochannel create <list>\n`,
+                `\`${prefix}autochannel list\n`,
                 this.cmd.type.GUILDADMIN,
                 3
             )

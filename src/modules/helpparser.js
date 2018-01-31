@@ -1,6 +1,7 @@
 var Main = require('../main')
 var fs = require('fs')
 var cmds = Main.cmd.helplist
+var Logger = require('../util/logger')
 
 var output = ""
 
@@ -35,4 +36,7 @@ Object.keys(cmds).forEach(i => {
                   '```\n\n\n'
 })
     
-fs.writeFile('commands.md', output)
+fs.writeFile('commands.md', output, (err, res) => {
+    if (!err)
+        Logger.debug('Successfully created "commands.md"')
+})

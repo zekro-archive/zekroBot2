@@ -92,7 +92,7 @@ $ npm start
 ```php
 zb:autochannel set <channel>
 zb:autochannel unset <channel>
-zb:autochannel create <list>
+zb:autochannel list
 ```
 
 
