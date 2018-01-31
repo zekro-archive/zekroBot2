@@ -44,3 +44,15 @@ exports.setGame = (sets, cb) => {
         })
     })
 }
+
+
+exports.getAutochanPre = (guild, cb) => {
+    Mysql.query(`SELECT * FROM guilds WHERE guild = '${guild.id}'`, (err, res) => {
+        if (!err && res)
+            console.log(res.autochanprefix, res.autochanprefix == "")
+            if (res.length > 0)
+                cb(res.autochanprefix == "" ? null : res.autochanprefix)
+        else
+            cb(null)
+    })
+}

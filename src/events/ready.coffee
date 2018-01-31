@@ -2,12 +2,13 @@ Main = require '../main'
 Logger = require '../util/logger'
 client = Main.client
 Settings = require '../core/settings'
+Statics = require '../util/statics'
 
 client.on 'ready', ->
     Logger.info """
                 Successfully logged in as #{client.user.username}##{client.user.discriminator} (#{client.user.id})
                 Invite link: 
-                https://discordapp.com/oauth2/authorize?client_id=#{client.user.id}&scope=bot&permissions=2146958455
+                https://discordapp.com/oauth2/authorize?client_id=#{client.user.id}&scope=bot&permissions=#{Statics.INVPERMS}
                 -------------------------
                 Running on #{client.guilds.array().length} servers.
                 """

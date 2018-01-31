@@ -4,3 +4,5 @@ exports.COLORS =
     cyan: 0x4DD0E1
     green: 0x8BC34A
     orange: 0xFFB300
+
+exports.INVPERMS = 2146958455

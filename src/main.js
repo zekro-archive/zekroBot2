@@ -12,6 +12,8 @@ const package = require('../package.json')
 exports.VERSION = package.version
 exports.package = package
 
+exports.argv = process.argv
+
 // Config loader
 if (!fs.existsSync('../config.json'))
     var config = require('../config.json')
@@ -19,6 +21,8 @@ else {
     Logger.error("Cant't find 'config.json' file!\nPlease download it here: " + "http://bot2.zekro.de/dl/config".bgRed)
     process.exit(-1)
 }
+
+Logger.debug('Debug mode enabled')
 
 exports.mysql = new MySql(config.mysql)
 
