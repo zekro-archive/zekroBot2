@@ -33,7 +33,7 @@ Currently, the system is in a very early development phase, so please stay tuned
 > Please keep in mind, that this bot is still in beta phase and work in progress. So if there occure any bugs and errors or if you have some enhancement suggestions, feel free to submit an [**Issue**](https://github.com/zekroTJA/zekroBot2/issues) or a [**Pull Request**](https://github.com/zekroTJA/zekroBot2/pulls).
 ---
 
-# Installation
+# Installation (Self-Hosting)
 
 ### Requirements
 
