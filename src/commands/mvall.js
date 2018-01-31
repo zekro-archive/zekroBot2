@@ -3,8 +3,10 @@ const client = Main.client
 const Mysql = Main.mysql
 const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
-const util = require('util')
+const Logger = require('../util/logger')
 const Statics = require('../util/statics')
+
+const ACHandler = require('../core/autochanhandler')
 
 
 exports.ex = (msg, args) => {
@@ -24,12 +26,28 @@ exports.ex = (msg, args) => {
     else {
         let cvc = msg.member.voiceChannel
         if (cvc) {
-            cvc.members.forEach(m => {
-                try {
-                    m.setVoiceChannel(chan)
+            Logger.debug('IsAutochannel: ' + ACHandler.get().indexOf(chan.id))
+            if (ACHandler.get().indexOf(chan.id) > -1) {
+                function _acmovehandler(vc) {
+                    cvc.members.forEach(m => {
+                        try {
+                            m.setVoiceChannel(chan)
+                        }
+                        catch (e) {}
+                    })
+                    ACHandler.event.removeListener('created', _acmovehandler)
                 }
-                catch (e) {}
-            })
+                cvc.members.first().setVoiceChannel(chan).then(m => {
+                    ACHandler.event.on('created', _acmovehandler)
+                })
+            } else {
+                cvc.members.forEach(m => {
+                    try {
+                        m.setVoiceChannel(chan)
+                    }
+                    catch (e) {}
+                })
+            }
             Embeds.default(msg.channel, `Moved all voice members from channel \`${cvc.name}\` to channel \`${chan.name}\``)
         }
         else {
