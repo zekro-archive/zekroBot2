@@ -34,6 +34,7 @@ exports.ex = (msg, args) ->
             emb = new Discord.RichEmbed()
                 .setDescription argstr
                 .setColor color
+                .setAuthor msg.member.displayName, msg.author.avatarURL
             msg.channel.send '', emb
         else
             msg.channel.send argstr

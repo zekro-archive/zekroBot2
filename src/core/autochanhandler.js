@@ -1,11 +1,14 @@
 const Main = require('../main')
 const client = Main.client
 const Mysql = Main.mysql
+const { EventEmitter } = require('events')
 
 
 var autochans = {}
 var tempchans = []
 
+
+exports.event = new EventEmitter();
 
 exports.set = (chan, guild) => {
     autochans[chan.id] = guild.id
@@ -54,6 +57,7 @@ function createTempChan(vc, cb) {
             c.setPosition(vc.position + 1)
         })
         tempchans.push(c.id)
+        exports.event.emit('created', vc)
         cb(c)
     })
 }

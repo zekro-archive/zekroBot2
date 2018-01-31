@@ -1,22 +1,25 @@
+/*
+
+MODULE INFO:
+- name:         Help Parser
+- version:      1.0
+- creator:      zekro (github.com/zekrotja)
+- last edited:  2018/01/31
+
+MODULE DESCRIPTION:
+This module is just for creating an Markdown formatted file which contains 
+various information about commands, which can be implemented into the
+main Readme document.
+
+*/
+
+
 var Main = require('../main')
 var fs = require('fs')
 var cmds = Main.cmd.helplist
 var Logger = require('../util/logger')
 
 var output = ""
-
-/*
-{ autochannel:
-   { cmdfunc: [Function],
-     invoke: 'autochannel',
-     aliases: [ 'autochan', 'ac', 'autochans' ],
-     description: 'Manage automatic voice channels',
-     help: '`zb:autochannel set <channel>\n`zb:autochannel unset <channel>\n`zb:autochannel create <list>\n',
-     type: 'GUILDADMIN',
-     perm: 3 },
-  ...
-}
-*/
 
 
 Object.keys(cmds).forEach(i => {
