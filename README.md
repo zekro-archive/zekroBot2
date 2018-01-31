@@ -30,6 +30,7 @@ Currently, the system is in a very early development phase, so please stay tuned
 
 <a href="https://discordapp.com/oauth2/authorize?client_id=388848585879584778&scope=bot&permissions=2146958455"><img src="https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/add_to_discord.png?raw=true" width="300"/></a>
 
+> Please keep in mind, that this bot is still in beta phase and work in progress. So if there occure any bugs and errors or if you have some enhancement suggestions, feel free to submit an [**Issue**](https://github.com/zekroTJA/zekroBot2/issues) or a [**Pull Request**](https://github.com/zekroTJA/zekroBot2/pulls).
 ---
 
 # Installation
