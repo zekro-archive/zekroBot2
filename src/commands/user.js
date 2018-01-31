@@ -17,27 +17,35 @@ function parse(chan, memb) {
 
     let permlvl = Main.cmd.getPermLvl(memb)
 
-    let emb = new Discord.RichEmbed()
-        .setTitle(memb.displayName + ' - User Info')
-        .addField('User Tag', user.tag)
-        .addField('Display Name', memb.displayName)
-        .addField('ID', `\`\`\`${user.id}\`\`\``)
-        .addField('Current Game', memb.presence.game ? memb.presence.game : 'Not in game')
-        .addField('Current Status', memb.presence.status)
-        .addField('Joined Guild At', _ornull(memb.joinedAt))
-        .addField('Created Account At', _ornull(user.createdAt))
-        .addField('Permission Level', _ornull(permlvl, '0'))
-        .addField('Roles', memb.roles.array().slice(1).map(r => `<@&${r.id}>`).join(', '))
-        .addField('User Level', '*Comming soon*')
-        .addField('Recent Reports', '*Comming soon*')
+    Mysql.query(`SELECT * FROM reports WHERE victim = '${memb.id}'`, (err, res) => {
+        let reports
+        if (!err && res)
+            reports = res.length == 0 ? 'This user has a white west  :ok_hand:' : `**${res.length}** reports on record`
+        else
+            reports = '*No data received*'
+
+        let emb = new Discord.RichEmbed()
+            .setTitle(memb.displayName + ' - User Info')
+            .addField('User Tag', user.tag)
+            .addField('Display Name', memb.displayName)
+            .addField('ID', `\`\`\`${user.id}\`\`\``)
+            .addField('Current Game', memb.presence.game ? memb.presence.game : 'Not in game')
+            .addField('Current Status', memb.presence.status)
+            .addField('Joined Guild At', _ornull(memb.joinedAt))
+            .addField('Created Account At', _ornull(user.createdAt))
+            .addField('Permission Level', _ornull(permlvl, '0'))
+            .addField('Roles', memb.roles.array().slice(1).map(r => `<@&${r.id}>`).join(', '))
+            .addField('User Level', '*Comming soon*')
+            .addField('Recent Reports', reports)
+        
+        if (maxrole && maxrole.color)
+            emb.setColor(maxrole.color)
     
-    if (maxrole && maxrole.color)
-        emb.setColor(maxrole.color)
-
-    if (user.avatarURL)
-        emb.setThumbnail(user.avatarURL)
-
-    chan.send('', emb)
+        if (user.avatarURL)
+            emb.setThumbnail(user.avatarURL)
+    
+        chan.send('', emb)
+    })
 }
 
 

@@ -221,6 +221,16 @@ class CmdHandler {
                 this.cmd.type.MODERATION,
                 4
             )
+            .register(
+                require('../commands/report').ex,
+                'report',
+                ['rep'],
+                'Report a user or get information about recent reports',
+                `\`${prefix}report <VictimID/Mention>\`\n` +
+                `\`${prefix}report list <ID/Mention>\`\n`,
+                this.cmd.type.MODERATION,
+                4
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
