@@ -24,7 +24,7 @@ class CmdHandler {
         this.cmd.addType('DEBUG')
 
         this.cmd.setOptions({
-            guildownerperm: 5,
+            ownerpermlvl: 5,
         })
 
         this.cmd.setHost(Main.config.hostid)
