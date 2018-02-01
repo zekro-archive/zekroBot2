@@ -35,7 +35,7 @@ Currently, the system is in a very early development phase, so please stay tuned
 
 # Installation (Self-Hosting)
 
-[👉 **Wiki: Self-Hosting**](https://github.com/zekroTJA/zekroBot2/wiki/Instalatio-(Self-Hosting))
+[👉 **Wiki: Self-Hosting**](https://github.com/zekroTJA/zekroBot2/wiki/Instalation-(Self-Hosting))
 
 ---
 
