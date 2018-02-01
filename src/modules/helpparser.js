@@ -2,9 +2,9 @@
 
 MODULE INFO:
 - name:         Help Parser
-- version:      1.0
+- version:      1.1
 - creator:      zekro (github.com/zekrotja)
-- last edited:  2018/01/31
+- last edited:  2018/02/01
 
 MODULE DESCRIPTION:
 This module is just for creating an Markdown formatted file which contains 
@@ -32,7 +32,7 @@ Object.keys(cmds).forEach(i => {
                   '| --------- | --------- |\n' +
                   `| Permission | ${c.perm} |\n` +
                   `| Group | ${c.type} |\n` +
-                  `| Aliases | ${c.aliases.map(a => `- ${a}`).join('</br>')} |\n\n` +
+                  `| Aliases | ${c.aliases.join(', ')} |\n\n` +
                   '**Usage**\n\n' +
                   '```php\n' +
                   help +
