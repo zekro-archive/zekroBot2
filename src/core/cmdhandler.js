@@ -24,7 +24,7 @@ class CmdHandler {
         this.cmd.addType('DEBUG')
 
         this.cmd.setOptions({
-            guildownerperm: 5,
+            ownerpermlvl: 5,
         })
 
         this.cmd.setHost(Main.config.hostid)
@@ -32,6 +32,7 @@ class CmdHandler {
         Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
         this.cmd   
+            // AUTOCHANNEL COMMAND
             .register(
                 require('../commands/autochannel').ex,
                 'autochannel',
@@ -43,6 +44,7 @@ class CmdHandler {
                 this.cmd.type.GUILDADMIN,
                 3
             )
+            // BROADCAST COMMAND
             .register(
                 require('../commands/broadcast').ex,
                 'broadcast',
@@ -53,6 +55,7 @@ class CmdHandler {
                 this.cmd.type.ADMIN,
                 999
             )
+            // ID / WHOIS / WHATIS COMMAND
             .register(
                 require('../commands/id').ex,
                 'id',
@@ -63,6 +66,7 @@ class CmdHandler {
                 this.cmd.type.MISC,
                 0
             )
+            // RESTART COMMAND
             .register(
                 require('../commands/restart').ex,
                 'restart',
@@ -72,6 +76,7 @@ class CmdHandler {
                 this.cmd.type.ADMIN,
                 100
             )
+            // MVALL COMMAND
             .register(
                 require('../commands/mvall').ex,
                 'mvall',
@@ -81,6 +86,7 @@ class CmdHandler {
                 this.cmd.type.MODERATION,
                 2
             )
+            // GUILD STATS COMMAND
             .register(
                 require('../commands/guild').ex,
                 'guild',
@@ -90,6 +96,7 @@ class CmdHandler {
                 this.cmd.type.MISC,
                 0
             )
+            // VOTE / POLL COMMAND
             .register(
                 require('../commands/vote').ex,
                 'vote',
@@ -100,6 +107,7 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
+            // QUOTE COMMAND
             .register(
                 require('../commands/quote').ex,
                 'quote',
@@ -109,6 +117,7 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
+            // USER PROFILE COMMAND
             .register(
                 require('../commands/user').ex,
                 'user',
@@ -218,6 +227,17 @@ class CmdHandler {
                 `\`${prefix}clear <ammount>\`\n` +
                 `\`${prefix}clear <ammount> <user>\`\n` +
                 `\`${prefix}prefix\`\n`,
+                this.cmd.type.MODERATION,
+                4
+            )
+            // REPORT COMMAND
+            .register(
+                require('../commands/report').ex,
+                'report',
+                ['rep'],
+                'Report a user or get information about recent reports',
+                `\`${prefix}report <VictimID/Mention>\`\n` +
+                `\`${prefix}report list <ID/Mention>\`\n`,
                 this.cmd.type.MODERATION,
                 4
             )

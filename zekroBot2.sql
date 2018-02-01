@@ -36,6 +36,15 @@ CREATE TABLE IF NOT EXISTS `perms` (
   `guild` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `reports`;
+CREATE TABLE IF NOT EXISTS `reports` (
+  `guild` text NOT NULL,
+  `victim` text NOT NULL,
+  `executor` text NOT NULL,
+  `reason` text NOT NULL,
+  `time` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS `testing`;
 CREATE TABLE IF NOT EXISTS `testing` (
   `user` text NOT NULL,

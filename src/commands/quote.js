@@ -3,7 +3,6 @@ const client = Main.client
 const Mysql = Main.mysql
 const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
-const util = require('util')
 const Statics = require('../util/statics')
 
 

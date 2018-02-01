@@ -14,15 +14,18 @@ exports.package = package
 
 exports.argv = process.argv
 
+Logger.debug('Debug mode enabled')
+
 // Config loader
-if (!fs.existsSync('../config.json'))
-    var config = require('../config.json')
+if (!fs.existsSync('../config.json')) {
+    let rawconf = fs.readFileSync('config.json', 'utf8').replace(/\s*(\/\/).*/gm, '')
+    Logger.debug(rawconf)
+    var config = JSON.parse(rawconf)
+}
 else {
     Logger.error("Cant't find 'config.json' file!\nPlease download it here: " + "http://bot2.zekro.de/dl/config".bgRed)
     process.exit(-1)
 }
-
-Logger.debug('Debug mode enabled')
 
 exports.mysql = new MySql(config.mysql)
 
