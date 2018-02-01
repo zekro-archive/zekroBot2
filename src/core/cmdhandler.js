@@ -241,6 +241,26 @@ class CmdHandler {
                 this.cmd.type.MODERATION,
                 4
             )
+            // SET CMD LOG CHANNEL COMMAND
+            .register(
+                require('../commands/setcmdlogchan').ex,
+                'cmdlogchan',
+                ['cmdlog'],
+                'Set command log channel',
+                `\`${prefix}cmdlogchan <channel>\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
+            // SET VOICE LOG CHANNEL COMMAND
+            .register(
+                require('../commands/setvoicelogchan').ex,
+                'voicelogchan',
+                ['voicelog'],
+                'Set voice log channel',
+                `\`${prefix}voicelogchan <channel>\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
