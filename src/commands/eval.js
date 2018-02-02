@@ -54,8 +54,8 @@ exports.ex = (msg, args) => {
         .setDescription(
             'for command:' +
             `\`\`\`js\n${cmd}\`\`\`` +
-            'output:' + 
-            `\`\`\`${res.length != 0 ? res : "no eval output"}\`\`\``
+            'output:\n' + 
+            `\`\`\`\n${res.length != 0 ? res : "no eval output"}\n\`\`\``
         )
     )
 
