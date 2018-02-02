@@ -35,6 +35,7 @@ exports.config = config
 exports.cmd = new CmdHandler(exports.client, config.prefix)
 
 require('./events/eventregistry')
+require('./core/xp')
 
 
 exports.loadModLoader = () => {
