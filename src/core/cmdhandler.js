@@ -261,6 +261,16 @@ class CmdHandler {
                 this.cmd.type.SETTING,
                 4
             )
+            // STUPS / NUDGE COMMAND
+            .register(
+                require('../commands/stups').ex,
+                'stups',
+                ['nudge', 'msg', 'pn'],
+                'Send someone a nudge with the bot',
+                `\`${prefix}stups <user> <message>\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)

@@ -30,7 +30,8 @@ exports.ex = (msg, args) => {
             "- [guild *(Guild instance)*](https://discord.js.org/#/docs/main/stable/class/Guild)\n" +
             "- [channel *(TextChannel instance)*](https://discord.js.org/#/docs/main/stable/class/TextChannel)\n" +
             "- [msg *(Message instance)*](https://discord.js.org/#/docs/main/stable/class/Message)\n" +
-            "- args *(String[])*\n"
+            "- args *(String[])*\n" +
+            "\n*Hint: Use `util.inspect(value)` if you want to display object-type / non-string values.*"
         )
         return
     }
