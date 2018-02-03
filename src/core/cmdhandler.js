@@ -271,6 +271,16 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
+            // BUG SUGGESTION COMMAND
+            .register(
+                require('../commands/bug').ex,
+                'bug',
+                ['suggestion', 'bugreport', 'issue'],
+                'Get info how to submit a bug or suggestion',
+                `\`${prefix}bug\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
