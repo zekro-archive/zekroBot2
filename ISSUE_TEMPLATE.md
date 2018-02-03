@@ -16,8 +16,8 @@
 ...
 
 ## Logs & Screenshots
-> Please attach here relatable screenshots (as link or attach below) or logs raw or as hastebin.com / pastebin.com link.
-> *Let free if you submit an suggestion*
+> Please attach here relatable screenshots (as a link or attach below) or logs raw or as hastebin.com / pastebin.com link.
+> *Let free if you submit a suggestion*
 
 ```
 Example log trace
