@@ -83,8 +83,8 @@ class Poll {
                 member: this.msg.member.id
             },
             member: this.memb.id,
-            topic: this.topic,
-            poss: this.poss,
+            topic: this.topic.replace(/\n/gm, '--nl--'),
+            poss: this.poss.map(p => p.replace(/\n/gm, '--nl--')),
             ans: this.ans
         }
         Mysql.query(`UPDATE votes SET data = '${JSON.stringify(saveState)}' WHERE membid = '${this.memb.id}'`, (err, res) => {
@@ -105,8 +105,8 @@ class Poll {
                         let poll = new Poll(
                             guild.members.find(m => m.id == data.member),
                             guild.channels.find(c => c.id == data.msg.channel),
-                            data.topic,
-                            data.poss,
+                            data.topic.replace(/(--nl--)/gm, '\n'),
+                            data.poss.map(p => p.replace(/(--nl--)/gm, '\n')),
                             data.ans
                         )
                         polls[r.membid] = poll
