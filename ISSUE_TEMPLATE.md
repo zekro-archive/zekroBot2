@@ -14,3 +14,12 @@
 2. Step
     - Sample
 ...
+
+## Logs & Screenshots
+> Please attach here relatable screenshots (as link or attach below) or logs raw or as hastebin.com / pastebin.com link.
+> *Let free if you submit an suggestion*
+
+```
+Example log trace
+...
+```
