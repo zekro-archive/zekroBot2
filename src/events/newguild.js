@@ -10,7 +10,7 @@ function dbinsert(dbkey, chan, guild) {
     Mysql.query(`UPDATE guilds SET ${dbkey} = '${chan.id}' WHERE guild = '${guild.id}'`, (err, res) => {
         if (!err && res)
             if (res.affectedRows == 0)
-                MySql.query(`INSERT INTO guilds (guild, ${dbkey}) VALUES ('${guild.id}', '${chan.id}')`)
+                Mysql.query(`INSERT INTO guilds (guild, ${dbkey}) VALUES ('${guild.id}', '${chan.id}')`)
     })
 }
 

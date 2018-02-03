@@ -1,6 +1,6 @@
 {
   "name": "zekrobot2",
-  "version": "0.12.2-beta",
+  "version": "0.13.0-beta",
   "description": "Rework of the original JDA zekroBot",
   "main": "src/main.js",
   "scripts": {
