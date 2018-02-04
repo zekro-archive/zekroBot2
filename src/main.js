@@ -3,6 +3,7 @@ require('extendutils')
 const { Client, RichEmbed } = require('discord.js')
 const Colors = require('colors')
 const fs = require('fs')
+const Cloc = require('./util/cloc')
 
 const Logger = require('../src/util/logger')
 const { CmdHandler } = require('./core/cmdhandler')
@@ -36,7 +37,6 @@ exports.cmd = new CmdHandler(exports.client, config.prefix)
 
 require('./events/eventregistry')
 require('./core/xp')
-
 
 exports.loadModLoader = () => {
     exports.modloader = require('./core/modloader')

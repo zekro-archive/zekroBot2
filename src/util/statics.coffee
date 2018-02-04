@@ -6,3 +6,6 @@ exports.COLORS =
     orange: 0xFFB300
 
 exports.INVPERMS = 2146958455
+
+exports.DIRS =
+    cloc: 'https://raw.githubusercontent.com/zekroTJA/zekroBot2/master/CLOC_LOG.md'
