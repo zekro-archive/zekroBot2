@@ -22,7 +22,7 @@ client.on('guildCreate', g => {
             cmdchan.setParent(c)
             Embeds.default(cmdchan,
                 '**Hey!** :wave:\n\n' +
-                `Im <@!${client.user.id}>, a multi-functional, chat and music bot!\n\n` +
+                `Im <@${client.user.id}>, a multi-functional, chat and music bot!\n\n` +
                 `My default prefix is \`${Main.config.prefix}\`. If you want to set a guild specific prefix, use the command` +
                 `\`\`\`${Main.config.prefix}prefix <new prefix>\`\`\`\n\n` +
                 'Do you want a list of commands of this bot? Enter ```' +

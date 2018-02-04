@@ -23,7 +23,7 @@ exports.ex = (msg, args) => {
     switch (args[0]) {
 
         case 'list', 'show', 'user', 'info':
-            inp = args[1].replace(/(<@!)|>/g, '')
+            inp = args[1].replace(/(<@)|>/g, '')
             victim = guild.members.find(m => m.id == inp)
             if (!victim)
                 victim = guild.members.find(m => m.displayName.toLowerCase().indexOf(inp.toLowerCase()) > -1)
@@ -51,7 +51,7 @@ exports.ex = (msg, args) => {
             break
 
         default:
-            inp = args[0].replace(/(<@!)|>/g, '')
+            inp = args[0].replace(/(<@)|>/g, '')
             victim = guild.members.find(m => m.id == inp)
             let reason = args.slice(1).join(' ')
             if (!victim)
@@ -65,12 +65,12 @@ exports.ex = (msg, args) => {
                         Mysql.query(`SELECT * FROM reports WHERE victim = '${victim.id}'`, (err, res) => {
                             if (!err && res) {
                                 Embeds.default(chan, 
-                                    `<@!${victim.id}> got reported by <@!${memb.id}> with the reason \`\`\`${reason}\`\`\`\n` +
+                                    `<@${victim.id}> got reported by <@${memb.id}> with the reason \`\`\`${reason}\`\`\`\n` +
                                     `This is report number **${res.length}** for this user.`, 'Report'
                                 )
                                 victim.createDM().then(c => {
                                     Embeds.default(c,
-                                        `You got reported by <@!${memb.id}> with the reason \`\`\`${reason}\`\`\`\n` +
+                                        `You got reported by <@${memb.id}> with the reason \`\`\`${reason}\`\`\`\n` +
                                         `This is report number **${res.length}** for you.`, 'Report'
                                     )
                                 })

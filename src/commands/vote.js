@@ -33,7 +33,7 @@ class Poll {
                 let vote = emojis.indexOf(emoji)
                 if (vote > -1 && vote < this.poss.length) {
                     if (!this.vote(user, vote))
-                        Embeds.error(this.msg.channel, `You can only vote once, <@!${user.id}>`).then(m => {
+                        Embeds.error(this.msg.channel, `You can only vote once, <@${user.id}>`).then(m => {
                             setTimeout(() => m.delete(), 3000)
                         })
                     else if (!ans)

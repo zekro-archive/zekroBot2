@@ -52,7 +52,7 @@ exports.ex = (msg, args) => {
 
         let chans = cats.channels.filter(filter).map(o => `${_chantype(o)}  -  \`${o.id}\``).join('\n')
         let roles = cats.roles.filter(filter).map(o => `<@&${o.id}>  -  \`${o.id}\``).join('\n')
-        let membs = cats.members.filter(filter).map(o => `<@!${o.id}>  -  \`${o.id}\``).join('\n')
+        let membs = cats.members.filter(filter).map(o => `<@${o.id}>  -  \`${o.id}\``).join('\n')
         let emojis = cats.emojis.filter(filter).map(o => `<:${o.name}:${o.id}>  -  \`${o.id}\``).join('\n')
 
         let emb = new Discord.RichEmbed()

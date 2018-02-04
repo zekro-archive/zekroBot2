@@ -60,7 +60,7 @@ exports.ex = (msg, args) => {
         return
     }
 
-    let memb = guild.members.find(m => m.id == args[0].replace(/[<@!>]/g, ''))
+    let memb = guild.members.find(m => m.id == args[0].replace(/(<@)|>/g, ''))
     if (!memb)
         memb = guild.members.find(
             m => m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1 ||

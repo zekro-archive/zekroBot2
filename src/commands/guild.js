@@ -19,7 +19,7 @@ exports.ex = (msg, args) => {
         .setTitle(guild.name + ' - Guild Info')
         .setColor(guild.owner.highestRole.color)
         .addField('ID', `\`\`\`${guild.id}\`\`\``)
-        .addField('Owner', `<@!${owner.id}> - ${owner.user.tag} *(${owner.id})*`)
+        .addField('Owner', `<@${owner.id}> - ${owner.user.tag} *(${owner.id})*`)
         .addField('Created At', guild.createdAt)
         .addField('Region', guild.region)
         .addField(

@@ -18,7 +18,7 @@ exports.ex = (msg, args) ->
         Embeds.invalidInput chan, 'stups'
         return
 
-    receiver = guild.members.find (m) -> m.id == args[0].replace /(<@!)|>/gm, ''
+    receiver = guild.members.find (m) -> m.id == args[0].replace /(<@)|>/gm, ''
     if !receiver
         receiver = guild.members.find (m) -> m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1
     if !receiver
@@ -34,7 +34,7 @@ exports.ex = (msg, args) ->
             .then (c) ->
                 c.send '', emb
                     .then ->
-                        Embeds.default chan, "Send nudge to <@!#{receiver.id}>."
+                        Embeds.default chan, "Send nudge to <@#{receiver.id}>."
                         msg.delete()
                     .catch (e) ->
                         _error e
