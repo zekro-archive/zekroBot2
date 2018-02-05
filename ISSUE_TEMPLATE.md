@@ -1,3 +1,7 @@
+## Submitted by
+> If someone else without github account submitted the bug to you
+*Delete this if you are the bug submiter*
+
 ## Issue Type
 - [ ] Bug
 - [ ] Feature Suggestion
