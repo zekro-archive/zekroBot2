@@ -10,6 +10,43 @@ const Logger = require('../util/logger')
 
 var xploop
 
+
+function getParsedUserLvl(member, cb, raw) {
+    getMembXp(member, (res) => {
+        if (!res)
+            if (raw)
+                cb(null)
+            else
+                cb('*Could not get data from DB*')
+        else {
+            let start = config.exp.startlvl
+            let delta = config.exp.delta
+            function _getreq(x) {
+                return x == 0 ? 0 : start * delta ** (x - 1)
+            }
+            let lvl = 0
+            while (res > _getreq(lvl))
+                lvl++
+            lvl = lvl - 1
+            let nextlvl = parseInt(res - _getreq(lvl))
+            let nextlvln = parseInt(_getreq(lvl + 1))
+            let nextlvlp = parseInt((nextlvl / nextlvln) * 100)
+
+            if (raw)
+                cb({
+                    lvl,
+                    xp: res,
+                    next: nextlvlp
+                })
+            else
+                cb(
+                    `**LVL \`${lvl}\`** (*\`${res}\` XP total*)\n` +
+                    `\`${nextlvlp} %\` to next lvl`
+                )
+        }
+    })
+}
+
 function changeXpVal(value, member) {
     Mysql.query(`UPDATE xp SET xp = xp + ${value} WHERE user = '${member.id}' && guild = '${member.guild.id}'`, (err, res) => {
         if (!err && res)
@@ -58,6 +95,7 @@ client.on('message', msg => {
             IDEA:
             Maybe later here an notification message into the channel to notify user
             reached a specific level.
+            → Must be disableable
         */
     }
 })
@@ -79,5 +117,6 @@ client.on('ready', () => {
 module.exports = {
     changeXpVal,
     getMembXp,
-    getGuildXp
+    getGuildXp,
+    getParsedUserLvl
 }

@@ -57,7 +57,7 @@ function createTempChan(vc, cb) {
             c.setPosition(vc.position + 1)
         })
         tempchans.push(c.id)
-        exports.event.emit('created', vc)
+        exports.event.emit('created', c)
         cb(c)
     })
 }

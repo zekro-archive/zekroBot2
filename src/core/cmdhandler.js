@@ -281,6 +281,18 @@ class CmdHandler {
                 this.cmd.type.MISC,
                 0
             )
+            // XP LVL COMMAND
+            .register(
+                require('../commands/xpcmd').ex,
+                'xp',
+                ['lvl', 'level'],
+                'Get information about your level status and guilds best list',
+                `\`${prefix}xp\`\n` +
+                `\`${prefix}xp <user>\`\n` +
+                `\`${prefix}xp list\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
