@@ -52,7 +52,7 @@ client.on('voiceStateUpdate', (mold, mnew) => {
                     .setTimestamp(new Date())
                 )
             }
-            else if (vold && vnew) {
+            else if (vold && vnew && vold.id != vnew.id) {
                 logchan.send('', new RichEmbed()
                     .setColor(Statics.COLORS.cyan)
                     .setDescription(`:arrow_right: **${mnew.displayName}** went from **\`${vold.name}\`** to **\`${vnew.name}\`**`)
