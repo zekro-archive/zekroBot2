@@ -1,13 +1,14 @@
 require('coffeescript/register');
 require('extendutils')
+
 const { Client, RichEmbed } = require('discord.js')
 const Colors = require('colors')
 const fs = require('fs')
 const Cloc = require('./util/cloc')
-
 const Logger = require('../src/util/logger')
 const { CmdHandler } = require('./core/cmdhandler')
 const { MySql } = require('./core/mysql')
+const { Config } = require('./core/config')
 
 const package = require('../package.json')
 exports.VERSION = package.version
@@ -18,15 +19,8 @@ exports.argv = process.argv
 Logger.debug('Debug mode enabled')
 
 // Config loader
-if (!fs.existsSync('../config.json')) {
-    let rawconf = fs.readFileSync('config.json', 'utf8').replace(/\s*(\/\/).*/gm, '')
-    Logger.debug(rawconf)
-    var config = JSON.parse(rawconf)
-}
-else {
-    Logger.error("Cant't find 'config.json' file!\nPlease download it here: " + "http://bot2.zekro.de/dl/config".bgRed)
-    process.exit(-1)
-}
+var confHandler = new Config()
+var config = confHandler.getConfig()
 
 exports.mysql = new MySql(config.mysql)
 
