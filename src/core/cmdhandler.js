@@ -55,6 +55,15 @@ class CmdHandler {
                 this.cmd.type.ADMIN,
                 999
             )
+            .register(
+                require('../commands/brainfuck').ex,
+                'bf',
+                ['brainfuck', 'bfck'],
+                'Execute some brainfuck code',
+                `\`${prefix}bf -c <code> [-i "<input>"] [-v] [-b <cellsize>]\n`,
+                this.cmd.type.MISC,
+                0
+            )
             // ID / WHOIS / WHATIS COMMAND
             .register(
                 require('../commands/id').ex,
