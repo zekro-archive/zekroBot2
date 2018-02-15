@@ -11,6 +11,18 @@ const Logger = require('../util/logger')
 var xploop
 
 
+function getLvlFromXp(xpamm) {
+    let start = config.exp.startlvl
+    let delta = config.exp.delta
+    function _getreq(x) {
+        return x == 0 ? 0 : start * delta ** (x - 1)
+    }
+    let lvl = 0
+    while (xpamm > _getreq(lvl))
+        lvl++
+    return  lvl - 1
+}
+
 function getParsedUserLvl(member, cb, raw) {
     getMembXp(member, (res) => {
         if (!res)
@@ -21,17 +33,13 @@ function getParsedUserLvl(member, cb, raw) {
         else {
             let start = config.exp.startlvl
             let delta = config.exp.delta
+            let lvl = getLvlFromXp(res)
             function _getreq(x) {
                 return x == 0 ? 0 : start * delta ** (x - 1)
             }
-            let lvl = 0
-            while (res > _getreq(lvl))
-                lvl++
-            lvl = lvl - 1
             let nextlvl = parseInt(res - _getreq(lvl))
             let nextlvln = parseInt(_getreq(lvl + 1))
             let nextlvlp = parseInt((nextlvl / nextlvln) * 100)
-
             if (raw)
                 cb({
                     lvl,
@@ -118,5 +126,6 @@ module.exports = {
     changeXpVal,
     getMembXp,
     getGuildXp,
-    getParsedUserLvl
+    getParsedUserLvl,
+    getLvlFromXp
 }
