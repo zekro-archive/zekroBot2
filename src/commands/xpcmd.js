@@ -8,6 +8,7 @@ const Xp = require('../core/xp')
 exports.ex = (msg, args) => {
 
     let chan = msg.channel
+    let guild = msg.member.guild
 
     if (args.length < 1) {
         Xp.getParsedUserLvl(msg.member, (res) => {
@@ -30,9 +31,14 @@ exports.ex = (msg, args) => {
             Embeds.default(chan, xpstr, 'Your current XP Status')
         }, true)
     }
-
-    switch (args[0]) {
-        
+    else {
+        let member = guild.members.find(m => m.id == args[0].replace(/(<@)|>/g))
+        if (!member)
+            member = guild.members.find(m => m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1)
+        if (!member) {
+            Embeds.error(chan, 'Can not fetch any member to the identifier: ```' + args.join(' ') + '```')
+            return
+        }
     }
 
 }
