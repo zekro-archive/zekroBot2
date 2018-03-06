@@ -27,7 +27,7 @@ function shuffle(a) {
 function get_time(time) {
     let h = time / 3600000
     let m = (time % 3600000) / 60000
-    return `${`${h}`.split('.')[0]} hours, ${`${m}`.split('.')[0]} minutes`
+    return `${`${h}`.split('.')[0]} hours, ${`${m}`.split('.')[0]} minutes` //`
 }
 
 function getOps(defenders, msg, args) {
@@ -113,6 +113,26 @@ function get_rerolls(msg) {
 }
 
 
+function print_help(msg) {
+    Embeds.error(msg.channel, 
+        'Aliases: `rand6`, `r6`, `r`\n\n' +
+        '`r` - Get random ops (automatically switching between def and attack)\n' +
+        '`r a` - Get random ops for defenders side\n' +
+        '`r d` - Get random ops for attackers side\n' +
+        '`r r [@member]` - Reroll (without arg: for yourself)\n' +
+        '`r lsit` - Display list of all running reroll cooldowns on this guild\n' +
+        '`r rules` - Display rules for this game\n' +
+        '`r help` - Display this help message'
+    )
+}
+
+function print_rules(msg) {
+    Embeds.default(msg.channel, 
+        'Click [**here** *(GitHub)*](https://github.com/zekroTJA/docs/blob/master/etc/random6siege_rules.md) to read rules.',
+        'Random6Siege Rules'
+    )
+}
+
 
 exports.ex = (msg, args) => { 
 
@@ -147,8 +167,18 @@ exports.ex = (msg, args) => {
             get_rerolls(msg)
             break
 
+        case 'help':
+        case 'h':
+            print_help(msg)
+            break
+
+        case 'rules':
+        case 'guide':
+            print_rules(msg)
+            break            
+
         default:
-            Embeds.error(chan, 'Invalid argument', 'Error')
+            print_help(msg)
     }
 
 }
