@@ -24,6 +24,8 @@ var server = {}
 
     - create that other commands
 
+    PLAYLIST HANDLING → https://stackoverflow.com/questions/41827728/how-to-get-video-ids-from-an-youtube-playlist
+
 */
 
 class Track {
@@ -45,6 +47,8 @@ class Track {
 
 function play(conn, track) {
     return conn.playStream(track.audio)
+        .on('end', () => console.log('end'))
+        .on('start', () => console.log('start'))
 }
 
 function queue(member, vc, url) {
@@ -125,6 +129,8 @@ exports.ex = (msg, args) => {
             if (guild.voiceConnection)
                 guild.voiceConnection.disconnect()
             break  
+
+        case 'test':
 
         default:
             //help()
