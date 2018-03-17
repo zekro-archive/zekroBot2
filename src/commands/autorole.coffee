@@ -17,7 +17,7 @@ exports.ex = (msg, args) ->
     roles = guild.roles
     role = roles.find (r) -> r.id == args[0].replace(/[<@&>]/g, '')
     if not role
-        role = roles.find (r) -> r.name.toLowerCase().indexOf(args.join(' ').toLowerCase())
+        role = roles.find (r) -> r.name.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1
     if not role
         Embeds.error chan, "Could not fetch any role to the input ```#{args.join(' ')}```"
     else

@@ -8,7 +8,7 @@ const Statics = require('../util/statics')
 
 const OPS = {
     ATT: ['Lion', 'Finka', 'Dokkaebi', 'Zofia', 'Ying', 'Blitz', 'IQ', 'Twitch', 'Montagne', 'Ash', 'Thermite', 'Sledge', 'Thatcher', 'Capitao', 'Jackal', 'Hibana', 'Blackbeard', 'Glaz', 'Fuze', 'Buck', 'Recruit', 'Recruit (Full Engage)', 'Recruit (Only Real)'],
-    DEF: ['Vigil', 'Ella', 'Lesion', 'Jäger', 'Bandit', 'Rook', 'Doc', 'Pulse', 'Castle', 'Tachanka', 'Kapkan', 'Frost', 'Smoke', 'Mute', 'Caveira', 'Echo', 'Valkyrie', 'Mira', 'Recruit', 'Recruit', 'Recruit(Full Engage)']
+    DEF: ['Vigil', 'Ela', 'Lesion', 'Jäger', 'Bandit', 'Rook', 'Doc', 'Pulse', 'Castle', 'Tachanka', 'Kapkan', 'Frost', 'Smoke', 'Mute', 'Caveira', 'Echo', 'Valkyrie', 'Mira', 'Recruit', 'Recruit', 'Recruit(Full Engage)']
 }
 
 const REROLL_COOLDOWN = 12 * 3600 * 1000 // 12 hours

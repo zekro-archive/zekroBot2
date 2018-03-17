@@ -11,10 +11,13 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.2.1",
-    "discordjs-cmds": "^0.6.7",
+    "discordjs-cmds": "^0.6.9",
     "extendutils": "^0.2.1",
     "colors": "^1.1.2",
     "coffeescript": "^2.0.3",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "ytdl-core": "^0.20.2",
+    "opusscript": "^0.0.6",
+    "node-opus": "^0.2.7"
   }
 }

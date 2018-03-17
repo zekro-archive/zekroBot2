@@ -317,6 +317,16 @@ class CmdHandler {
                 this.cmd.type.FUN,
                 0
             )
+            // MUSIC COMMAND
+            .register(
+                require('../commands/music').ex,
+                'music',
+                ['m'],
+                'Play music from youtube with the bot',
+                `\`${prefix}music\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
