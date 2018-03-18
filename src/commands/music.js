@@ -13,10 +13,6 @@ var server = {}
 
 /*
     TODO:
-    
-    - create kind of event noticing track has ended
-        → if queue has further tracks, play them
-          else disconnect from voice
 
     - create now playing messages, displaying in channels
       set in config (?) or in channel, music command 
@@ -45,30 +41,38 @@ class Track {
 }
 
 
-function play(conn, track) {
+function play(guild, conn, track) {
     return conn.playStream(track.audio)
-        .on('end', () => console.log('end'))
-        .on('start', () => console.log('start'))
+        .on('end', () => {
+            console.log('track ended')
+            server[guild.id].queue.shift()
+            if (server[guild.id].queue.length > 0) {
+                server[guild.id].dispatcher = play(guild, conn, server[guild.id].queue[0])
+            }
+            else
+                conn.disconnect()
+        })
 }
 
 function queue(member, vc, url) {
 
     let conn = member.guild.voiceConnection
+    let guild = member.guild
 
-    if (!server[server.id])
-        server[server.id] = {queue: []}
-    server[server.id].queue.push(new Track(member, url))
+    if (!server[guild.id])
+        server[guild.id] = {queue: []}
+    server[guild.id].queue.push(new Track(member, url))
 
-    var queue = server[server.id].queue
+    var queue = server[guild.id].queue
 
     if (queue.length == 1) {
         if (conn) {
-            server[server.id].dispatcher = play(conn, queue[0])
+            server[guild.id].dispatcher = play(guild, conn, queue[0])
         }
         else {
             vc.join().then(conn => {
                 console.log('voice connected')
-                server[server.id].dispatcher = play(conn, queue[0])
+                server[guild.id].dispatcher = play(guild, conn, queue[0])
             }).catch(e => console.log('ERROR', e))
         }
     }
@@ -128,9 +132,7 @@ exports.ex = (msg, args) => {
         case 'dc':
             if (guild.voiceConnection)
                 guild.voiceConnection.disconnect()
-            break  
-
-        case 'test':
+            break
 
         default:
             //help()
