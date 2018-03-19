@@ -3,7 +3,11 @@ const client = Main.client
 const Discord = require('discord.js')
 const Embeds = require('../util/embeds')
 
+const DL = require('../util/dl')
+
 
 exports.ex = (msg, args) => {
-    console.log(msg.content.replace(/\n/gm, '--nl--'))
+    DL.get('https://pastebin.com/raw/x9x1nu9h', (err) => {
+        console.log(err)
+    })
 }

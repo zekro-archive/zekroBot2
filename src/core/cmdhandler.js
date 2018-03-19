@@ -31,7 +31,7 @@ class CmdHandler {
 
         Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
 
-        this.cmd   
+        this.cmd
             // AUTOCHANNEL COMMAND
             .register(
                 require('../commands/autochannel').ex,
@@ -299,6 +299,31 @@ class CmdHandler {
                 `\`${prefix}xp\`\n` +
                 `\`${prefix}xp <user>\`\n` +
                 `\`${prefix}xp list\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            // RANDOM 6 SIEGE COMMAND
+            .register(
+                require('../commands/rand6').ex,
+                'rand6',
+                ['r', 'r6'],
+                'Play RANDOM6SIEGE© game',
+                `\`${prefix}rand6 d\`\n` +
+                `\`${prefix}rand6 a\`\n` +
+                `\`${prefix}rand6 r\`\n` +
+                `\`${prefix}rand6 list\`\n` +
+                `\`${prefix}rand6 listops\`\n` +
+                `\`${prefix}rand6 help\`\n`,
+                this.cmd.type.FUN,
+                0
+            )
+            // MUSIC COMMAND
+            .register(
+                require('../commands/music').ex,
+                'music',
+                ['m'],
+                'Play music from youtube with the bot',
+                `\`${prefix}music\`\n`,
                 this.cmd.type.MISC,
                 0
             )
