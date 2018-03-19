@@ -313,6 +313,8 @@ class CmdHandler {
                 `\`${prefix}rand6 r\`\n` +
                 `\`${prefix}rand6 list\`\n` +
                 `\`${prefix}rand6 listops\`\n` +
+                `\`${prefix}rand6 setops <URL>\`\n` +
+                `\`${prefix}rand6 rules\`\n` +
                 `\`${prefix}rand6 help\`\n`,
                 this.cmd.type.FUN,
                 0
