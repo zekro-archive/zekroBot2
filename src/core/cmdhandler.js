@@ -327,6 +327,16 @@ class CmdHandler {
                 this.cmd.type.MISC,
                 0
             )
+            // GIF COMMAND
+            .register(
+                require('../commands/gif').ex,
+                'gif',
+                [],
+                'Display some gifs from giphy',
+                `\`${prefix}gif <search query> (<index>)\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
