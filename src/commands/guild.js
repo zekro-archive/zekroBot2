@@ -35,7 +35,7 @@ exports.ex = (msg, args) => {
             '```\n' +
             `Text Channels:    ${chans.filter(c => c.type == 'text').array().length}\n` +
             `Voice Channels:   ${chans.filter(c => c.type == 'voice').array().length}\n` +
-            `Categories:       ${chans.filter(c => c.type == 'group').array().length}\n` +
+            `Categories:       ${chans.filter(c => c.type == null).array().length}\n` +
             '                  -------\n' +
             `                  ${chans.array().length}\n` +
             '```'
