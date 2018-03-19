@@ -13,6 +13,10 @@ var server = {}
 
 /*
     TODO:
+    
+    - create kind of event noticing track has ended
+        → if queue has further tracks, play them
+          else disconnect from voice
 
     - create now playing messages, displaying in channels
       set in config (?) or in channel, music command 

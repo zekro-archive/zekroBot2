@@ -49,7 +49,9 @@ exports.ex = (msg, args) => {
             '```' +
             (roles.array().length > 80 ? `and ${roles.array().length - 80} roles more...` : '')
         )
-        .addField('Emojis', guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' '))
+
+    if (guild.emojis.array().length)
+        emb.addField('Emojis', guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' '))
 
     if (guild.iconURL)
         emb.setThumbnail(guild.iconURL)
