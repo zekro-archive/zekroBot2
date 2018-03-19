@@ -23,18 +23,21 @@ exports.ex = (msg, args) ->
     sendto = 0
     failed = 0
     switch args[0]
+    
         when 'owner', 'owners', 'o'
             client.guilds.array().forEach (g, i) ->
                 g.owner.createDM().then (dm) ->
                     dm.send '', emb
                     if client.guilds.array().length == i + 1
                         Embeds.default chan, "Successfully send message to **#{client.guilds.array().length}** owners."
+
         when 'all', 'members', 'membs'
             membs = []
             client.guilds.forEach (g) ->
                 g.members.forEach (m) ->
-                    if membs.indexOf(m) == -1
+                    if membs.map((_m) -> _m.id).indexOf(m.id) == -1 and !m.user.bot
                         membs.push m
+
             membs.forEach (m) ->
                 m.createDM().then (dm) ->
                     dm.send '', emb

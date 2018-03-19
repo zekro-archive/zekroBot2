@@ -337,6 +337,16 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
+            // SUGGESTION COMMAND
+            .register(
+                require('../commands/suggestion').ex,
+                'suggest',
+                ['wish'],
+                'Submit your guggestions about this bot',
+                `\`${prefix}suggest <message>\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
