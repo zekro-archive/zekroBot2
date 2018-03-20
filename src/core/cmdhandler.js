@@ -349,6 +349,17 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
+            // NOTIFY CHANNEL COMMAND
+            .register(
+                require('../commands/msgchan').ex,
+                'msgchan',
+                ['notifychan'],
+                'Set a text channel as notification message channel',
+                `\`${prefix}msgchan (<name/ID>)\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
+
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)

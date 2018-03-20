@@ -7,14 +7,20 @@ const Statics = require('../util/statics')
 const DL = require('../util/dl')
 
 
+
+const SYMBOLS = {
+    REROLL: '🌀',
+    SWAP: '🤝'
+}
+
 const DEF_OPS = {
     ATT: ['Lion', 'Finka', 'Dokkaebi', 'Zofia', 'Ying', 'Blitz', 'IQ', 'Twitch', 'Montagne', 'Ash', 'Thermite', 'Sledge', 'Thatcher', 'Capitao', 'Jackal', 'Hibana', 'Blackbeard', 'Glaz', 'Fuze', 'Buck', 'Recruit', 'Recruit (Full Engage)', 'Recruit (Only Real)'],
     DEF: ['Vigil', 'Ela', 'Lesion', 'Jäger', 'Bandit', 'Rook', 'Doc', 'Pulse', 'Castle', 'Tachanka', 'Kapkan', 'Frost', 'Smoke', 'Mute', 'Caveira', 'Echo', 'Valkyrie', 'Mira', 'Recruit', 'Recruit', 'Recruit(Full Engage)']
 }
 
-var OPS = {}
-
 const REROLL_COOLDOWN = 12 * 3600 * 1000 // 12 hours
+const SWAP_COOLDOWN = 12 * 3600 * 1000 // 12 hours
+const SWAP_EXPIRE = 60 * 1000 // 60 seconds
 
 const ALLOWED_HOSTS = [
     'https://pastebin.com/',
@@ -24,8 +30,28 @@ const ALLOWED_HOSTS = [
 ]
 
 
+var OPS = {}
+var activeMsgs = {}
 var last = false
 var ops = []
+var swaps = {}
+
+
+client.on('messageReactionAdd', (reaction, user) => {
+    let msg = Object.values(activeMsgs).find(m => m.id == reaction.message.id)
+    if (msg && user != client.user) {
+        switch (reaction.emoji.name) {
+            case SYMBOLS.REROLL:
+                reroll(msg)
+                break
+            case SYMBOLS.SWAP:
+                swap(msg)
+                break
+        }
+        reaction.remove(user)
+    }
+})
+
 
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -44,6 +70,7 @@ function get_time(time) {
 function getOps(defenders, msg, args) {
     let vc = msg.member.voiceChannel
     let chan = msg.channel
+    let guild = msg.member.guild
 
     if (!vc) {
         Embeds.error(chan, 'You need to be in a voice channel to perform this command!', 'ERROR')
@@ -68,12 +95,18 @@ function getOps(defenders, msg, args) {
             return `**${m}** - \`${rands[m]}\``
         }).join('\n'))
     )
+    .then(m => {
+        m.react(SYMBOLS.REROLL)
+        setTimeout(() => m.react(SYMBOLS.SWAP), 25)
+        m.member = msg.member
+        activeMsgs[guild.id] = m
+    })
 }
 
 function reroll(msg, args) {
     let chan = msg.channel
     let memb = msg.member
-    if (args.length > 1) {
+    if (args && args.length > 1) {
         memb = msg.member.guild.members.find(m => m.id == args[1].replace(/(<@!)|(<@)|>/g, ''))
         if (!memb) {
             Embeds.error(chan, 'Please enter a valid member via ID or mention!', 'Argument Error')
@@ -120,7 +153,6 @@ function get_rerolls(msg) {
         }
     })
 }
-
 
 function print_help(msg) {
     Embeds.error(msg.channel, 
@@ -238,6 +270,56 @@ function set_opslist(guildid, cb) {
     })
 }
 
+function swap(msg) {
+    let memb = msg.member
+    let guild = memb.guild
+    let chan = msg.channel
+
+    Mysql.query(`SELECT * FROM r6swaps WHERE member = '${memb.id}'`, (err, res) => {
+        if (err || !res)
+            return
+        if (res.length > 0) {
+            if (Date.now() < res[0].time + SWAP_COOLDOWN) {
+                Embeds.error(chan, `You can only swap again after \`${get_time(res[0].time + SWAP_COOLDOWN - Date.now())}\``)
+                return
+            }
+        }
+
+        if (!swaps[guild.id]) {
+            swaps[guild.id] = {
+                memb,
+                timer: setTimeout(() => {
+                    swaps[guild.id] = null
+                    Embeds.error(chan, 'Swap expired.')
+                }, SWAP_EXPIRE)
+            }
+            Embeds.default(chan, 'Another member needs to enter swap in the next 60 seconds.')
+        }
+        else if (swaps[guild.id].memb) {
+
+            if (swaps[guild.id].memb == memb) {
+                Embeds.error(chan, `You can not swap with yourself, <@${memb.id}>.`)
+                return
+            }
+
+            Mysql.query(`UPDATE r6swaps SET time = ${Date.now()} WHERE member = '${swaps[guild.id].memb.id}'`, (err, res) => {
+                if (!err && res) {
+                    if (res.affectedRows == 0)
+                        Mysql.query(`INSERT INTO r6swaps (guild, member, time) VALUES ('${guild.id}', '${swaps[guild.id].memb.id}', ${Date.now()})`)
+                }
+            })
+            Mysql.query(`UPDATE r6swaps SET time = ${Date.now()} WHERE member = '${memb.id}'`, (err, res) => {
+                if (!err && res) {
+                    if (res.affectedRows == 0)
+                        Mysql.query(`INSERT INTO r6swaps (guild, member, time) VALUES ('${guild.id}', '${memb.id}', ${Date.now()})`)
+                    clearTimeout(swaps[guild.id].timer)
+                    swaps[guild.id] = null
+                    Embeds.default(chan, `Successfully swapped operators between <@${swaps[guild.id].memb.id}> and <@${memb.id}>`)
+                }
+            })
+        }
+    })
+}
 
 exports.ex = (msg, args) => { 
 
