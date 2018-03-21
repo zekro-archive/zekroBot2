@@ -5,6 +5,7 @@ const Mysql = Main.mysql
 const Statics = require('../util/statics')
 const Embeds = require('../util/embeds')
 const { RichEmbed } = require('discord.js')
+const Time = require('../util/timeutil')
 
 
 var logchanid = {}
@@ -37,8 +38,7 @@ Main.cmd.event.on('commandExecuted', msg => {
             logchan.send('', new RichEmbed()
                 .setAuthor(msg.author.tag, msg.author.avatarURL)
                 .setDescription('```' + msg.content + '```')
-                .setFooter('#' + msg.channel.name)
-                .setTimestamp(msg.createdAt)
+                .setFooter('#' + msg.channel.name + ' | ' + Time.getTime())
                 .setColor(Statics.COLORS.main)
             )
         }

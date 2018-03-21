@@ -12,11 +12,11 @@ exports.error = (chan, cont, title) ->
     return chan.send '', emb
 
 
-exports.default = (chan, cont, title) ->
+exports.default = (chan, cont, title, color) ->
     msg = null
     emb = new Discord.RichEmbed()
         .setDescription cont
-        .setColor Statics.COLORS.main
+        .setColor if color then color else Statics.COLORS.main
     if title
         emb.setTitle title
     return chan.send '', emb

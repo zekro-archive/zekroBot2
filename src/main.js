@@ -11,7 +11,7 @@ const { MySql } = require('./core/mysql')
 const { Config } = require('./core/config')
 
 const package = require('../package.json')
-exports.VERSION = package.version
+exports.VERSION = "0.18.0.0-beta"
 exports.package = package
 
 exports.argv = process.argv

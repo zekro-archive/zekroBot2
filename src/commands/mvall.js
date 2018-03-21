@@ -28,7 +28,6 @@ exports.ex = (msg, args) => {
         if (cvc) {
             Logger.debug('IsAutochannel: ' + ACHandler.get().indexOf(chan.id))
             if (ACHandler.get().indexOf(chan.id) > -1) {
-                console.log('detected ac')
                 function _acmovehandler(vc) {
                     cvc.members.forEach(m => {
                         try {

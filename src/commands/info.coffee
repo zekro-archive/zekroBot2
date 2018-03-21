@@ -12,6 +12,13 @@ exports.ex = (msg, args) ->
     deps_str = Object.keys deps
         .map (k) -> ":white_small_square:  [**#{k}**](https://www.npmjs.com/package/#{k}) *(#{deps[k]})*"
         .join '\n'
+
+    memb_count = () ->
+        _m = 0
+        client.guilds.forEach (g) ->
+            _m += g.members.array().length
+        return _m
+
     Cloc.getLines (err, res) ->
         client.fetchUser Main.config.hostid
             .then (host) ->
@@ -20,11 +27,19 @@ exports.ex = (msg, args) ->
                     .setTitle "zekroBot V2 - Info"
                     .setDescription """
                                     This bot is the reworked version of the original [zekroBot](https://github.com/zekroTJA/DiscordBot).
-                                    Currently, this bot is in a very early development phase, so not all features of the old version are implemented yet.
+                                    Currently, this bot is in a beta testing, so not all features of the old version are implemented yet.
 
                                     © 2017 - 2018 zekro Development (Ringo Hoffmann)
                                     """
                     .addField   "Current Version", "v.#{Main.VERSION}"
+                    .addField   "Stats",
+                                """
+                                ```
+                                Guilds:     #{client.guilds.array().length}
+                                Members:    #{memb_count()}
+                                Commands:   #{Object.keys(Main.cmd.helplist).length}
+                                ```
+                                """
 
                 if !err and res
                     emb .addField "Lines of Code",

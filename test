@@ -1,0 +1,800 @@
+commit 6246682160a10db8402c7eba085c5090bc9e077e
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Mar 19 13:28:13 2018 +0100
+
+    optimized some stuff and fixed some bugs
+
+commit c54537a4f7a48182d4d6147cf60006d2dfea6c44
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Mar 19 12:42:54 2018 +0100
+
+    added suggestion command and optimized broadcast command
+
+commit 291d48b2d44eeb3c6690591b2d1ff0a4f80e5327
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Mar 19 11:26:20 2018 +0100
+
+    added gif command
+
+commit 977dcef27631fe5c876789d7405eb45396c90e2a
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Mar 19 10:18:58 2018 +0100
+
+    [fixed #33] fixed wrong number of categories in guild command
+
+commit 94728cae6eef969360d79a8f277947217b4e9175
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Mar 19 09:53:59 2018 +0100
+
+    fixed bug in guild command and added stats to info command
+
+commit 91097906e032841a1d6340f2fb6ef3d28c6e2f63
+Merge: 0c8cb77 2a77315
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Mar 19 08:27:09 2018 +0100
+
+    Merge branch 'master' of github.com:zekroTJA/zekroBot2 into dev
+
+commit 0c8cb7717753875186f759e536bec9a5b925c08c
+Merge: d1ffa9c e243f65
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Mar 19 08:26:55 2018 +0100
+
+    Merge branch 'dev' of github.com:zekroTJA/zekroBot2 into dev
+
+commit e243f65f1d2baf8f2176f620219581a0ac71debb
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Mar 18 13:09:42 2018 +0100
+
+    updated music command and random6 command
+
+commit 78ce693b75b1cf104bc25b0360da7e32f9c7fd93
+Merge: 757ef2f adf6282
+Author: zekro <riho@live.de>
+Date:   Sat Mar 17 09:51:15 2018 +0100
+
+    Merge pull request #32 from zekroTJA/music
+    
+    Music
+
+commit adf6282f52501f8736665bf8511ea450e430113a
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Mar 17 09:50:48 2018 +0100
+
+    updated rand6 cmd
+
+commit 13259262953b30d8e6f7014fa72413f488c20d0b
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Thu Mar 15 16:54:19 2018 +0100
+
+    fixed autorole bug
+
+commit e6f9fcffdd44b9c00074fdef45d2f4bb4c6f8c1d
+Author: zekro <riho@live.de>
+Date:   Tue Mar 13 13:33:13 2018 +0100
+
+    updated discordjs-cmds version
+
+commit 4ee4a5c085af81e748c491094199e51e04446244
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Fri Mar 9 17:20:06 2018 +0100
+
+    added music command (NOT FINISHED AT ALL)
+
+commit 2a773157c26585fbe9583032fca9d0744b82bf3c
+Merge: 8b4c726 757ef2f
+Author: zekro <riho@live.de>
+Date:   Thu Mar 8 16:57:08 2018 +0100
+
+    Merge pull request #30 from zekroTJA/dev
+    
+    Dev
+
+commit 757ef2fb27c084a9a53672058640fdefb2f20458
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Thu Mar 8 16:56:16 2018 +0100
+
+    updated cloc_log
+
+commit f1cfc38085bf81bf08cd8769f06c7d6361e430dc
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Thu Mar 8 16:55:21 2018 +0100
+
+    updated mysql db template
+
+commit 797c4992d73892a7540a6c2c23f1b67ab64a657f
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Wed Mar 7 22:35:43 2018 +0100
+
+    updated rand6 operators list
+
+commit a9e83908f979828cb1b55cb10635c7ff130383a6
+Author: zekro <riho@live.de>
+Date:   Tue Mar 6 13:47:23 2018 +0100
+
+    added rules and help message to rand6 command
+
+commit db665ec2e1d76b7f5b6ab5b167deaac1848ea26a
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Mon Mar 5 17:24:28 2018 +0100
+
+    updated cloc log
+
+commit 9d8095e7dee0427bfb365b646ac93a1a3571438d
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Mon Mar 5 17:23:40 2018 +0100
+
+    completed random6siege command
+
+commit be6f5e665f9627336752e38c29c0e79d772a3dbb
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Mar 4 22:06:58 2018 +0100
+
+    added random6siege command (NOT FINISHED)
+
+commit 8b4c726bd4690f6b5a008aa67e9987a0365545ee
+Merge: 9453a44 314824b
+Author: zekro <riho@live.de>
+Date:   Sat Mar 3 12:12:55 2018 +0100
+
+    Merge pull request #29 from zekroTJA/dev
+    
+    updated cloc log
+
+commit 314824b0731f31a7cf9871d70194c8b6810d4df9
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Mar 3 12:12:14 2018 +0100
+
+    updated cloc log
+
+commit 9453a447fab396101b6e1f258edc5171ee030704
+Merge: e92ec37 6147028
+Author: zekro <riho@live.de>
+Date:   Fri Feb 16 11:35:48 2018 +0100
+
+    Merge pull request #27 from zekroTJA/dev
+    
+    Dev
+
+commit d1ffa9c5bb6e08572eeb8839fc29bb3c24cd0a47
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 15 15:43:53 2018 +0100
+
+    updated view
+
+commit 6147028d9d38ffc8ae22e268d6272ef664805c99
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 15 13:42:58 2018 +0100
+
+    updated mvall command [should fix #26]
+
+commit b1fe595f34968dfc58bb3d651e55bcc70789ed58
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Feb 11 13:04:09 2018 +0100
+
+    added brainfuck command [MAY BE BUGGY]
+
+commit e92ec373b7fc8676a84d086eb40efd2c5135ec8b
+Merge: e22eb33 68ef61e
+Author: zekro <riho@live.de>
+Date:   Fri Feb 9 11:45:44 2018 +0100
+
+    Merge pull request #23 from zekroTJA/dev
+    
+    Dev
+
+commit 68ef61e70ff503b2ff5d9a5578743cba011d270a
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 8 16:41:20 2018 +0100
+
+    optimized documentation of util classes
+
+commit 59d7ab8ff32f90eb081e81c6e0431047b09964ff
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 8 15:59:50 2018 +0100
+
+    Added Config Creator and Parser (fixed #21)
+
+commit e22eb33c5f4245aa861506d44cd94f880ef22bc3
+Merge: 3a4daa8 6f118c6
+Author: zekro <riho@live.de>
+Date:   Thu Feb 8 11:38:31 2018 +0100
+
+    Merge pull request #20 from zekroTJA/dev
+    
+    Dev
+
+commit 6f118c65e60512f3b04b9a4b477fb87e21e7996d
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 8 11:38:08 2018 +0100
+
+    fixed #19 (voicelog mute/unmute bug)
+
+commit 3a4daa8a6aded553dc6d13321f687dfe51edac34
+Author: zekro <riho@live.de>
+Date:   Mon Feb 5 19:09:50 2018 +0100
+
+    Update ISSUE_TEMPLATE.md
+
+commit 20590b2825cc04768c419661eff2c8825fec4ff0
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Feb 5 16:28:59 2018 +0100
+
+    [ADD] xp command (not finished)
+
+commit facf2e5d7148b092036de9fe125204cc90bf0be0
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Feb 5 15:27:07 2018 +0100
+
+    [UPD] this should fix #18 (NTBT)
+
+commit 4e2e5dc42f9f0c26b834bb72f1cbb30405ed1702
+Author: zekro <riho@live.de>
+Date:   Mon Feb 5 15:20:09 2018 +0100
+
+    Update ISSUE_TEMPLATE.md
+
+commit 0935e0deb81a87b2376d2ad3f1fc75972a66fa22
+Merge: 1e685a5 4bec00d
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Feb 4 13:45:05 2018 +0100
+
+    Merge branch 'master' of github.com:zekroTJA/zekroBot2
+
+commit 1e685a5c0ddc2355ae899ff28b783a2e57adc7f2
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Feb 4 13:43:38 2018 +0100
+
+    [fixed #17] implemented cloc loc
+
+commit a5bce4951f86c08d1160cf1ce48bfefb154fe26f
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Feb 4 11:49:45 2018 +0100
+
+    [fixed #9] Should fix general mention bug
+
+commit 4bec00db0f05d6982e1c59e662e3a2596915533b
+Merge: 9433651 32535c6
+Author: zekro <riho@live.de>
+Date:   Sat Feb 3 16:14:15 2018 +0100
+
+    Merge pull request #16 from zekroTJA/dev
+    
+    fixed #14 - Vote command bug
+
+commit 32535c6e5c9f7d08ac9545a2df6f241e0be86596
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Feb 3 16:12:24 2018 +0100
+
+    fixed #14 - Vote command bug
+
+commit 9433651f72d6bbd9ccdab3d09d1543b6eaf0cd49
+Merge: 4bbe9b9 14c0ddd
+Author: zekro <riho@live.de>
+Date:   Sat Feb 3 15:54:21 2018 +0100
+
+    Merge pull request #15 from zekroTJA/dev
+    
+    Dev
+
+commit 14c0dddb7d172593926a45d91881eb115b5679f1
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Feb 3 15:53:10 2018 +0100
+
+    added bug command (fixed #10)
+
+commit 4bbe9b9d5a757ac94947237ea4a0f36aeba54d3d
+Merge: ec97671 244864b
+Author: zekro <riho@live.de>
+Date:   Sat Feb 3 14:58:40 2018 +0100
+
+    Merge pull request #11 from LeeDJD/patch-1
+    
+    Fixed Spelling
+
+commit 244864b3c5feab1b75542943e69f8017ec9dd2e0
+Author: リー <meluten@gmail.com>
+Date:   Sat Feb 3 14:51:52 2018 +0100
+
+    Fixed Spelling
+
+commit ec976712f9656b15fc0d8193dd888e4362c7fefa
+Author: zekro <riho@live.de>
+Date:   Sat Feb 3 14:33:34 2018 +0100
+
+    Update ISSUE_TEMPLATE.md
+
+commit e323eb6438b5bb3d3acb72211014e376fb07b41c
+Author: zekro <riho@live.de>
+Date:   Sat Feb 3 14:26:51 2018 +0100
+
+    Update ISSUE_TEMPLATE.md
+
+commit ef838b53d6205debbf1109b6452266875d4b1a46
+Author: zekro <riho@live.de>
+Date:   Sat Feb 3 14:22:51 2018 +0100
+
+    Create ISSUE_TEMPLATE.md
+
+commit 5b090f406c877404210983e4cc8c81a8e8ece8f3
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Fri Feb 2 16:43:21 2018 +0100
+
+    added xp functions
+
+commit 6be35ec3d6b84afe98f1c3c607f44587a7966423
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Fri Feb 2 14:13:00 2018 +0100
+
+    added nudge command
+
+commit e961c23012ed4b48f8e20add9cb642e665843765
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Fri Feb 2 13:22:28 2018 +0100
+
+    fixed worse bug in permission command ^^
+
+commit 06a013690e82b3d64d78b0ac7be733169aed618b
+Author: zekro <riho@live.de>
+Date:   Thu Feb 1 13:43:53 2018 +0100
+
+    Update README.md
+
+commit 10130d9b3699402d200d766b0eff83f297f4a2ab
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 1 13:41:05 2018 +0100
+
+    updated helpparser for new wiki format
+
+commit 2b239be0d9e157b7ff14963c37004c239b6ebb07
+Merge: 8b5a06c c98e21f
+Author: zekro <riho@live.de>
+Date:   Thu Feb 1 13:37:48 2018 +0100
+
+    Merge pull request #8 from zekroTJA/dev
+    
+    Dev
+
+commit c98e21feb41811c9300174fe42d88dae0555fbfe
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 1 13:37:22 2018 +0100
+
+    added CLOC_LOG
+
+commit cc1e7ef63aeb8545cb175a2123698ddd2b91cbb2
+Merge: 6810fec b2329b9
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 1 13:36:07 2018 +0100
+
+    Merge branch 'dev' of github.com:zekroTJA/zekroBot2 into dev
+
+commit 6810fec8cb69755862814f03bdae85f2c38b9490
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 1 13:34:46 2018 +0100
+
+    added voicelog and cmdlog
+
+commit 8b5a06cb480ef823540b0cee12ab271662934c87
+Merge: 109d167 b2329b9
+Author: zekro <riho@live.de>
+Date:   Thu Feb 1 11:28:34 2018 +0100
+
+    Merge pull request #7 from zekroTJA/dev
+    
+    Dev
+
+commit b2329b95be22c54e9521987ce1c111a23848191f
+Merge: f0fcaaf 109d167
+Author: zekro <riho@live.de>
+Date:   Thu Feb 1 11:28:25 2018 +0100
+
+    Merge branch 'master' into dev
+
+commit f0fcaafadceb995d04a9adf4ed28ecd075325db5
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 1 11:27:22 2018 +0100
+
+    added automatic generation of channels
+
+commit aded99b514f1c9baac35ec02afd0571c02079868
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 1 10:59:32 2018 +0100
+
+    final minor changes
+
+commit ccced5e99047d4ffbcffb08df85aaab3e239d722
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Feb 1 08:26:23 2018 +0100
+
+    fixed permission bug
+
+commit 45f811c63ac5c7b36d92ffb1198ebe59d5a6f58e
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 16:45:10 2018 +0100
+
+    added comments to command handler
+
+commit 3a92a0595b37e505b280e3d29bf87f772c1aef54
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 15:30:08 2018 +0100
+
+    added cloc log
+
+commit fce6622f96e0a4c6febca58c09590dd551a3b338
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 15:09:56 2018 +0100
+
+    updated package
+
+commit 20331297163bfbe96c7c3d78babf2fc0f70f1e0a
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 15:09:22 2018 +0100
+
+    added report system
+
+commit 109d167d47adae24dc31cf569ab096115121aa7b
+Author: zekro <riho@live.de>
+Date:   Wed Jan 31 11:36:32 2018 +0100
+
+    Update README.md
+
+commit 6707c75236061b260f3be050438578861f811c51
+Merge: 8a4f698 9aaf43e
+Author: zekro <riho@live.de>
+Date:   Wed Jan 31 11:06:44 2018 +0100
+
+    Merge pull request #6 from zekroTJA/dev
+    
+    edited readme, updated modules
+
+commit 9aaf43ef2090bbdb0540f93ad05c568e216176bf
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 11:04:54 2018 +0100
+
+    edited readme, updated modules
+
+commit 8a4f6984f04f0841067fb95a8bc71b1399323bc2
+Merge: 54ef2ae 0691453
+Author: zekro <riho@live.de>
+Date:   Wed Jan 31 10:25:05 2018 +0100
+
+    Merge pull request #5 from zekroTJA/dev
+    
+    updated package
+
+commit 0691453e9f110148102bdd4b760c66f50f9ffe79
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 10:24:18 2018 +0100
+
+    updated package
+
+commit 54ef2ae963de2571b65f63369c88eb07414b36be
+Author: zekro <riho@live.de>
+Date:   Wed Jan 31 09:56:31 2018 +0100
+
+    Update README.md
+
+commit 667cbb9733c7717647f24bacb40ad666c680c05b
+Author: zekro <riho@live.de>
+Date:   Wed Jan 31 09:55:33 2018 +0100
+
+    Update README.md
+
+commit 4a3ccb6ef326fde3faae7b845793788a45f7dbec
+Merge: 63dc438 fd3a2ac
+Author: zekro <riho@live.de>
+Date:   Wed Jan 31 09:50:46 2018 +0100
+
+    Merge pull request #4 from zekroTJA/dev
+    
+    Dev
+
+commit fd3a2acacc4453811dc9ef369c5f4baab3240d48
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 09:29:17 2018 +0100
+
+    added debug mode
+
+commit 675a75c6b4a32c777b39aa8eb07a4510a0f06326
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Wed Jan 31 08:57:10 2018 +0100
+
+    fixed some cmd descriptions, updated readme, added cmd module
+    
+    I've added the module 'helpparser.js, which only creates an markdown formated file which contains information about registered commands, which I use in main readme. You can disable or delete this module, if you want.'
+
+commit 2a470e0256d7345722a4395851005de7c88f3297
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Tue Jan 30 16:33:45 2018 +0100
+
+    updated info, updated readme
+
+commit e4e675daccae172332b9e98b8347214e29306ebd
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Tue Jan 30 14:14:42 2018 +0100
+
+    improved auochannel function
+
+commit 1e46f76ace644965e23779097954ea4c0a29ec10
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Tue Jan 30 13:27:09 2018 +0100
+
+    finished autochannel function
+
+commit 46d36b1f21f8dda5b426b2e682021cb34ab95b8d
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Jan 29 16:31:48 2018 +0100
+
+    added some stuff for auto channel function
+
+commit 03c9428b3f9fe69cffb777e2a126d22fb1fd1638
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Mon Jan 29 13:19:49 2018 +0100
+
+    added broadcast command
+
+commit 63dc43835965667bb93c060f501d2605ce764738
+Merge: 79f7fe3 7cbce45
+Author: zekro <riho@live.de>
+Date:   Mon Jan 29 08:29:12 2018 +0100
+
+    Merge pull request #3 from zekroTJA/dev
+    
+    Dev
+
+commit 7cbce45cb6b6d84287c69638efdf159beefedbbd
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Jan 28 11:48:36 2018 +0100
+
+    fixed another bug in perms
+
+commit 9ab8320b741b01610ad0ae95d66d0542440598e8
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Jan 28 11:41:02 2018 +0100
+
+    updated eval command
+
+commit 9a1a9f621ead185e115b0109df1044b062859ffd
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Jan 28 11:33:36 2018 +0100
+
+    fixed bug in perms
+
+commit 9a46548a49b8a1b2d4b9a8caef1751d8e2f456f7
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Jan 27 13:51:59 2018 +0100
+
+    added id / whois / whatis command
+
+commit 6fff7ee77fe0883de670ede46f5f577f57227e33
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Jan 27 12:49:36 2018 +0100
+
+    added restart, updated some stuff
+
+commit 79f7fe3a81c94dd428f365675d29956bb6956886
+Merge: 324f59d 69aa569
+Author: zekro <riho@live.de>
+Date:   Sat Jan 27 01:25:27 2018 +0100
+
+    Merge pull request #2 from zekroTJA/dev
+    
+    Dev
+
+commit 69aa56900f16eeefedbbf5c20c2585d0f48da8a9
+Author: zekro <zekrommaster110@aol.de>
+Date:   Sat Jan 27 01:24:43 2018 +0100
+
+    updated gitignore
+
+commit 58330b63800daa1e4f874bdb2eba4fd668853bf9
+Author: zekro <zekrommaster110@aol.de>
+Date:   Sat Jan 27 01:23:22 2018 +0100
+
+    added mvall command
+
+commit 863f7385db1698e9f6834fabbf1e615c7a14c2c8
+Author: zekro <zekrommaster110@aol.de>
+Date:   Sat Jan 27 00:57:33 2018 +0100
+
+    updated guilds command
+
+commit be67cc995ab87cedd28541961dbf04949912e053
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Fri Jan 26 16:44:33 2018 +0100
+
+    enhanced vote command
+
+commit dd97f3847f4b5d6753e7768dd1c695f5b31d3be3
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Fri Jan 26 14:33:24 2018 +0100
+
+    added vote command
+
+commit 324f59d7812823ea04eb5c90bf39665cd870bad2
+Merge: 3aadfb3 722f18b
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Fri Jan 26 09:38:03 2018 +0100
+
+    Merge branch 'dev'
+
+commit 722f18b0dd5caaa8695cfcb2afd64ae1899750ed
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Fri Jan 26 09:37:22 2018 +0100
+
+    added a little thing to readme
+
+commit 053c0ed9926c153e6cb31eebb4df2ecd3bdeb833
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Jan 25 16:41:29 2018 +0100
+
+    updated readme
+
+commit b5fc5df67de356eba9d01ab9831d3fcec8022ec6
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Jan 25 16:37:27 2018 +0100
+
+    added module integration and fixed some bugs
+
+commit 8998cce180aa1937244ec394b68dfe00f20b6874
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Jan 25 14:09:24 2018 +0100
+
+    added mysql import for database structure
+
+commit 6b5938b1ed5d6e39c9d6fd99f4ebab4de7c3aebd
+Author: Ringo Hoffmann <riho@live.de>
+Date:   Thu Jan 25 13:40:29 2018 +0100
+
+    added user command, some other stuff
+    
+    fixed a bug in clear command and removed logger message when registering permission levels for roles on startup
+
+commit ec4bf86f0827c0f85d990b108a0613c9618cbdfb
+Author: zekro <zekrommaster110@aol.de>
+Date:   Wed Jan 24 20:07:53 2018 +0100
+
+    fixed some bugs ^^
+
+commit 5a8e852f71b7e69a72f2fdcf3a3ddbaa4f2953f9
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Wed Jan 24 13:51:44 2018 +0100
+
+    added autorole
+
+commit 9fc6826b0e2642e53bdc555c67efb10d8eb6e703
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Wed Jan 24 13:33:30 2018 +0100
+
+    fixed some bugs
+
+commit 7894fd5f63636d3da117798e9b1a9f2bbd7ac477
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Wed Jan 24 12:53:52 2018 +0100
+
+    updated clear command and some command descriptions
+
+commit f4c86371ec167bce2eb97d0a698e1f38669b9325
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Wed Jan 24 11:46:12 2018 +0100
+
+    added clear command
+
+commit 3aadfb3e1229d8305c5a007a175b938aba226990
+Merge: 3f7d19d ce9b686
+Author: zekro <riho@live.de>
+Date:   Wed Jan 24 10:55:35 2018 +0100
+
+    Merge pull request #1 from zekroTJA/dev
+    
+    Dev
+
+commit ce9b686303a617e3c9f0b7b8bc39b6f3499e183b
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Wed Jan 24 10:54:44 2018 +0100
+
+    updated info, updated game function
+
+commit 52a7fe2b769e0c0ed0d597deb50227af9c3eb0a5
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Wed Jan 24 10:07:10 2018 +0100
+
+    added game setting
+
+commit 91fb50eba8d2e39472aee8d3475c0cda333b3b67
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Tue Jan 23 16:48:00 2018 +0100
+
+    added botmention
+
+commit f71cca1d22fa324fff3726eb1d61c2a1bede7c25
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Tue Jan 23 15:15:00 2018 +0100
+
+    added reset to perms command
+
+commit 3f3af24d4bbfa99374b34a8a3b79a7c1790e38bb
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Tue Jan 23 14:03:36 2018 +0100
+
+    added guildprefix function
+
+commit 48d6354edd2024a8d645ef0fc86a8e8e26aa54f0
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Tue Jan 23 13:25:39 2018 +0100
+
+    added eval command
+
+commit c0f45cac484a384c83e20b1eb1de86d415145b4b
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Tue Jan 23 12:33:48 2018 +0100
+
+    added say command
+
+commit 3f7d19df0226f094a7b6e7731c0cca0a22d14d01
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Tue Jan 23 11:33:50 2018 +0100
+
+    added role permission system
+
+commit f25e7fda2a14e794f6fc08e252d86e56a9ab17cd
+Author: Ringo Hoffmann <rh@digitronic.net>
+Date:   Mon Jan 22 10:28:03 2018 +0100
+
+    edited some stuff in command register
+
+commit fe8cdf81c8a81f5eb8facd9840952014455d2f6e
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sun Dec 10 01:12:43 2017 +0100
+
+    added mysql stuff
+
+commit c3d73329475f19ea5cc4d98f3b197d6bbd307735
+Merge: 876e183 75dff50
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Dec 9 12:59:03 2017 +0100
+
+    Merge branch 'master' of https://github.com/zekroTJA/zekroBot2
+
+commit 876e183758710aeaff586ba260509cb0eab3bb5d
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Dec 9 12:58:31 2017 +0100
+
+    added info command, added some other stuff
+
+commit 75dff50af33e2dd18721625be1079f34a3edf564
+Author: zekro <zekrommaster110@aol.de>
+Date:   Sat Dec 9 12:26:55 2017 +0100
+
+    Update README.md
+
+commit eb252d2659c73d297dbac1088b64f8e9c5f30f8c
+Author: zekro <zekrommaster110@aol.de>
+Date:   Sat Dec 9 12:26:41 2017 +0100
+
+    Update README.md
+
+commit d1ba5e93af3ee376b33fb02143f388e5d987c340
+Merge: 9d62841 55d2993
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Dec 9 02:24:17 2017 +0100
+
+    Merge branch 'master' of https://github.com/zekroTJA/zekroBot2
+
+commit 9d628418222c2fe9c673a8966bda1e27a3034cc1
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Dec 9 02:24:04 2017 +0100
+
+    added some stuff ^^
+
+commit 55d299335116b68ba23a847dd4d616375ad1b745
+Author: zekro <zekrommaster110@aol.de>
+Date:   Sat Dec 9 01:36:31 2017 +0100
+
+    Update README.md
+
+commit c50ef91deee2b9f08ca36d50f3e2af2ef4a52781
+Author: ゼクロ <zekrommaster110@aol.de>
+Date:   Sat Dec 9 01:29:40 2017 +0100
+
+    Initial commit

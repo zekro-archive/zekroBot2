@@ -313,10 +313,74 @@ class CmdHandler {
                 `\`${prefix}rand6 r\`\n` +
                 `\`${prefix}rand6 list\`\n` +
                 `\`${prefix}rand6 listops\`\n` +
+                `\`${prefix}rand6 setops <URL>\`\n` +
+                `\`${prefix}rand6 rules\`\n` +
                 `\`${prefix}rand6 help\`\n`,
                 this.cmd.type.FUN,
                 0
             )
+            // MUSIC COMMAND
+            .register(
+                require('../commands/music').ex,
+                'music',
+                ['m'],
+                'Play music from youtube with the bot',
+                `\`${prefix}music\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            // GIF COMMAND
+            .register(
+                require('../commands/gif').ex,
+                'gif',
+                [],
+                'Display some gifs from giphy',
+                `\`${prefix}gif <search query> (<index>)\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
+            // SUGGESTION COMMAND
+            .register(
+                require('../commands/suggestion').ex,
+                'suggest',
+                ['wish'],
+                'Submit your guggestions about this bot',
+                `\`${prefix}suggest <message>\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
+            // NOTIFY CHANNEL COMMAND
+            .register(
+                require('../commands/msgchan').ex,
+                'msgchan',
+                ['notifychan'],
+                'Set a text channel as notification message channel',
+                `\`${prefix}msgchan (<name/ID>)\`\n` +
+                `\`${prefix}msgchan reset\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
+            // JOINMSG COMMAND
+            .register(
+                require('../commands/joinmsg').ex,
+                'joinmsg',
+                ['joinmessage'],
+                'Set a message appearing in notification channel when new member joins the guild',
+                `\`${prefix}joinmsg <message ([m] -> member, [g] -> guild>\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
+            // JOINMSG COMMAND
+            .register(
+                require('../commands/leavemsg').ex,
+                'leavemsg',
+                ['leavemessage'],
+                'Set a message appearing in notification channel when member leaves the guild',
+                `\`${prefix}leavemsg <message ([m] -> member, [g] -> guild>\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
+
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
             console.log(type, err)

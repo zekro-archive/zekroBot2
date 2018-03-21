@@ -5,6 +5,7 @@ const Mysql = Main.mysql
 const Statics = require('../util/statics')
 const Embeds = require('../util/embeds')
 const { RichEmbed } = require('discord.js')
+const Time = require('../util/timeutil')
 
 
 var logchanid = {}
@@ -42,21 +43,21 @@ client.on('voiceStateUpdate', (mold, mnew) => {
                 logchan.send('', new RichEmbed()
                     .setColor(Statics.COLORS.green)
                     .setDescription(`:white_check_mark: **${mnew.displayName}** joined **\`${vnew.name}\`**`)
-                    .setTimestamp(new Date())
+                    .setFooter(Time.getTime())
                 )
             }
             else if (vold && !vnew) {
                 logchan.send('', new RichEmbed()
                     .setColor(Statics.COLORS.orange)
                     .setDescription(`:small_red_triangle_down: **${mnew.displayName}** left **\`${vold.name}\`**`)
-                    .setTimestamp(new Date())
+                    .setFooter(Time.getTime())
                 )
             }
             else if (vold && vnew && vold.id != vnew.id) {
                 logchan.send('', new RichEmbed()
                     .setColor(Statics.COLORS.cyan)
                     .setDescription(`:arrow_right: **${mnew.displayName}** went from **\`${vold.name}\`** to **\`${vnew.name}\`**`)
-                    .setTimestamp(new Date())
+                    .setFooter(Time.getTime())
                 )
             }
         }
