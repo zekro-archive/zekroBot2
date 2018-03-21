@@ -6,13 +6,14 @@ const Embeds = require('../util/embeds')
 
 function set_chan(guild, channel) {
     return new Promise((resolve, reject) => {
-        Mysql.query(`UPDATE guilds SET notifychan = '${channel.id}' WHERE guild = '${guild.id}'`, (err, res) => {
+        let chanid = channel ? channel.id : ''
+        Mysql.query(`UPDATE guilds SET notifychan = '${chanid}' WHERE guild = '${guild.id}'`, (err, res) => {
             if (err || !res) {
                 reject(err)
                 return
             }
             if (res.affectedRows == 0) {
-                Mysql.query(`INSERT INTO guilds (guild, notifychan) VALUES ('${guild.id}', '${channel.id}')`, (err, res) => {
+                Mysql.query(`INSERT INTO guilds (guild, notifychan) VALUES ('${guild.id}', '${chanid}')`, (err, res) => {
                     if (err || !res) {
                         reject(err)
                         return
@@ -33,6 +34,13 @@ exports.ex = (msg, args) => {
         set_chan(guild, chan).then(() => {
             Embeds.default(chan, `Set this channel (<#${chan.id}>) as notification channel.\n\nIf you want to set an other channel as notification channel, enter the channel ID or name as argument: ` + 
                                  '```zb:msgchan <name/ID>```')
+        })
+        return
+    }
+
+    if (args[0] == 'reset') {
+        set_chan(guild, null).then(() => {
+            Embeds.default(chan, 'Notification channel is now unset again.')
         })
         return
     }

@@ -1,4 +1,3 @@
-
 /**
  * Color statics used for message embeds.
  */

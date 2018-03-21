@@ -1,15 +1,17 @@
-const Main = require('../main')
-const client = Main.client
 const https = require('https')
-const Statics = require('../util/statics')
 
 
 function get(url, cb) {
-
+    if (!cb)
+        return
     https.get(url, (res) => {
+        var data = ''
         res.on('data', (d) => {
-            cb(null, d.toString('utf8'))
+            data += d.toString('utf8')
         });
+        res.on('end', () => {
+            cb(null, data)
+        })
     }).on('error', (err) => {
         if (cb)
             cb(err)

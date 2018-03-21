@@ -355,7 +355,28 @@ class CmdHandler {
                 'msgchan',
                 ['notifychan'],
                 'Set a text channel as notification message channel',
-                `\`${prefix}msgchan (<name/ID>)\`\n`,
+                `\`${prefix}msgchan (<name/ID>)\`\n` +
+                `\`${prefix}msgchan reset\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
+            // JOINMSG COMMAND
+            .register(
+                require('../commands/joinmsg').ex,
+                'joinmsg',
+                ['joinmessage'],
+                'Set a message appearing in notification channel when new member joins the guild',
+                `\`${prefix}joinmsg <message ([m] -> member, [g] -> guild>\`\n`,
+                this.cmd.type.SETTING,
+                4
+            )
+            // JOINMSG COMMAND
+            .register(
+                require('../commands/leavemsg').ex,
+                'leavemsg',
+                ['leavemessage'],
+                'Set a message appearing in notification channel when member leaves the guild',
+                `\`${prefix}leavemsg <message ([m] -> member, [g] -> guild>\`\n`,
                 this.cmd.type.SETTING,
                 4
             )
