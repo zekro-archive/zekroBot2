@@ -16,12 +16,19 @@ client.on 'ready', ->
 
     Settings.getGame (curr) ->
         if curr
-            client.user.setActivity((if curr.name then curr.name else "zekro.de | #{Main.config.prefix}help"),
-                                    { 
-                                        type: if curr.type then curr.type else 0
-                                        url: if curr.url then curr.url else "http://twitch.tv/zekrotja"
-                                    }
-            )
+            client.user.setPresence({
+                game: {
+                    name: (if curr.name then curr.name else "zekro.de | #{Main.config.prefix}help")
+                }
+                type: if curr.type then curr.type else 0
+                url: if curr.url then curr.url else "http://twitch.tv/zekrotja"
+            })
+            # client.user.setActivity((if curr.name then curr.name else "zekro.de | #{Main.config.prefix}help"),
+            #                         { 
+            #                             type: if curr.type then curr.type else 0
+            #                             url: if curr.url then curr.url else "http://twitch.tv/zekrotja"
+            #                         }
+            # )
         else
             client.user.setActivity """zekros Tutorials. | #{Main.VERSION} | zb:help""", {url: "http://twitch.tv/zekrotja", type: 3}
 

@@ -102,14 +102,23 @@ class Poll {
                     res.forEach(r => {
                         let data = JSON.parse(r.data)
                         let guild = client.guilds.find(g => g.id == data.msg.guild)
+                        let chan = guild.channels.find(c => c.id == data.msg.channel)
                         let poll = new Poll(
                             guild.members.find(m => m.id == data.member),
-                            guild.channels.find(c => c.id == data.msg.channel),
+                            chan,
                             data.topic.replace(/(--nl--)/gm, '\n'),
                             data.poss.map(p => p.replace(/(--nl--)/gm, '\n')),
                             data.ans
                         )
                         polls[r.membid] = poll
+
+                        // Thanks @ Lee#6874 (github.com/LeeDJD) for the answer
+                        chan.fetchMessages()
+                            .then(messages => {
+                                messages.find(m => m.id == data.msg.id).delete()
+                            })
+                            .catch(console.error);
+
                         resolve()
                     })
                 }

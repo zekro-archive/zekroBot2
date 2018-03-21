@@ -16,7 +16,6 @@ exports.ex = (msg, args) ->
     Cloc.getLines (err, res) ->
         Settings.getGame (cb_curr) ->
             curr = cb_curr
-            console.log curr
             switch args[0]
                 when 'cloc'
                     if err or !res
@@ -43,13 +42,18 @@ exports.ex = (msg, args) ->
                         Embeds.error msg.channel, "Please enter a valid game url!", "INVALID INPUT"
                         return
 
-            console.log("curr after", curr)
-
             curr.name = if curr.name then curr.name else "zekro.de | #{Main.config.prefix}help"
             curr.type = if curr.type then curr.type else 'PLAYING'
             curr.url = if curr.url then curr.url else "https://twitch.tv/zekrotja"
 
-            client.user.setActivity curr.name, {url: curr.url, type: curr.type}
+            client.user.setPresence {
+                game: {
+                    name: curr.name
+                },
+                type: curr.type,
+                url: curr.url
+            }
+            # client.user.setActivity curr.name, {url: curr.url, type: curr.type}
             Embeds.default msg.channel, """
                                         Set game to 
                                         ```
