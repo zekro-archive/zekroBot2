@@ -84,7 +84,7 @@ function getOps(defenders, msg, args) {
     let rands = {}
 
     let ind = 0
-    vc.members.forEach(m => {
+    vc.members.filter(m => !m.user.bot).forEach(m => {
         rands[m.displayName] = ops[ind++]
     })
 

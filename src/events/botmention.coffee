@@ -17,5 +17,5 @@ client.on "message", (msg) ->
                     .addField 'Global Prefix', "```#{pre}```"
                 if res
                     emb.addField 'Prefix on this guild', "```#{res}```"
-                emb.addField 'Documentation', 'Soon...'
+                emb.addField 'Documentation', ':link:  [**GitHub Wiki**](https://github.com/zekroTJA/zekroBot2/wiki)'
                 msg.channel.send '', emb
