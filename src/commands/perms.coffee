@@ -52,7 +52,7 @@ exports.ex = (msg, args) ->
         Embeds.error(chan, 'Please enter a valid level to set for role(s).')
         return
 
-    if parseInt(lvl) >= Main.cmd.options.ownerpermlvl
+    if parseInt(lvl) > Main.cmd.options.ownerpermlvl
         Embeds.error(chan, "Role level can not be higher than guild owner permission level (`#{Main.cmd.options.ownerpermlvl}`)!")
         return
 
