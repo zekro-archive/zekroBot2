@@ -12,9 +12,7 @@ const { Config } = require('./core/config')
 
 const package = require('../package.json')
 
-/********* V E R S I O N *********/
-exports.VERSION = "0.18.1.0-beta"
-/*********************************/
+exports.VERSION = package.version
 
 exports.package = package
 

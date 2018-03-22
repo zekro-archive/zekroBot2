@@ -380,6 +380,36 @@ class CmdHandler {
                 this.cmd.type.SETTING,
                 4
             )
+            // VOICE KICK VKICK COMMAND
+            .register(
+                require('../commands/voicekick').ex,
+                'vkick',
+                ['voicekick'],
+                'Kick a member out of its current voice channel',
+                `\`${prefix}vkick <Member mention/ID/name>\`\n`,
+                this.cmd.type.MODERATION,
+                4
+            )
+            // KICK COMMAND
+            .register(
+                require('../commands/kick').ex,
+                'kick',
+                [],
+                'Kick a member from the guild with reason and entry in reports database',
+                `\`${prefix}kick <Member mention/ID> <reason>\`\n`,
+                this.cmd.type.GUILDADMIN,
+                5
+            )
+            // BAN COMMAND
+            .register(
+                require('../commands/ban').ex,
+                'ban',
+                [],
+                'Ban a member from the guild with reason and entry in reports database',
+                `\`${prefix}ban <Member mention/ID> <reason>\`\n`,
+                this.cmd.type.GUILDADMIN,
+                5
+            )
 
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
