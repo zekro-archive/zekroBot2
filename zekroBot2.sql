@@ -22,7 +22,11 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `autorole` text NOT NULL,
   `cmdlogchan` text NOT NULL,
   `vlogchan` text NOT NULL,
-  `autochanprefix` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `autochanprefix` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifychan` text NOT NULL,
+  `joinmsg` text NOT NULL,
+  `leavemsg` text NOT NULL,
+  `r6opsurl` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `membsets`;
@@ -45,6 +49,13 @@ CREATE TABLE IF NOT EXISTS `r6rerolls` (
   `time` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `r6swaps`;
+CREATE TABLE IF NOT EXISTS `r6swaps` (
+  `guild` text NOT NULL,
+  `member` text NOT NULL,
+  `time` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS `reports`;
 CREATE TABLE IF NOT EXISTS `reports` (
   `guild` text NOT NULL,
@@ -52,6 +63,15 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `executor` text NOT NULL,
   `reason` text NOT NULL,
   `time` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `suggestion`;
+CREATE TABLE IF NOT EXISTS `suggestion` (
+  `userid` text NOT NULL,
+  `tag` text NOT NULL,
+  `guildid` text NOT NULL,
+  `guildname` text NOT NULL,
+  `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `testing`;
