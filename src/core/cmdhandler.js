@@ -380,6 +380,16 @@ class CmdHandler {
                 this.cmd.type.SETTING,
                 4
             )
+            // VOICE KICK VKICK COMMAND
+            .register(
+                require('../commands/voicekick').ex,
+                'vkick',
+                ['voicekick'],
+                'Kick a member out of its current voice channel',
+                `\`${prefix}vkick <Member mention/ID/name>\`\n`,
+                this.cmd.type.MODERATION,
+                4
+            )
 
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
