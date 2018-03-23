@@ -45,6 +45,7 @@ client.on('messageReactionAdd', (reaction, user) => {
                 reroll(msg)
                 break
             case SYMBOLS.SWAP:
+                msg.member = msg.member.guild.members.find(m => m.id == user.id)
                 swap(msg)
                 break
         }
@@ -84,7 +85,7 @@ function getOps(defenders, msg, args) {
     let rands = {}
 
     let ind = 0
-    vc.members.filter(m => !m.user.bot).forEach(m => {
+    vc.members.filter(_m => !_m.user.bot).forEach(m => {
         rands[m.displayName] = ops[ind++]
     })
 
@@ -297,7 +298,7 @@ function swap(msg) {
         }
         else if (swaps[guild.id].memb) {
 
-            if (swaps[guild.id].memb == memb) {
+            if (swaps[guild.id].memb.id == memb.id) {
                 Embeds.error(chan, `You can not swap with yourself, <@${memb.id}>.`)
                 return
             }
@@ -313,8 +314,8 @@ function swap(msg) {
                     if (res.affectedRows == 0)
                         Mysql.query(`INSERT INTO r6swaps (guild, member, time) VALUES ('${guild.id}', '${memb.id}', ${Date.now()})`)
                     clearTimeout(swaps[guild.id].timer)
-                    swaps[guild.id] = null
                     Embeds.default(chan, `Successfully swapped operators between <@${swaps[guild.id].memb.id}> and <@${memb.id}>`)
+                    swaps[guild.id] = null
                 }
             })
         }
