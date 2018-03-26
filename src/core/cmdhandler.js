@@ -410,6 +410,16 @@ class CmdHandler {
                 this.cmd.type.GUILDADMIN,
                 5
             )
+            // CAT COMMAND
+            .register(
+                require('../commands/cat').ex,
+                'cat',
+                ['cats'],
+                '😼',
+                `\`${prefix}cat\`\n`,
+                this.cmd.type.FUN,
+                5
+            )
 
 
         this.cmd.event.on('commandFailed', (type, msg, err) => 
