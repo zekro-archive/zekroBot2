@@ -12,6 +12,7 @@ var polls = {}
 
 exports.load = () => Poll.load()
 
+
 class Poll {
 
     constructor(memb, chan, topic, poss, ans) {
@@ -19,6 +20,8 @@ class Poll {
         this.topic = topic
         this.poss = poss
         this.ans = ans ? ans : {}
+
+        this.once_warnings = []
 
         chan.send('', this.emb).then(m => {
             this.poss.forEach((p, i) => setTimeout(() => m.react(emojis[i]), 500 * i))
@@ -33,13 +36,16 @@ class Poll {
                 let vote = emojis.indexOf(emoji)
                 if (vote > -1 && vote < this.poss.length) {
                     if (!this.vote(user, vote))
-                        Embeds.error(this.msg.channel, `You can only vote once, <@${user.id}>`).then(m => {
-                            setTimeout(() => m.delete(), 3000)
-                        })
+                        if (this.once_warnings.indexOf(user.id) == -1) {
+                            Embeds.error(this.msg.channel, `You can only vote once, <@${user.id}>`).then(m => {
+                                setTimeout(() => m.delete(), 3000)
+                            })
+                            this.once_warnings.push(user.id)
+                        }
                     else if (!ans)
                         this.save()
-                    reaction.remove(user)
                 }
+                reaction.remove(user)
             }
         })
     }
