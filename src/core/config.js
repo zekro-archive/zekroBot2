@@ -4,6 +4,8 @@ const util = require('util')
 
 const CONF_TEMPLATE = {
     token: "",
+    giphy_key: "",
+    youtube_api_key: "",
     prefix: "zb:",
     hostid: "",
     mysql: {
@@ -55,7 +57,12 @@ class Config {
     }
 
     create() {
-        fs.writeFileSync(this.conf_file, JSON.stringify(CONF_TEMPLATE, null, 2))
+        out = '/*\n' +
+              '    If you need help creating the config, take a look into the wiki page:\n' +
+              '    https://github.com/zekroTJA/zekroBot2/wiki/Config-Explaination\n'
+              '*/\n\n\n';
+        out += JSON.stringify(CONF_TEMPLATE, null, 2)
+        fs.writeFileSync(this.conf_file, out)
     }
 
     getConfig() {
