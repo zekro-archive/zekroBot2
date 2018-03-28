@@ -22,8 +22,14 @@ exports.ex = (msg, args) => {
 
     switch (args[0]) {
 
-        case 'list', 'show', 'user', 'info':
-            inp = args[1].replace(/(<@)|>/g, '')
+        case 'list': 
+        case 'show':
+        case 'user':
+        case 'info':
+            if (!args[1])
+                Embeds.error(chan, 'Please enter a member mention, ID or name to list reports of this member.')
+                return
+            inp = args[1].replace(/(<@!)|(<@)|>/g, '')
             victim = guild.members.find(m => m.id == inp)
             if (!victim)
                 victim = guild.members.find(m => m.displayName.toLowerCase().indexOf(inp.toLowerCase()) > -1)
@@ -51,7 +57,7 @@ exports.ex = (msg, args) => {
             break
 
         default:
-            inp = args[0].replace(/(<@)|>/g, '')
+            inp = args[0].replace(/(<@!)|(<@)|>/g, '')
             victim = guild.members.find(m => m.id == inp)
             let reason = args.slice(1).join(' ')
             if (!victim)
