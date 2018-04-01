@@ -38,7 +38,7 @@ class Track extends EventEmitter {
     constructor(member, url) {
         super()
         this.member = member
-        this.audio = YTDL(url, {filter: 'audioonly'})
+        this.audio = YTDL(url, { filter: 'audioonly' })
         YTDL.getInfo(url, (err, info) => {
             this.full_info = info
             this.info = {
@@ -64,6 +64,7 @@ class Track extends EventEmitter {
 
 function track_end_handler(guild, conn) {
     server[guild.id].queue.shift()
+    console.log('NEXT:', server[guild.id].queue[0].info)
     if (server[guild.id].queue.length > 0) {
         server[guild.id].dispatcher = play(guild, conn, server[guild.id].queue[0])
     }
@@ -85,7 +86,7 @@ function track_start_handler(guild, track) {
         .addField('Current Track', `:arrow_forward:  \`[${track.info.length_f}]\` **${track.info.title}**`)
         .addField('Next Track', next ? `:track_next:  \`[${next.info.length_f}]\` **${next.info.title}**` : ':track_next:  *End of queue*')
     chan.send('', emb)
-    
+
     if (!chan.topic || chan.topic == ' ')
         chan.setTopic(`:musical_note:   [${track.info.length_f}] ${track.info.title}`)
 }
@@ -96,13 +97,16 @@ function track_start_handler(guild, track) {
 */
 
 function play(guild, conn, track) {
-    return conn.playStream(track.audio)
+    console.log('play')
+    let disp = conn.playStream(track.audio)
         .on('end', () => {
             track_end_handler(guild, conn)
         })
         .on('start', () => {
             track_start_handler(guild, track)
         })
+    disp.setVolume(0.2)
+    return disp
 }
 
 function queue(member, vc, tchan, url, notsendmsg) {
@@ -118,7 +122,7 @@ function queue(member, vc, tchan, url, notsendmsg) {
     }
 
     if (!server[guild.id])
-        server[guild.id] = {queue: []}
+        server[guild.id] = { queue: [] }
     server[guild.id].queue.push(track)
     server[guild.id].tchan = tchan
 
@@ -152,7 +156,7 @@ function queue_playlist(memb, guild, vc, tchan, url) {
             reject('No API key')
             return
         }
-    
+
         let PLAYLIST_ID = url.split('list=')[1].split('&')[0]
         let API_URL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&key=${Main.config.youtube_api_key}&maxResults=50`
         DL.get_ua(API_URL, (err, res) => {
@@ -238,7 +242,7 @@ function shuffle(memb, guild, tchan) {
 function displayqueue(guild, tchan) {
 
     let queue = server[guild.id] ? server[guild.id].queue : null
-    
+
     let emb = new Discord.RichEmbed()
         .setColor(Statics.COLORS.cyan)
         .setTitle('CURRENT QUEUE')
@@ -342,7 +346,7 @@ exports.ex = (msg, args) => {
         case 'test':
             queue(member, vc, channel, TEST_URL)
             break
-        
+
         default:
             Embeds.error(channel, 'Please enter a valid video URL to play!', 'ARGUMENT ERROR')
 

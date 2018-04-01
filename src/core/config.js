@@ -2,8 +2,6 @@ const fs = require('fs')
 const Logger = require('../util/logger')
 const util = require('util')
 
-
-
 const CONF_TEMPLATE = {
     token: "",
     giphy_key: "",
@@ -31,6 +29,7 @@ const CONF_TEMPLATE = {
     }
 }
 
+
 class Config {
 
     constructor(conf_file) {
@@ -42,7 +41,6 @@ class Config {
         if (fs.existsSync(this.conf_file)) {
             let config_raw = fs.readFileSync(this.conf_file, 'utf8')
                 .replace(/((\/\*)((.|\n)[^\*\/])*(\*\/))|(\s*(\/\/).*)/gm, '')
-
             try {
                 this.config = JSON.parse(config_raw)
             }
@@ -59,11 +57,10 @@ class Config {
     }
 
     create() {
-        let out =  '/*\n' +
-                   '    If you need help creating the config, take a look into the wiki page:\n' +
-                   '    https://github.com/zekroTJA/zekroBot2/wiki/Config-Explaination\n' +
-                   '*/\n\n\n'
-
+        let out = '/*\n' +
+                  '    If you need help creating the config, take a look into the wiki page:\n' +
+                  '    https://github.com/zekroTJA/zekroBot2/wiki/Config-Explaination\n' +
+                  '*/\n\n\n';
         out += JSON.stringify(CONF_TEMPLATE, null, 2)
         fs.writeFileSync(this.conf_file, out)
     }
@@ -72,6 +69,7 @@ class Config {
         Logger.debug(util.inspect(this.config))
         return this.config
     }
+
 }
 
 exports.Config = Config
