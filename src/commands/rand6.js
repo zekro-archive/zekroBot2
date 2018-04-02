@@ -18,9 +18,10 @@ const DEF_OPS = {
     DEF: ['Vigil', 'Ela', 'Lesion', 'Jäger', 'Bandit', 'Rook', 'Doc', 'Pulse', 'Castle', 'Tachanka', 'Kapkan', 'Frost', 'Smoke', 'Mute', 'Caveira', 'Echo', 'Valkyrie', 'Mira', 'Recruit', 'Recruit', 'Recruit(Full Engage)']
 }
 
-const REROLL_COOLDOWN = 12 * 3600 * 1000 // 12 hours
-const SWAP_COOLDOWN = 12 * 3600 * 1000 // 12 hours
-const SWAP_EXPIRE = 60 * 1000 // 60 seconds
+const REROLL_COOLDOWN =      12 * 3600 * 1000 // 12 hours
+const SWAP_COOLDOWN =        12 * 3600 * 1000 // 12 hours
+const SWAP_EXPIRE =          10 * 1000 // 10 seconds
+const FAST_TRIGGER_TIMEOUT = 250 // 250 mills
 
 const ALLOWED_HOSTS = [
     'https://pastebin.com/',
@@ -35,23 +36,47 @@ var activeMsgs = {}
 var last = false
 var ops = []
 var swaps = {}
+var quickchans = []
 
 
 client.on('messageReactionAdd', (reaction, user) => {
     let msg = Object.values(activeMsgs).find(m => m.id == reaction.message.id)
+    if (!msg || !msg.member)
+        return
+    let guild = msg.member.guild
     if (msg && user != client.user) {
-        switch (reaction.emoji.name) {
-            case SYMBOLS.REROLL:
-                reroll(msg)
-                break
-            case SYMBOLS.SWAP:
-                msg.member = msg.member.guild.members.find(m => m.id == user.id)
-                swap(msg)
-                break
-        }
+        if (guild.members.find(m => m.id == user.id).voiceChannel)
+            switch (reaction.emoji.name) {
+                case SYMBOLS.REROLL:
+                    msg.member = guild.members.find(m => m.id == user.id)
+                    reroll(msg)
+                    break
+                case SYMBOLS.SWAP:
+                    msg.member = guild.members.find(m => m.id == user.id)
+                    swap(msg)
+                    break
+            }
         reaction.remove(user)
     }
 })
+
+client.on('voiceStateUpdate', (mold, mnew) => {
+
+    if (activeMsgs[mnew.guild.id]) {
+        quickchans.forEach(vc => {
+            if (!vc.members.first())
+                quickchans.splice(quickchans.indexOf(vc), 1)
+        })
+    
+        if (quickchans.indexOf(mnew.voiceChannel) > -1 && !mold.selfMute && mnew.selfMute) {
+            setTimeout(() => {
+                if (!mnew.guild.members.find(m => m.id == mnew.id).selfMute)
+                    getOps(!last, activeMsgs[mnew.guild.id])
+            }, FAST_TRIGGER_TIMEOUT)
+        }
+    }
+})
+
 
 
 function shuffle(a) {
@@ -102,6 +127,8 @@ function getOps(defenders, msg, args) {
         m.member = msg.member
         activeMsgs[guild.id] = m
     })
+
+    quickchans.push(vc)
 }
 
 function reroll(msg, args) {
@@ -124,7 +151,7 @@ function reroll(msg, args) {
         if (!err && res) {
             if (res.length > 0) {
                 if (Date.now() < res[0].time + REROLL_COOLDOWN) {
-                    Embeds.error(chan, `You can only reroll again after \`${get_time(res[0].time + REROLL_COOLDOWN - Date.now())}\``)
+                    Embeds.error(chan, `You can only reroll again after \`${get_time(res[0].time + REROLL_COOLDOWN - Date.now())}\`, <@${memb.id}>`)
                     return
                 }
                 Mysql.query(`UPDATE r6rerolls SET time = ${Date.now()} WHERE member = '${memb.id}'`)
@@ -281,7 +308,7 @@ function swap(msg) {
             return
         if (res.length > 0) {
             if (Date.now() < res[0].time + SWAP_COOLDOWN) {
-                Embeds.error(chan, `You can only swap again after \`${get_time(res[0].time + SWAP_COOLDOWN - Date.now())}\``)
+                Embeds.error(chan, `You can only swap again after \`${get_time(res[0].time + SWAP_COOLDOWN - Date.now())}\`, <@${memb.id}>`)
                 return
             }
         }

@@ -15,24 +15,7 @@ const PL_TEST_URL_2 = "https://www.youtube.com/watch?v=7QO2Fn-4i8E&index=1&list=
 
 var server = {}
 
-/*
-    TODO:
-    
-    - create kind of event noticing track has ended
-        → if queue has further tracks, play them
-          else disconnect from voice
 
-    - create now playing messages, displaying in channels
-      set in config (?) or in channel, music command 
-      was executed
-
-    - create that other commands
-
-    https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlist_id}&key=${key}
-
-    PLAYLIST HANDLING → https://stackoverflow.com/questions/41827728/how-to-get-video-ids-from-an-youtube-playlist
-
-*/
 
 class Track extends EventEmitter {
     constructor(member, url) {
@@ -62,9 +45,8 @@ class Track extends EventEmitter {
     LISTENER HANDLERS
 */
 
-function track_end_handler(guild, conn) {
+function track_end_handler(guild, conn, reason) {
     server[guild.id].queue.shift()
-    console.log('NEXT:', server[guild.id].queue[0].info)
     if (server[guild.id].queue.length > 0) {
         server[guild.id].dispatcher = play(guild, conn, server[guild.id].queue[0])
     }
@@ -78,6 +60,7 @@ function track_end_handler(guild, conn) {
 }
 
 function track_start_handler(guild, track) {
+    console.log("STARTED")
     let next = server[guild.id].queue[1]
     let chan = server[guild.id].tchan
     let emb = new Discord.RichEmbed()
@@ -97,10 +80,9 @@ function track_start_handler(guild, track) {
 */
 
 function play(guild, conn, track) {
-    console.log('play')
     let disp = conn.playStream(track.audio)
-        .on('end', () => {
-            track_end_handler(guild, conn)
+        .on('end', (reason) => {
+            track_end_handler(guild, conn, reason)
         })
         .on('start', () => {
             track_start_handler(guild, track)
@@ -202,9 +184,10 @@ function pause(member, guild, tchan) {
 function skip(member, guild, tchan, ammount) {
 
     let queue = server[guild.id].queue
-    ammount = ammount ? ammount : 1
+    ammount = (ammount ? ammount : 1)
 
     if (ammount > 1) {
+        console("multiple shift")
         for (i = 1; i < ammount; i++)
             server[guild.id].queue.shif()
     }
