@@ -11,7 +11,7 @@ exports.ex = (msg, args) ->
 
     deps = Main.package.dependencies
     deps_str = Object.keys deps
-        .map (k) -> ":white_small_square:  [**#{k}**](https://www.npmjs.com/package/#{k}) *(#{deps[k]})*"
+        .map (k) -> ":white_small_square:  **#{k}** *(#{deps[k]})*"
         .join '\n'
 
     memb_count = () ->
