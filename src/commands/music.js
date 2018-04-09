@@ -15,30 +15,13 @@ const PL_TEST_URL_2 = "https://www.youtube.com/watch?v=7QO2Fn-4i8E&index=1&list=
 
 var server = {}
 
-/*
-    TODO:
-    
-    - create kind of event noticing track has ended
-        → if queue has further tracks, play them
-          else disconnect from voice
 
-    - create now playing messages, displaying in channels
-      set in config (?) or in channel, music command 
-      was executed
-
-    - create that other commands
-
-    https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlist_id}&key=${key}
-
-    PLAYLIST HANDLING → https://stackoverflow.com/questions/41827728/how-to-get-video-ids-from-an-youtube-playlist
-
-*/
 
 class Track extends EventEmitter {
     constructor(member, url) {
         super()
         this.member = member
-        this.audio = YTDL(url, {filter: 'audioonly'})
+        this.audio = YTDL(url, { filter: 'audioonly' })
         YTDL.getInfo(url, (err, info) => {
             this.full_info = info
             this.info = {
@@ -62,7 +45,7 @@ class Track extends EventEmitter {
     LISTENER HANDLERS
 */
 
-function track_end_handler(guild, conn) {
+function track_end_handler(guild, conn, reason) {
     server[guild.id].queue.shift()
     if (server[guild.id].queue.length > 0) {
         server[guild.id].dispatcher = play(guild, conn, server[guild.id].queue[0])
@@ -77,6 +60,7 @@ function track_end_handler(guild, conn) {
 }
 
 function track_start_handler(guild, track) {
+    console.log("STARTED")
     let next = server[guild.id].queue[1]
     let chan = server[guild.id].tchan
     let emb = new Discord.RichEmbed()
@@ -85,7 +69,7 @@ function track_start_handler(guild, track) {
         .addField('Current Track', `:arrow_forward:  \`[${track.info.length_f}]\` **${track.info.title}**`)
         .addField('Next Track', next ? `:track_next:  \`[${next.info.length_f}]\` **${next.info.title}**` : ':track_next:  *End of queue*')
     chan.send('', emb)
-    
+
     if (!chan.topic || chan.topic == ' ')
         chan.setTopic(`:musical_note:   [${track.info.length_f}] ${track.info.title}`)
 }
@@ -96,13 +80,15 @@ function track_start_handler(guild, track) {
 */
 
 function play(guild, conn, track) {
-    return conn.playStream(track.audio)
-        .on('end', () => {
-            track_end_handler(guild, conn)
+    let disp = conn.playStream(track.audio)
+        .on('end', (reason) => {
+            track_end_handler(guild, conn, reason)
         })
         .on('start', () => {
             track_start_handler(guild, track)
         })
+    disp.setVolume(0.2)
+    return disp
 }
 
 function queue(member, vc, tchan, url, notsendmsg) {
@@ -118,7 +104,7 @@ function queue(member, vc, tchan, url, notsendmsg) {
     }
 
     if (!server[guild.id])
-        server[guild.id] = {queue: []}
+        server[guild.id] = { queue: [] }
     server[guild.id].queue.push(track)
     server[guild.id].tchan = tchan
 
@@ -152,7 +138,7 @@ function queue_playlist(memb, guild, vc, tchan, url) {
             reject('No API key')
             return
         }
-    
+
         let PLAYLIST_ID = url.split('list=')[1].split('&')[0]
         let API_URL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&key=${Main.config.youtube_api_key}&maxResults=50`
         DL.get_ua(API_URL, (err, res) => {
@@ -198,9 +184,10 @@ function pause(member, guild, tchan) {
 function skip(member, guild, tchan, ammount) {
 
     let queue = server[guild.id].queue
-    ammount = ammount ? ammount : 1
+    ammount = (ammount ? ammount : 1)
 
     if (ammount > 1) {
+        console("multiple shift")
         for (i = 1; i < ammount; i++)
             server[guild.id].queue.shif()
     }
@@ -238,7 +225,7 @@ function shuffle(memb, guild, tchan) {
 function displayqueue(guild, tchan) {
 
     let queue = server[guild.id] ? server[guild.id].queue : null
-    
+
     let emb = new Discord.RichEmbed()
         .setColor(Statics.COLORS.cyan)
         .setTitle('CURRENT QUEUE')
@@ -342,7 +329,7 @@ exports.ex = (msg, args) => {
         case 'test':
             queue(member, vc, channel, TEST_URL)
             break
-        
+
         default:
             Embeds.error(channel, 'Please enter a valid video URL to play!', 'ARGUMENT ERROR')
 

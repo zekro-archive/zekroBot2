@@ -8,7 +8,4 @@ const DL = require('../util/dl')
 
 
 exports.ex = (msg, args) => {
-    DL.get_ua(args[0], (err, res) => {
-        console.log(res)
-    })
 }

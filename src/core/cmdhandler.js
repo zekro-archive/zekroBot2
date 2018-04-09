@@ -418,14 +418,26 @@ class CmdHandler {
                 '😼',
                 `\`${prefix}cat\`\n`,
                 this.cmd.type.FUN,
-                5
+                0
+            )
+            // CAT COMMAND
+            .register(
+                require('../commands/link').ex,
+                'link',
+                ['ln'],
+                'Link voice channels with text channels',
+                `\`${prefix}link <vchan> <tchan>\`\n` + 
+                `\`${prefix}link reset <vchan> <tchan>\`\n` + 
+                `\`${prefix}link list\`\n`,
+                this.cmd.type.SETTING,
+                4
             )
 
 
-        this.cmd.event.on('commandFailed', (type, msg, err) => 
+        this.cmd.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
         )
-        this.cmd.event.on('commandFailed', (type, msg, err) => 
+        this.cmd.on('commandFailed', (type, msg, err) => 
             Embeds.error(msg.channel, `Error Type: *\`${type}\`*\n\nError:\n\`\`\`\n${err}\n\`\`\``, "COMMAND ERROR")
         )
 
