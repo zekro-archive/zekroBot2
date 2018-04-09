@@ -4,6 +4,7 @@
 
 ## Issue Type
 - [ ] Bug
+- [ ] Enhancement
 - [ ] Feature Suggestion
 - [ ] Crash
 
