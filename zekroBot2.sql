@@ -9,6 +9,13 @@ CREATE TABLE IF NOT EXISTS `autochans` (
   `guild` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `chanlinks`;
+CREATE TABLE IF NOT EXISTS `chanlinks` (
+  `vchan` text NOT NULL,
+  `tchan` text NOT NULL,
+  `guild` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS `gensets`;
 CREATE TABLE IF NOT EXISTS `gensets` (
   `key` text NOT NULL,
@@ -26,7 +33,8 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `notifychan` text NOT NULL,
   `joinmsg` text NOT NULL,
   `leavemsg` text NOT NULL,
-  `r6opsurl` text NOT NULL
+  `r6opsurl` text NOT NULL,
+  `betacatapi` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `membsets`;
