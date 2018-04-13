@@ -6,6 +6,7 @@ const CONF_TEMPLATE = {
     token: "",
     giphy_key: "",
     youtube_api_key: "",
+    pastebin_api_key: "",
     prefix: "zb:",
     hostid: "",
     mysql: {
