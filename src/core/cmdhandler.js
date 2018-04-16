@@ -439,8 +439,19 @@ class CmdHandler {
                 ['paste'],
                 'Paste some code on pastebin',
                 `\`${prefix}pastebin [-t="some title"] [-l=language] <your code here>\`\n` +
-                `// Available languages are listed on https://pastebin.com/api#5.`,
-                this.cmd.type.SETTING,
+                `// Available languages are listed on https://pastebin.com/api#5.\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            // PASSWORD GENERATOR COMMAND
+            .register(
+                require('../commands/passgen').ex,
+                'passgen',
+                ['password', 'pw'],
+                'Generatr a random and safe password with some parameters',
+                `\`${prefix}passgen <length> <charset as RegExpr OR Safety Level>\`\n` +
+                `Safety Levels:\n0 - ver simple\n1 - simple\n2 - normal\n3 - heavy\n4 - ultra heavy`,
+                this.cmd.type.MISC,
                 0
             )
 
