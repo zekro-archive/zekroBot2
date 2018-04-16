@@ -37,6 +37,7 @@ var last = false
 var ops = []
 var swaps = {}
 var quickchans = []
+var rands = {}
 
 
 client.on('messageReactionAdd', (reaction, user) => {
@@ -107,12 +108,14 @@ function getOps(defenders, msg, args) {
 
     ops = defenders ? shuffle(OPS.DEF) : shuffle(OPS.ATT)
 
-    let rands = {}
+    rands = {}
 
     let ind = 0
-    vc.members.filter(_m => !_m.user.bot).forEach(m => {
-        rands[m.displayName] = ops[ind++]
-    })
+    vc.members
+        .filter(_m => !_m.user.bot)
+        .forEach(m => {
+            rands[m.displayName] = ops[ind++]
+        })
 
     chan.send('', new Discord.RichEmbed()
         .setColor(defenders ? 0xBD4E06 : 0x0568BD)
@@ -134,6 +137,8 @@ function getOps(defenders, msg, args) {
 function reroll(msg, args) {
     let chan = msg.channel
     let memb = msg.member
+    let notav = Object.keys(rands).map(k => rands[k])
+
     if (args && args.length > 1) {
         memb = msg.member.guild.members.find(m => m.id == args[1].replace(/(<@!)|(<@)|>/g, ''))
         if (!memb) {
@@ -144,7 +149,12 @@ function reroll(msg, args) {
 
     function _get_new_op() {
         let vc = msg.member.voiceChannel
-        return shuffle(ops.slice(vc.members.count))[0]
+        let newops = ops
+            .filter(o => notav.find(x => x == o) == null)
+            .slice(vc.members.count)
+        let newop =  shuffle(newops)[0]
+        rands[memb.displayName] = newop
+        return newop
     }
 
     Mysql.query(`SELECT * FROM r6rerolls WHERE member = '${memb.id}'`, (err, res) => {
