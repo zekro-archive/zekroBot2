@@ -42,9 +42,19 @@ exports.ex = (msg, args) => {
             data += d.toString('utf8')
         })
         res.on('end', () => {
-            jdata = JSON.parse(data)
+            try {
+                jdata = JSON.parse(data)
+            }
+            catch (err) {
+                Embeds.error(chan, `An error occured while parsing request answer:\n \`\`\`${err}\`\`\``)
+                return
+            }
             if (index > jdata.data.length - 1)
                 index = 0
+            if (!jdata.data[index]) {
+                Embeds.error(chan, `No results for the entered query \`${query}\``)
+                return
+            }
             chan.send(`[${msg.member.displayName}]\n${jdata.data[index].url}`)
                 .then(() => msg.delete())
         })

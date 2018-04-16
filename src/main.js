@@ -9,6 +9,7 @@ const Logger = require('../src/util/logger')
 const { CmdHandler } = require('./core/cmdhandler')
 const { MySql } = require('./core/mysql')
 const { Config } = require('./core/config')
+const { CrashCollector } = require('./util/crashCollector')
 
 const package = require('../package.json')
 
@@ -39,5 +40,6 @@ exports.loadModLoader = () => {
     exports.modloader = require('./core/modloader')
 }
 
+new CrashCollector('./crash_logs')
 
 exports.client.login(config.token)

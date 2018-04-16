@@ -51,7 +51,7 @@ class CmdHandler {
                 ['bcast', 'bc'],
                 'Send messages to all servers or server owners',
                 `\`${prefix}broadcast owners <msg>\n` +
-                `\`${prefix}broadcast all <msg>\n`,
+                `\`${prefix}broadcast all <msg>`,
                 this.cmd.type.ADMIN,
                 999
             )
@@ -420,7 +420,7 @@ class CmdHandler {
                 this.cmd.type.FUN,
                 0
             )
-            // CAT COMMAND
+            // LINK COMMAND
             .register(
                 require('../commands/link').ex,
                 'link',
@@ -431,6 +431,17 @@ class CmdHandler {
                 `\`${prefix}link list\`\n`,
                 this.cmd.type.SETTING,
                 4
+            )
+            // PASTEBIN COMMAND
+            .register(
+                require('../commands/pastebin').ex,
+                'pastebin',
+                ['paste'],
+                'Paste some code on pastebin',
+                `\`${prefix}pastebin [-t="some title"] [-l=language] <your code here>\`\n` +
+                `// Available languages are listed on https://pastebin.com/api#5.`,
+                this.cmd.type.SETTING,
+                0
             )
 
 
