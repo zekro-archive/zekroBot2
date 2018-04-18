@@ -485,6 +485,10 @@ class CmdHandler {
             Embeds.error(msg.channel, `Error Type: *\`${type}\`*\n\nError:\n\`\`\`\n${err}\n\`\`\``, "COMMAND ERROR")
         )
 
+        this.cmd.on('commandExecuted', msg => {
+            
+        })
+
         return this.cmd
     }
 }
