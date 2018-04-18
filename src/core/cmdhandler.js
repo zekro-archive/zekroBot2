@@ -454,6 +454,16 @@ class CmdHandler {
                 this.cmd.type.MISC,
                 0
             )
+            // LEWD COMMAND
+            .register(
+                require('../commands/lewd').ex,
+                'lewd',
+                ['hentai'],
+                '[R18 | NSFW]  💦',
+                `\`${prefix}lewd\`\n`,
+                this.cmd.type.FUN,
+                0
+            )
 
 
         this.cmd.on('commandFailed', (type, msg, err) => 
