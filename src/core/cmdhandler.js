@@ -465,6 +465,17 @@ class CmdHandler {
                 this.cmd.type.FUN,
                 0
             )
+            // URBANDICT COMMAND
+            .register(
+                require('../commands/urbandictionary').ex,
+                'urbandict',
+                ['udict', 'ud'],
+                'Get a definition from urban dictionary',
+                `\`${prefix}urbandict\`\n` +
+                `\`${prefix}urbandict <query> (-i=<index>)\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
 
 
         this.cmd.on('commandFailed', (type, msg, err) => 
