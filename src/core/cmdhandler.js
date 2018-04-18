@@ -460,7 +460,8 @@ class CmdHandler {
                 'lewd',
                 ['hentai'],
                 '[R18 | NSFW]  💦',
-                `\`${prefix}lewd\`\n`,
+                `\`${prefix}lewd\`\n` +
+                `\`${prefix}lewd enable/disable\`\n`,
                 this.cmd.type.FUN,
                 0
             )

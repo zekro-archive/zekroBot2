@@ -12,11 +12,6 @@ IMAGE_URL = 'https://zekro.de/src/catswebhookimage.jpg'
 HOOK_NAME = 'LEWDwig'
 
 
-spams = {}
-
-warned = []
-
-
 get_hook = (chan) ->
     return new Promise (resolve, reject) ->
         chan.fetchWebhooks()
@@ -40,29 +35,50 @@ exports.ex = (msg, args) ->
     guild = msg.member.guild
     memb = msg.member
 
-    if !chan.nsfw
-        Embeds.error chan, 'This command is only allowed in NSFW-Channels!'
-        return
+    Mysql.query "SELECT disable_lewd FROM guilds WHERE guild = '#{guild.id}'", (err, res) ->
+        if err || !res
+            Embeds.error chan, "An error occured requesting settings from database:\n```#{err}```"
+            return
 
-    get_hook chan
-        .then (hook) ->
-            hook.send '', new Discord.RichEmbed().setDescription('Getting lewd...').setColor(Statics.COLORS.green)
-                .then (m) ->
-                    chan.fetchMessage(m.id).then (m) -> 
-                        DL.get (BETA_ENDPOINT), (err, res) ->
-                            if !err && res
-                                try
-                                    url = JSON.parse(res).file
-                                    hook.send {
-                                        files: [ url ]
-                                    }
-                                        .then () ->
-                                            m.delete()
-                                catch e
-                                    chan.send('', new Discord.RichEmbed()
-                                        .setColor(Statics.COLORS.error)
-                                        .setDescription("Failed accessing API. Please try again later.")
-                                    )
-                            else
-                                console.log err
-                        msg.delete()
+        console.log res
+        if ['disable', 'enable', 'block'].includes (if args[0] then args[0].toLowerCase() else null)
+            if Main.cmd.getPermLvl(memb) < 4
+                Embeds.error chan, 'You are not permitted to perform this command.'
+            else
+                Mysql.query "UPDATE guilds SET disable_lewd = #{res[0].disable_lewd ^ 1} WHERE guild = '#{guild.id}'", (err, _res) ->
+                    if err || !res
+                        Embeds.error chan, "An error occured requesting settings from database:\n```#{err}```"
+                    else
+                        Embeds.default chan, "#{if res[0].disable_lewd == 1 then 'Enabled' else 'Disabled'} lewd command on this guild.\nYou can enable or disable this command with `zb:lewd enable`."
+            return
+
+        if res[0].disable_lewd
+            Embeds.error chan, 'This command disabled on this guild!'
+            return
+
+        if !chan.nsfw
+            Embeds.error chan, 'This command is only allowed in NSFW-Channels!'
+            return
+
+        get_hook chan
+            .then (hook) ->
+                hook.send '', new Discord.RichEmbed().setDescription('Getting lewd...').setColor(Statics.COLORS.green)
+                    .then (m) ->
+                        chan.fetchMessage(m.id).then (m) -> 
+                            DL.get (BETA_ENDPOINT), (err, res) ->
+                                if !err && res
+                                    try
+                                        url = JSON.parse(res).file
+                                        hook.send {
+                                            files: [ url ]
+                                        }
+                                            .then () ->
+                                                m.delete()
+                                    catch e
+                                        chan.send('', new Discord.RichEmbed()
+                                            .setColor(Statics.COLORS.error)
+                                            .setDescription("Failed accessing API. Please try again later.")
+                                        )
+                                else
+                                    console.log err
+                            msg.delete()

@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `joinmsg` text NOT NULL,
   `leavemsg` text NOT NULL,
   `r6opsurl` text NOT NULL,
-  `betacatapi` tinyint(4) NOT NULL DEFAULT '0'
+  `disable_lewd` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `membsets`;
