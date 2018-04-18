@@ -485,9 +485,23 @@ class CmdHandler {
             Embeds.error(msg.channel, `Error Type: *\`${type}\`*\n\nError:\n\`\`\`\n${err}\n\`\`\``, "COMMAND ERROR")
         )
 
-        this.cmd.on('commandExecuted', msg => {
-            
-        })
+        if (Main.config.logcmds) {
+            this.cmd.on('commandExecuted', msg => {
+                var timeutils = require('../util/timeutil')
+                let chan = msg.channel
+                let memb = msg.member
+                let guild = memb.guild
+                try {
+                    Main.mysql.query(`INSERT INTO cmdlog (guild_id, guild_name, user_id, user_tag, \
+                                      channel_id, channel_name, msg_cont, time_text, timestamp) \
+                                      VALUES ('${guild.id}', '${guild.name}', '${memb.id}', '${memb.user.tag}', \
+                                      '${chan.id}', '${chan.name}', '${msg.content}', '${timeutils.getTime()}', '${Date.now()}')`)
+                }
+                catch (err) {
+                    Logger.error(err)
+                }
+            })
+        }
 
         return this.cmd
     }

@@ -40,7 +40,6 @@ exports.ex = (msg, args) ->
             Embeds.error chan, "An error occured requesting settings from database:\n```#{err}```"
             return
 
-        console.log res
         if ['disable', 'enable', 'block'].includes (if args[0] then args[0].toLowerCase() else null)
             if Main.cmd.getPermLvl(memb) < 4
                 Embeds.error chan, 'You are not permitted to perform this command.'
