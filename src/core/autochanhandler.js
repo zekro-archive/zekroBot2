@@ -50,7 +50,7 @@ client.on('voiceStateUpdate', (mold, mnew) => {
 function createTempChan(vc, cb) {
     if (!cb)
         cb = (c) => {}
-    vc.clone(`[TMP] ${vc.name}`).then(c => {
+    vc.clone(`[TMP] ${vc.name}`, true).then(c => {
         c.setParent(vc.parent).then(c1 => {
             c.setPosition(vc.position + 1)
         }).catch(e => {
