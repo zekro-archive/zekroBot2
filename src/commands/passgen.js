@@ -63,8 +63,8 @@ exports.ex = (msg, args) => {
             `:white_small_square:  Charset-Filter: \`${regex}\``
         ).then(m => {
             m.delete(30000)
+            Embeds.default(chan, 'Look in your DM to see your password.')
+                .then((m) => m.delete(15000))
         })
-    }).then(() => {
-        Embeds.default(chan, 'Look in your DM to see your password.')
     })
 }

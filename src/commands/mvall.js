@@ -18,9 +18,16 @@ exports.ex = (msg, args) => {
 
     let guild = msg.member.guild
 
-    let chan = guild.channels.find(c => c.id == args[0] && c.type == 'voice')
-    if (!chan)
-        chan = guild.channels.find(c => c.name.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1 && c.type == 'voice')
+    let chan = guild.channels
+        .filter(c => c.type == 'voice')
+        .sort((a, b) => a.position - b.position)
+        .find(c => c.id == args[0] ||
+                   c.name.toLowerCase() == args.join(' ').toLowerCase() ||
+                   c.name.toLowerCase().startsWith(args.join(' ').toLowerCase()) || 
+                   c.name.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1)
+    // let chan = guild.channels.find(c => c.id == args[0] && c.type == 'voice')
+    // if (!chan)
+    //     chan = guild.channels.find(c => c.name.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1 && c.type == 'voice')
     if (!chan)
         Embeds.error(msg.channel, `Can not fetch any voice channel to the input \`\`\`${args.join(' ')}\`\`\``)
     else {
