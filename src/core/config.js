@@ -9,6 +9,7 @@ const CONF_TEMPLATE = {
     pastebin_api_key: "",
     prefix: "zb:",
     hostid: "",
+    logcmds: true,
     mysql: {
         host: "localhost",
         user: "",

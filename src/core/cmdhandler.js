@@ -439,8 +439,41 @@ class CmdHandler {
                 ['paste'],
                 'Paste some code on pastebin',
                 `\`${prefix}pastebin [-t="some title"] [-l=language] <your code here>\`\n` +
-                `// Available languages are listed on https://pastebin.com/api#5.`,
-                this.cmd.type.SETTING,
+                `// Available languages are listed on https://pastebin.com/api#5.\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            // PASSWORD GENERATOR COMMAND
+            .register(
+                require('../commands/passgen').ex,
+                'passgen',
+                ['password', 'pw'],
+                'Generatr a random and safe password with some parameters',
+                `\`${prefix}passgen <length> <charset as RegExpr OR Safety Level>\`\n` +
+                `Safety Levels:\n0 - ver simple\n1 - simple\n2 - normal\n3 - heavy\n4 - ultra heavy`,
+                this.cmd.type.MISC,
+                0
+            )
+            // LEWD COMMAND
+            .register(
+                require('../commands/lewd').ex,
+                'lewd',
+                ['hentai'],
+                '[R18 | NSFW]  💦',
+                `\`${prefix}lewd\`\n` +
+                `\`${prefix}lewd enable/disable\`\n`,
+                this.cmd.type.FUN,
+                0
+            )
+            // URBANDICT COMMAND
+            .register(
+                require('../commands/urbandictionary').ex,
+                'urbandict',
+                ['udict', 'ud'],
+                'Get a definition from urban dictionary',
+                `\`${prefix}urbandict\`\n` +
+                `\`${prefix}urbandict <query> (-i=<index>)\`\n`,
+                this.cmd.type.CHAT,
                 0
             )
 
@@ -451,6 +484,24 @@ class CmdHandler {
         this.cmd.on('commandFailed', (type, msg, err) => 
             Embeds.error(msg.channel, `Error Type: *\`${type}\`*\n\nError:\n\`\`\`\n${err}\n\`\`\``, "COMMAND ERROR")
         )
+
+        if (Main.config.logcmds) {
+            this.cmd.on('commandExecuted', msg => {
+                var timeutils = require('../util/timeutil')
+                let chan = msg.channel
+                let memb = msg.member
+                let guild = memb.guild
+                try {
+                    Main.mysql.query(`INSERT INTO cmdlog (guild_id, guild_name, user_id, user_tag, \
+                                      channel_id, channel_name, msg_cont, time_text, timestamp) \
+                                      VALUES ('${guild.id}', '${guild.name}', '${memb.id}', '${memb.user.tag}', \
+                                      '${chan.id}', '${chan.name}', '${msg.content}', '${timeutils.getTime()}', '${Date.now()}')`)
+                }
+                catch (err) {
+                    Logger.error(err)
+                }
+            })
+        }
 
         return this.cmd
     }

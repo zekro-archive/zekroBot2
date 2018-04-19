@@ -145,7 +145,7 @@ exports.ex = (msg, args) => {
             case 'close':
             case 'stop':
             case 'end':
-                if (memb.id in polls)
+                if (memb.id in polls || Main.cmd.getPermLvl(memb) >= 4)
                     polls[memb.id].close()
                 else
                     Embeds.error(chan, 'You can only close a vote if you created one before.')
@@ -160,7 +160,9 @@ exports.ex = (msg, args) => {
                 else {
                     Embeds.error(chan, 'There is currently a poll created by you running.\nClose it with `vote close` before opening another one.')
                 }
+                msg.delete()
                 break
+                
         }
     }
 }

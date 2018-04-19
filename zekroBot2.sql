@@ -16,6 +16,19 @@ CREATE TABLE IF NOT EXISTS `chanlinks` (
   `guild` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `cmdlog`;
+CREATE TABLE IF NOT EXISTS `cmdlog` (
+  `guild_id` text NOT NULL,
+  `guild_name` text NOT NULL,
+  `user_id` text NOT NULL,
+  `user_tag` text NOT NULL,
+  `channel_id` text NOT NULL,
+  `channel_name` text NOT NULL,
+  `msg_cont` text NOT NULL,
+  `time_text` text NOT NULL,
+  `timestamp` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS `gensets`;
 CREATE TABLE IF NOT EXISTS `gensets` (
   `key` text NOT NULL,
@@ -34,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `joinmsg` text NOT NULL,
   `leavemsg` text NOT NULL,
   `r6opsurl` text NOT NULL,
-  `betacatapi` tinyint(4) NOT NULL DEFAULT '0'
+  `disable_lewd` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `membsets`;
