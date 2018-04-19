@@ -8,7 +8,7 @@ Statics = require '../util/statics'
 
 
 BETA_ENDPOINT = 'https://zekro.de/api/lewd/get/'
-IMAGE_URL = 'https://zekro.de/src/catswebhookimage.jpg'
+IMAGE_URL = 'https://zekro.de/src/lewdwebhookimage.jpg'
 HOOK_NAME = 'LEWDwig'
 
 
