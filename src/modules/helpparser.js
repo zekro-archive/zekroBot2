@@ -30,13 +30,14 @@ Object.keys(cmds).forEach(i => {
 var output = '# Commands\n'
 var head = '# Commands index\n'
 
-categories.forEach(category => {
+categories.sort().forEach(category => {
 
     head += `\n### ${category}\n\n`
     output += `\n## ${category}\n\n`
 
     Object.keys(cmds)
         .filter(i => cmds[i].type == category)
+        .sort()
         .forEach(i => {
 
             let c = cmds[i]
