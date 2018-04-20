@@ -333,9 +333,9 @@ class CmdHandler {
             .register(
                 require('../commands/gif').ex,
                 'gif',
-                [],
+                ['jif'],
                 'Display some gifs from giphy',
-                `\`${prefix}gif <search query> (<index>)\`\n`,
+                `\`${prefix}gif <search query> (-i=<index>)\`\n`,
                 this.cmd.type.CHAT,
                 0
             )

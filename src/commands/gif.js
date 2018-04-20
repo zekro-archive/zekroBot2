@@ -7,6 +7,7 @@ const https = require('https')
 exports.ex = (msg, args) => { 
 
     var chan = msg.channel
+    var cont = args.join(' ')
 
     if (!args[0]) {
         Embeds.error(chan, 'Enter `zb:help gif` to get how to use this command!', 'INVALID ARGUMENTS')
@@ -18,23 +19,15 @@ exports.ex = (msg, args) => {
         return
     }
 
-    var ind_ind = 1
-    query = (function() {
-        if (!args[0].startsWith('"'))
-            return args[0]
-        let out = '', i = 0;
-        do {
-            if (!args[i])
-                return args[0]
-            out += args[i] + "%20"
-        }
-        while (!args[i++].endsWith('"'))
-        ind_ind = i
-        return out.substring(1, out.length - 4)
+    var query = cont
+        .replace(/(-i=\d)/gm, '')
+        .trim()
+        .replace(/\s/gm, '%20')
+    var index = (() => {
+        let _match = cont.match(/(-i=\d)/gm)
+        return _match && parseInt(_match[0].split('=')[1]) >= 0 ?
+               parseInt(_match[0].split('=')[1]) : 0
     })()
-
-    index = (args[ind_ind] && parseInt(args[ind_ind]) && parseInt(args[ind_ind]) > -1) ? parseInt(args[ind_ind]) : 0
-    console.log(query, index)
 
     https.get(`https://api.giphy.com/v1/gifs/search?api_key=${Main.config.giphy_key}&q=${query}`, (res) => {
         let data = ''
@@ -61,5 +54,4 @@ exports.ex = (msg, args) => {
     }).on('error', (err) => {
         Embeds.error(chan, 'An error occured while requesting Gif list from giphy: ```' + err + '```', 'REQUEST ERROR')
     })
-
 }
