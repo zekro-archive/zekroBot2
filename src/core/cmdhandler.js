@@ -494,8 +494,8 @@ class CmdHandler {
                 try {
                     Main.mysql.query(`INSERT INTO cmdlog (guild_id, guild_name, user_id, user_tag, \
                                       channel_id, channel_name, msg_cont, time_text, timestamp) \
-                                      VALUES ('${guild.id}', '${guild.name}', '${memb.id}', '${memb.user.tag}', \
-                                      '${chan.id}', '${chan.name}', '${msg.content}', '${timeutils.getTime()}', '${Date.now()}')`)
+                                      VALUES ('${guild.id}', "${guild.name}", '${memb.id}', "${memb.user.tag}", \
+                                      '${chan.id}', "${chan.name}", '${msg.content.replace(/[\\"']/gm, '\\$&')}', '${timeutils.getTime()}', '${Date.now()}')`)
                 }
                 catch (err) {
                     Logger.error(err)
