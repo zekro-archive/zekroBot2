@@ -61,7 +61,7 @@ class Config {
     create() {
         let out = '/*\n' +
                   '    If you need help creating the config, take a look into the wiki page:\n' +
-                  '    https://github.com/zekroTJA/zekroBot2/wiki/Config-Explaination\n' +
+                  '    github.com/zekroTJA/zekroBot2/wiki/Config-Explaination\n' +
                   '*/\n\n\n';
         out += JSON.stringify(CONF_TEMPLATE, null, 2)
         fs.writeFileSync(this.conf_file, out)
