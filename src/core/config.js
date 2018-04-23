@@ -28,7 +28,8 @@ const CONF_TEMPLATE = {
             10000,
             5
         ]
-    }
+    },
+    ignoredModules: [ "helpparser" ]
 }
 
 
