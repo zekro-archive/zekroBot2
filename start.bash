@@ -61,6 +61,7 @@ debug='start'
         echo "(C) 2018-present Ringo Hoffmann (zekro Development)"
         echo ""
         echo "  -s   Stop running bot screen"
+        echo "  -r   Resume running screen session"
         echo "  -d   Enable debug output of bot"
         echo "  -c   Clear 'node_modules' and 'config.json'"
         echo ""
@@ -101,6 +102,19 @@ debug='start'
         fi
         exit 0
     fi
+
+    # Resume 
+    if [ $1 = '-r' ]; then
+        if ! $screen; then
+            echo -e $ERROR "'screen' is not installed."
+        elif ! [[ `screen -ls` = *"$SCREENNAME"* ]]; then
+            echo -e $ERROR "zekroBot screen is currently not running."
+        else
+            screen -r $SCREENNAME
+        fi
+        exit 0
+    fi
+
 }
 
 # checking if repo is installed, if not, install from git repo and install dependencies
