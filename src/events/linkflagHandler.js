@@ -3,6 +3,7 @@ const { RichEmbed } = require('discord.js')
 const { COLORS } = require('../util/statics')
 const Embeds = require('../util/embeds')
 
+const SET_ALLOW_LEVEL = 3
 
 const EMOJIS = {
     ACCEPT: '\✅',
@@ -73,7 +74,7 @@ client.on('messageReactionAdd', (reaction, user) => {
     var member = msg.guild.members.find(m => m.id == user.id)
     if (!member)
         return
-    if (cmd.getPermLvl(member) >= 4) {
+    if (cmd.getPermLvl(member) >= SET_ALLOW_LEVEL) {
         switch (reaction.emoji.name) {
             case EMOJIS.ACCEPT:
                 mysql.query(`INSERT INTO linkflag (guild, pattern, status) VALUES ('${member.guild.id}', '${lmsgs[msg.id].link}', '${1}')`, (err, res) => {

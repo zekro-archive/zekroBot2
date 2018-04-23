@@ -476,6 +476,18 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
+            // LINKFLAG COMMAND
+            .register(
+                require('../commands/linkflag').ex,
+                'linkflag',
+                ['lf', 'flag'],
+                'Get, add or remove linkflags',
+                `\`${prefix}linkflag\`\n` +
+                `\`${prefix}linkflag <link> 0/1/-\`\n` +
+                '`0` - will set the link flag to `FORBIT`\n`1` - will set the link flag to `ALLOW`\n`-` - will remove the link from list',
+                this.cmd.type.GUILDADMIN,
+                3
+            )
 
 
         this.cmd.on('commandFailed', (type, msg, err) => 
