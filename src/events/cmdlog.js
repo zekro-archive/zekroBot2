@@ -29,7 +29,7 @@ function getlogchan(guild, cb) {
         cb()
 }
 
-Main.cmd.event.on('commandExecuted', msg => {
+Main.cmd.on('commandExecuted', msg => {
     let guild = msg.member.guild
     
     getlogchan(guild, () => {
