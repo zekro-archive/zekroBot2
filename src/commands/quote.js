@@ -45,4 +45,5 @@ exports.ex = (msg, args) => {
                 )
             })
     })
+    msg.delete()
 }
