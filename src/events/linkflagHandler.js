@@ -38,7 +38,9 @@ client.on('message', msg => {
     
     if (matched_links) {
         getLinks(guild, links => {
-            let found_link = Object.keys(links).find(k => matched_links[0].indexOf(k) > -1)
+            var matched_link = matched_links[0]
+                .replace(/(https?:\/\/)|www\./g, '')
+            let found_link = Object.keys(links).find(k => matched_link.indexOf(k) > -1)
             if (found_link) {
                 if (links[found_link] == 0) {
                     msg.delete()
@@ -49,9 +51,9 @@ client.on('message', msg => {
             else {
                 chan.send('', new RichEmbed()
                     .setColor(COLORS.deep_orange)
-                    .setDescription('Unregistered Link detected: ```' + matched_links[0] + '```')
+                    .setDescription('Unregistered Link detected: ```' + matched_link + '```')
                 ).then(m => {
-                    lmsgs[m.id] = { originmsg: msg, link: matched_links[0] }
+                    lmsgs[m.id] = { originmsg: msg, link: matched_link }
                     m.react(EMOJIS.ACCEPT).then(() => {
                         m.react(EMOJIS.REMOVE).then(() => {
                             m.react(EMOJIS.IGNORE).then(() => {
@@ -67,7 +69,7 @@ client.on('message', msg => {
 
 
 client.on('messageReactionAdd', (reaction, user) => {
-    if (user.id == client.user.id || Object.keys(lmsgs).includes(reaction.message))
+    if (user.id == client.user.id || !Object.keys(lmsgs).includes(reaction.message.id))
         return
     
     var msg = reaction.message
@@ -79,7 +81,6 @@ client.on('messageReactionAdd', (reaction, user) => {
             case EMOJIS.ACCEPT:
                 mysql.query(`INSERT INTO linkflag (guild, pattern, status) VALUES ('${member.guild.id}', '${lmsgs[msg.id].link}', '${1}')`, (err, res) => {
                     if (!err && res) {
-                        lmsgs[msg.id].originmsg.delete()
                         msg.delete()
                     }
                 })

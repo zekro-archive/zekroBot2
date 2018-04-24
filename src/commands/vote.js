@@ -29,6 +29,8 @@ class Poll {
 
         client.on('messageReactionAdd', (reaction, user) => {
             let msg = reaction.message
+            if (!user || !this.msg)
+                return
             if (user.id != client.user.id && msg.id == this.msg.id) {
                 let emoji = reaction.emoji.name
                 let vote = emojis.indexOf(emoji)
