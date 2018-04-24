@@ -1,6 +1,6 @@
 {
   "name": "zekrobot2",
-  "version": "0.27.2-beta",
+  "version": "0.27.3-beta",
   "description": "Rework of the original JDA zekroBot",
   "main": "src/main.js",
   "scripts": {
@@ -19,6 +19,7 @@
     "ytdl-core": "^0.20.2",
     "opusscript": "^0.0.6",
     "node-opus": "^0.2.7",
-    "pastebin-js": "^0.5.1"
+    "pastebin-js": "^0.5.1",
+    "readline-sync": "^1.4.9"
   }
 }
