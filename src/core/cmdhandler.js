@@ -484,7 +484,7 @@ class CmdHandler {
                 'Get, add or remove linkflags',
                 `\`${prefix}linkflag\`\n` +
                 `\`${prefix}linkflag <link> 0/1/-\`\n` +
-                '`0` - will set the link flag to `FORBIT`\n`1` - will set the link flag to `ALLOW`\n`-` - will remove the link from list',
+                '`0` - will set the link flag to `FORBIT`\n`1` - will set the link flag to `ALLOW`\n`-` - will remove the link from list\n',
                 this.cmd.type.GUILDADMIN,
                 3
             )
