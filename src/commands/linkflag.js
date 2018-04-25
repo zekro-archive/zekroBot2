@@ -38,6 +38,8 @@ exports.ex = (msg, args) => {
             if (mode == '0' || mode == '1') {
                 Mysql.query(`UPDATE linkflag SET status = ${mode} WHERE pattern = '${link}' AND guild = '${guild.id}'`, (err, res) => {
                     if (!err && res) {
+                        if (res.affectedRows == 0)
+                            Mysql.query(`INSERT INTO linkflag (guild, pattern, status) VALUES ('${guild.id}', '${link}', ${mode})`)
                         Embeds.default(chan, `Set status of link \`${link}\` to \`${mode == 0 ? 'FORBIDDEN' : 'ALLOWED'}\``)
                         return
                     }
@@ -47,6 +49,17 @@ exports.ex = (msg, args) => {
                 Mysql.query(`DELETE FROM linkflag WHERE guild = '${guild.id}' AND pattern = '${link}'`, (err, res) => {
                     if (!err && res) {
                         Embeds.default(chan, `Removed \`${link}\` from link flags.`)
+                        return
+                    }
+                })
+            }
+            else {
+                Mysql.query(`UPDATE linkflag SET pattern = '${mode}' WHERE pattern = '${link}' AND guild = '${guild.id}'`, (err, res) => {
+                    if (!err && res) {
+                        if (res.affectedRows == 0)
+                            Embeds.error(chan, `Could not find pattern \`${mode}\` in flag list to replace.`)
+                        else
+                            Embeds.default(chan, `Updated link flags.`)
                         return
                     }
                 })

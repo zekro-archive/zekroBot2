@@ -34,15 +34,29 @@ client.on('message', msg => {
     if (chan.type != 'text' || memb.id == client.user.id)
         return
 
-    var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?\w{1,}\.\w{1,4}(?=(.?)(\/|$))/gm)
+    // var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?\w{1,}\.\w{1,4}(?=(.?)(\/|$))/gm)
+
+    // Match all possible links
+    var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?((\w)+\.)+(\w{1,5})(:\d+)?(\/\S+)?(?!\w)/gm)
     
     if (matched_links) {
-        getLinks(guild, links => {
-            var matched_link = matched_links[0]
-                .replace(/(https?:\/\/)|www\./g, '')
-            let found_link = Object.keys(links).find(k => matched_link.indexOf(k) > -1)
-            if (found_link) {
-                if (links[found_link] == 0) {
+
+        getLinks(guild, rule => {
+            
+            var index
+            // match only 'blog.zekro.de' from for example 'http://blog.zekro.de/hl4release'
+            var suspect = matched_links[0].match(/((\w)+\.)+\w{1,5}(?=(\/|\W|$))/gm)[0]
+            var result = Object.keys(rule).map(r => {
+                // Create regex from link with replacing '*' with /.*/ and escaping other regex characters
+                return new RegExp(r.replace(/\*/gm, '.*')
+                                   .replace(/[\.\/\?\$]/gm, '\\$&'))
+            }).find((r, i) => {
+                index = i
+                return suspect.match(r) != null
+            })
+
+            if (result) {
+                if (rule[Object.keys(rule)[index]] == 0) {
                     msg.delete()
                     Embeds.error(chan, 'This link is not allowed on this guild!')
                         .then(m => m.delete(6000))
@@ -51,9 +65,9 @@ client.on('message', msg => {
             else {
                 chan.send('', new RichEmbed()
                     .setColor(COLORS.deep_orange)
-                    .setDescription('Unregistered Link detected: ```' + matched_link + '```')
+                    .setDescription('Unregistered Link detected: ```' + suspect + '```')
                 ).then(m => {
-                    lmsgs[m.id] = { originmsg: msg, link: matched_link }
+                    lmsgs[m.id] = { originmsg: msg, link: suspect }
                     m.react(EMOJIS.ACCEPT).then(() => {
                         m.react(EMOJIS.REMOVE).then(() => {
                             m.react(EMOJIS.IGNORE).then(() => {
@@ -63,8 +77,40 @@ client.on('message', msg => {
                     })
                 })
             }
-        })
+
+        }) 
+
     }
+
+    // if (matched_links) {
+        // getLinks(guild, links => {
+            // var matched_link = matched_links[0]
+                // .replace(/(https?:\/\/)|www\./g, '')
+            // let found_link = Object.keys(links).find(k => matched_link.indexOf(k) > -1)
+            // if (found_link) {
+                // if (links[found_link] == 0) {
+                    // msg.delete()
+                    // Embeds.error(chan, 'This link is not allowed on this guild!')
+                        // .then(m => m.delete(6000))
+                // } 
+            // }
+            // else {
+                // chan.send('', new RichEmbed()
+                    // .setColor(COLORS.deep_orange)
+                    // .setDescription('Unregistered Link detected: ```' + matched_link + '```')
+                // ).then(m => {
+                    // lmsgs[m.id] = { originmsg: msg, link: matched_link }
+                    // m.react(EMOJIS.ACCEPT).then(() => {
+                        // m.react(EMOJIS.REMOVE).then(() => {
+                            // m.react(EMOJIS.IGNORE).then(() => {
+                                // m.react(EMOJIS.HELP)
+                            // })
+                        // })
+                    // })
+                // })
+            // }
+        // })
+    // }
 })
 
 
