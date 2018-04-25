@@ -44,7 +44,6 @@ class Config {
             let config_raw = fs.readFileSync(this.conf_file, 'utf8')
                 .replace(/\/\/[^\n]*/gm, '')
             try {
-                console.log(config_raw)
                 this.config = JSON.parse(config_raw)
             }
             catch (e) {
