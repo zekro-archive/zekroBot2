@@ -37,7 +37,7 @@ client.on('message', msg => {
     // var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?\w{1,}\.\w{1,4}(?=(.?)(\/|$))/gm)
 
     // Match all possible links
-    var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?((\w)+\.)+(\w{1,5})(:\d+)?(\/\S+)?(?!\w)/gm)
+    var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?((\w)+\.)+([a-zA-Z]+(?!\())(:\d+)?(\/\S+)?(?!\w)/gm)
     
     if (matched_links) {
 
