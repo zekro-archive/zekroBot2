@@ -1,6 +1,6 @@
 {
   "name": "zekrobot2",
-  "version": "0.27.4-beta",
+  "version": "0.28.1-beta",
   "description": "Rework of the original JDA zekroBot",
   "main": "src/main.js",
   "scripts": {
@@ -20,6 +20,7 @@
     "opusscript": "^0.0.6",
     "node-opus": "^0.2.7",
     "pastebin-js": "^0.5.1",
-    "readline-sync": "^1.4.9"
+    "readline-sync": "^1.4.9",
+    "dictcc-js": "^1.0.0"
   }
 }

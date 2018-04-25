@@ -489,6 +489,16 @@ class CmdHandler {
                 this.cmd.type.GUILDADMIN,
                 3
             )
+            // DICT COMMAND
+            .register(
+                require('../commands/dictcc').ex,
+                'dict',
+                ['translate', 'dictcc', 'dcc'],
+                'Translate something with dict.cc',
+                `\`${prefix}dict <from> <to> <text>\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
 
 
         this.cmd.on('commandFailed', (type, msg, err) => 

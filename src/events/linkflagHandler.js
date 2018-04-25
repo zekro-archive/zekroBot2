@@ -23,8 +23,7 @@ function getLinks(guild, cb) {
     })
 }
 
-client.on('message', msg => {
-
+function handler(msg) {
     var chan = msg.channel
     var memb = msg.member
     if (!memb)
@@ -37,7 +36,7 @@ client.on('message', msg => {
     // var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?\w{1,}\.\w{1,4}(?=(.?)(\/|$))/gm)
 
     // Match all possible links
-    var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?((\w)+\.)+([a-zA-Z]+(?!\())(:\d+)?(\/\S+)?(?!\w)/gm)
+    var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?((\w)+\.)+([a-zA-Z]{2,}(?!\())(:\d+)?(\/\S+)?(?!\w)/gm)
     
     if (matched_links) {
 
@@ -45,7 +44,7 @@ client.on('message', msg => {
             
             var index
             // match only 'blog.zekro.de' from for example 'http://blog.zekro.de/hl4release'
-            var suspect = matched_links[0].match(/((\w)+\.)+\w{1,5}(?=(\/|\W|$))/gm)[0]
+            var suspect = matched_links[0].match(/((\w)+\.)+([a-zA-Z]{2,}(?!\())(?=(\/|\W|$))/gm)[0]
             var result = Object.keys(rule).map(r => {
                 // Create regex from link with replacing '*' with /.*/ and escaping other regex characters
                 return new RegExp(r.replace(/\*/gm, '.*')
@@ -111,7 +110,10 @@ client.on('message', msg => {
             // }
         // })
     // }
-})
+}
+
+client.on('message', msg => handler(msg))
+client.on('messageUpdate', (omsg, nmsg) => handler(nmsg))
 
 
 client.on('messageReactionAdd', (reaction, user) => {
@@ -151,8 +153,9 @@ client.on('messageReactionAdd', (reaction, user) => {
                                             \r${EMOJIS.IGNORE}  Ignore this time - link will be flaged next time again`
                 ).then(m => m.delete(10000))
                 break
+            
+            default:
+                reaction.remove(user)
         }
     }
-
-    reaction.remove(user)
 })
