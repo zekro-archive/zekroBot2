@@ -6,6 +6,7 @@ class MySql {
     constructor(config) {
 
         this.config = config
+        this.executedQueries = 0
 
         this.con = MySqlMod.createConnection({
             host:     config.host,
@@ -35,8 +36,9 @@ class MySql {
     query(command, cb) {
         try {
             this.con.query(command, cb)
+            this.executedQueries++
         } catch (e) {
-            console.log(e)
+            Logger.error(e.toString())
             cb(null, null)
         }
     }

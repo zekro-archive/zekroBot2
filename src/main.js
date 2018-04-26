@@ -14,10 +14,9 @@ const { CrashCollector } = require('./util/crashCollector')
 const package = require('../package.json')
 
 exports.VERSION = package.version
-
 exports.package = package
-
 exports.argv = process.argv
+exports.startupTime = Date.now()
 
 Logger.debug('Debug mode enabled')
 

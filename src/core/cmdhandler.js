@@ -19,14 +19,13 @@ const Guildpres = require('../util/guildpres')
 
 class CmdHandler {
     constructor(client, prefix) {
+
         this.cmd = new CmdParser(client, prefix)
-
+        this.cmd.cmdsExecuted = 0
         this.cmd.addType('DEBUG')
-
         this.cmd.setOptions({
             ownerpermlvl: 5,
         })
-
         this.cmd.setHost(Main.config.hostid)
 
         Guildpres.get(dbpres => this.cmd.setGuildPres(dbpres))
@@ -499,6 +498,16 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
+            // UPTIME COMMAND
+            .register(
+                require('../commands/uptime').ex,
+                'uptime',
+                ['up', 'stats', 'botstats'],
+                'Get uptime and bot stats since last restart',
+                `\`${prefix}uptime\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
 
 
         this.cmd.on('commandFailed', (type, msg, err) => 
@@ -510,18 +519,21 @@ class CmdHandler {
 
         if (Main.config.logcmds) {
             this.cmd.on('commandExecuted', msg => {
-                var timeutils = require('../util/timeutil')
-                let chan = msg.channel
-                let memb = msg.member
-                let guild = memb.guild
-                try {
-                    Main.mysql.query(`INSERT INTO cmdlog (guild_id, guild_name, user_id, user_tag, \
-                                      channel_id, channel_name, msg_cont, time_text, timestamp) \
-                                      VALUES ('${guild.id}', "${guild.name}", '${memb.id}', "${memb.user.tag}", \
-                                      '${chan.id}', "${chan.name}", '${msg.content.replace(/[\\"']/gm, '\\$&')}', '${timeutils.getTime()}', '${Date.now()}')`)
-                }
-                catch (err) {
-                    Logger.error(err)
+                this.cmd.cmdsExecuted++
+                if (Main.config.logcmds) {
+                    var timeutils = require('../util/timeutil')
+                    let chan = msg.channel
+                    let memb = msg.member
+                    let guild = memb.guild
+                    try {
+                        Main.mysql.query(`INSERT INTO cmdlog (guild_id, guild_name, user_id, user_tag, \
+                                          channel_id, channel_name, msg_cont, time_text, timestamp) \
+                                          VALUES ('${guild.id}', "${guild.name}", '${memb.id}', "${memb.user.tag}", \
+                                          '${chan.id}', "${chan.name}", '${msg.content.replace(/[\\"']/gm, '\\$&')}', '${timeutils.getTime()}', '${Date.now()}')`)
+                    }
+                    catch (err) {
+                        Logger.error(err.toString())
+                    }
                 }
             })
         }
