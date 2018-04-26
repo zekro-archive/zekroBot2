@@ -10,6 +10,7 @@ const ENWORDS = {
     'BS': 'Bosnian',
     'CS': 'Czech',
     'DA': 'Danish',
+    'GE': 'German',
     'DE': 'German',
     'EN': 'English',
     'EL': 'Greek',
@@ -45,6 +46,8 @@ exports.ex = (msg, args) => {
     }
 
     var from = args[0].toUpperCase(), to = args[1].toUpperCase(), text = args.slice(2).join(' ')
+    from = from == 'GE' ? 'DE' : from
+    to = to == 'GE' ? 'DE' : to
 
     if (!ENWORDS[from])
         Embeds.error(chan, `Language identifier \`${from}\` is not available.\n\nAvailable language identifiers:\n\`\`\`${Object.keys(ENWORDS).join(', ')}\`\`\``)
@@ -59,6 +62,11 @@ exports.ex = (msg, args) => {
                 let res_from = res.slice(0, 10).map(r => r.from).join('\n')
                 let res_to = res.slice(0, 10).map(r => r.to).join('\n')
     
+                if (!res_from || !res_to) {
+                    Embeds.error(chan, 'No results for `' + text + '`.')
+                    return
+                }
+
                 let emb = new RichEmbed()
                     .setColor(COLORS.indigo)
                     .setTitle('dict.cc Translation Results')
