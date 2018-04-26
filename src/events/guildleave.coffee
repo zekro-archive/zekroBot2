@@ -3,6 +3,7 @@ client = Main.client
 Mysql = Main.mysql
 Settings = require '../core/settings'
 Embeds = require('../util/embeds')
+Statics = require('../util/statics')
 
 client.on 'guildMemberRemove', (memb) ->
     if !memb.user.bot
@@ -11,7 +12,7 @@ client.on 'guildMemberRemove', (memb) ->
             if !err and res
                 if res.length > 0
 
-                    # JOINMSG
+                    # LEAVEMSG
                     msgchan = guild.channels.find (c) -> c.id == res[0].notifychan
                     if msgchan
                         message = res[0].leavemsg
