@@ -40,6 +40,7 @@ exports.ex = (msg, args) ->
 
                                         © 2017 - 2018 zekro Development (Ringo Hoffmann)
                                         """
+                        .setImage   'https://zekro.de/src/signaltransmitter_banner.png'
                         .addField   "Current Version", "v.#{Main.VERSION}"
                         .addField   "Stats",
                                     """
@@ -82,5 +83,6 @@ exports.ex = (msg, args) ->
                         .addField   "Contributors", 
                                     ":white_small_square:  [**zekro**](https://github.com/zekroTJA)"
                         .addField   "Dependencies", deps_str
+                        .addField   "Hosted by signaltransmitter", "`AD` | This bot is hosted by [signaltransmitter.de](https://zekro.de/signaltransmitter)"
                     msg.channel.send '', emb
                 

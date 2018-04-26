@@ -13,6 +13,11 @@ function parse(chan, memb) {
         return value ? value : (replacer ? replacer : '<n/a>')
     }
 
+    function _gameToString(game) {
+        let type = game.type == 0 ? 'Playing ' : (game.type == 1 ? 'Streaming ' : 'Listening to ')
+        return type + game.name
+    }
+
     let maxrole = memb.highestRole
     let user = memb.user
 
@@ -31,7 +36,7 @@ function parse(chan, memb) {
                 .addField('User Tag', user.tag)
                 .addField('Display Name', memb.displayName)
                 .addField('ID', `\`\`\`${user.id}\`\`\``)
-                .addField('Current Game', memb.presence.game ? memb.presence.game : 'Not in game')
+                .addField('Current Game', memb.presence.game ? _gameToString(memb.presence.game) : 'Not in game')
                 .addField('Current Status', memb.presence.status)
                 .addField('Joined Guild At', _ornull(memb.joinedAt))
                 .addField('Created Account At', _ornull(user.createdAt))

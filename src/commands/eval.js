@@ -56,7 +56,7 @@ exports.ex = (msg, args) => {
             'for command:' +
             `\`\`\`js\n${cmd}\`\`\`` +
             'output:\n' + 
-            `\`\`\`\n${res.length != 0 ? res : "no eval output"}\n\`\`\``
+            `\`\`\`\n${res.length != 0 ? res.substr(0, 2000) : "no eval output"}\n\`\`\``
         )
     )
 

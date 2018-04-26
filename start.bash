@@ -134,7 +134,7 @@ then
         echo -e $INFO "Installing npm packages..."
         npm install
         echo -e $INFO "Staring bot to generate config..."
-        npm start >/dev/null
+        npm start
         if [ -f /bin/nano ]; then
             nano config.json
             echo -e $INFO "Setup finished! Now you can restart the script to start the bot."
@@ -155,6 +155,22 @@ else
         echo -e $INFO "Node modules not installed. Executing 'npm install'..."
         npm install
     fi
+
+    if ! [ -f config.json ]; then
+        echo -e $INFO "Staring bot to generate config..."
+        npm start
+        if [ -f /bin/nano ]; then
+            nano config.json
+            echo -e $INFO "Setup finished! Now you can restart the script to start the bot."
+        elif [ -f /usr/bin/vim ]; then
+            vim config.json
+            echo -e $INFO "Setup finished! Now you can restart the script to start the bot."
+        else
+            echo -e $INFO "Please open the generated file 'config.json' with a text editor and enter your preferences."
+        fi
+        exit
+    fi
+
     if ! $screen; then
         echo -e $WARNING "'screen' is not installed and bot wil lstart in current session!"
         echo -e $WARNING "'This means, that the bot will stop running after exiting this terminal session!"

@@ -1,11 +1,14 @@
 
-cloc|github.com/AlDanial/cloc v 1.74  T=1.00 s (73.0 files/s, 5197.0 lines/s)
+cloc|github.com/AlDanial/cloc v 1.74  T=0.50 s (168.0 files/s, 12180.0 lines/s)
 --- | ---
 
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
-JavaScript|47|560|182|3224
-CoffeeScript|25|144|26|946
-SQL|1|14|0|101
+JavaScript|52|626|226|3631
+CoffeeScript|25|144|26|949
+Bourne Again Shell|1|22|17|158
+SQL|1|15|0|107
+JSON|2|1|0|76
+Markdown|3|29|0|63
 --------|--------|--------|--------|--------
-SUM:|73|718|208|4271
+SUM:|84|837|269|4984

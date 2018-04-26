@@ -50,6 +50,13 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `disable_lewd` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `linkflag`;
+CREATE TABLE IF NOT EXISTS `linkflag` (
+  `guild` text NOT NULL,
+  `pattern` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS `membsets`;
 CREATE TABLE IF NOT EXISTS `membsets` (
   `id` text NOT NULL,
