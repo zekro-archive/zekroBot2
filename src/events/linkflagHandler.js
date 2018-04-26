@@ -2,6 +2,7 @@ const { client, mysql, config, cmd } = require('../main')
 const { RichEmbed } = require('discord.js')
 const { COLORS } = require('../util/statics')
 const Embeds = require('../util/embeds')
+const https = require('https')
 
 const SET_ALLOW_LEVEL = 3
 
@@ -21,6 +22,17 @@ function getLinks(guild, cb) {
             res.forEach(r => links[r.pattern] = r.status)
         cb(links)
     })
+}
+
+function checkIfLink(url, cb) {
+    let req = https.get('https://' + url, res => {
+        var data = ''
+        res.on('data', d => data += d.toString('utf8'))
+        res.on('end', () => { 
+            cb(data)
+        })
+    }).on('error', e => console.log)
+    req.end()
 }
 
 function handler(msg) {
@@ -62,15 +74,17 @@ function handler(msg) {
                 } 
             }
             else {
-                chan.send('', new RichEmbed()
-                    .setColor(COLORS.deep_orange)
-                    .setDescription('Unregistered Link detected: ```' + suspect + '```')
-                ).then(m => {
-                    lmsgs[m.id] = { originmsg: msg, link: suspect }
-                    m.react(EMOJIS.ACCEPT).then(() => {
-                        m.react(EMOJIS.REMOVE).then(() => {
-                            m.react(EMOJIS.IGNORE).then(() => {
-                                m.react(EMOJIS.HELP)
+                checkIfLink(suspect, data => {
+                    chan.send('', new RichEmbed()
+                        .setColor(COLORS.deep_orange)
+                        .setDescription('Unregistered Link detected: ```' + suspect + '```')
+                    ).then(m => {
+                        lmsgs[m.id] = { originmsg: msg, link: suspect }
+                        m.react(EMOJIS.ACCEPT).then(() => {
+                            m.react(EMOJIS.REMOVE).then(() => {
+                                m.react(EMOJIS.IGNORE).then(() => {
+                                    m.react(EMOJIS.HELP)
+                                })
                             })
                         })
                     })
