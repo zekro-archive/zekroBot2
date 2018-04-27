@@ -5,6 +5,7 @@ const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const Logger = require('../util/logger')
 const PastebinAPI = require('pastebin-js')
+const ArgParser = require('../util/argumentParser')
 
 
 exports.ex = (msg, args) => {
@@ -27,16 +28,13 @@ exports.ex = (msg, args) => {
 
     var cont = args.join(' ')
     
-    var title_match = cont.match(/-t=".*"(?=(\s|\n))|-t=[\w]*/gm)
-    var lang_match = cont.match(/-l=[\w]*/gm)
-    var title = title_match ? title_match[0].replace(/(-t=)|"/g, '') : null
-    var lang = lang_match ? lang_match[0].replace(/(-l=)/g, '') : null
-    var code = cont
-        .replace(title_match ? title_match[0] : null, '')
-        .replace(lang_match ? lang_match[0] : null, '')
+    var ap = new ArgParser(['t', 'l'])
+    var parsed = ap.parse(cont)
 
-    while (code.startsWith('\n'))
-        code = code.substr(1)
+    var title = parsed.vals.t
+    var lang = parsed.vals.l
+    var code = parsed.rest.trim()
+
 
     var pastebin = new PastebinAPI(API_KEY)
 
