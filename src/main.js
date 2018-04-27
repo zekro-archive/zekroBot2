@@ -20,6 +20,10 @@ exports.startupTime = Date.now()
 
 Logger.debug('Debug mode enabled')
 
+if (!fs.existsSync('tmp')){
+    fs.mkdirSync('tmp');
+}
+
 // Config loader
 var confHandler = new Config()
 var config = confHandler.getConfig()
@@ -30,6 +34,7 @@ exports.mysql = new MySql(config.mysql)
 exports.client = new Client()
 exports.config = config
 exports.cmd = new CmdHandler(exports.client, config.prefix)
+exports.onCrash = []
 
 
 require('./events/eventregistry')
@@ -39,6 +44,11 @@ exports.loadModLoader = () => {
     exports.modloader = require('./core/modloader')
 }
 
-new CrashCollector('./crash_logs')
+new CrashCollector('./crash_logs', () => {
+    exports.onCrash.forEach(f => {
+        try { f() }
+        catch (e) {}
+    })
+})
 
 exports.client.login(config.token)
