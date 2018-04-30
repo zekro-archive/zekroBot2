@@ -508,6 +508,17 @@ class CmdHandler {
                 this.cmd.type.MISC,
                 0
             )
+            // LOBBY COMMAND
+            .register(
+                require('../commands/lobby').ex,
+                'lobby',
+                [],
+                'CReate a lobby where people can join',
+                `\`${prefix}lobby (-t <title>) (-max <max participants>) (-expire <expire time in minutes>) <message>\`\n` +
+                `\`${prefix}lobby close\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
 
 
         this.cmd.on('commandFailed', (type, msg, err) => 

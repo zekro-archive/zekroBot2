@@ -34,7 +34,6 @@ exports.mysql = new MySql(config.mysql)
 exports.client = new Client()
 exports.config = config
 exports.cmd = new CmdHandler(exports.client, config.prefix)
-exports.onCrash = []
 
 
 require('./events/eventregistry')
@@ -44,11 +43,6 @@ exports.loadModLoader = () => {
     exports.modloader = require('./core/modloader')
 }
 
-new CrashCollector('./crash_logs', () => {
-    exports.onCrash.forEach(f => {
-        try { f() }
-        catch (e) {}
-    })
-})
+new CrashCollector('./crash_logs')
 
 exports.client.login(config.token)
