@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - lts/*
+
+services:
+  - mysql
+
+env:
+  global:
+    secure: "DMbAzwruIlRJFKE9aOuUpOkjvftKPX7cYOpEZOHTDrwuaiNx1Nczmo1vRuNrI+ZT8BtX31QhYXU+8Ol4gsKE0cEecFpTYn+5SIpc4dtOlke3Y++8xRXk49dCzwSO9l7T5+HeIU+IwU3Y4dkIE5ChtUDWsg2Zu6Nu1Jdy+AQ7bIlmZFogk4/Pl6FSNeJ8UaPupUzTvoLVS1Wxg51yDQyRsInVdUVucm2jzhDx/CqAk101sFX8ApkmdNYb9Yskq9y1BZntVMPGIeLw5I0P/tMNkeuBTT+e/7OeMrDLtxO7NvIQCCt6bxZmJud+LMfBdQRJeAK2SEhSsZaQNl0GqtG1IFhsNv1VLIBnE/gi31tazbpMbIjbc3V6RDoDJLzocgQAI/fzW+dI6CHknCWwAL5biHeSSvSq0ijdSshqls/BgBGSkZdIXPGSFb2CQ1ZvjqgLkSXB/dKugfEFh4tMfSdYzcM7d6SahQTBDdHIo/HvLocTZnC6EhLRy6x/Z7ey2fUmljc8QPeZWi3SzsOT99LX8XLvM6LgiX9urIlK43gt9tTyj1B9W/YqcMj3QZRxpdycOK3SGqZZhwXT5ejf/+eSN8mPpYF/WcNKAg/SOuhYTVcsUs7SoVUjMKbhpfhCdAxAFor5Ess26abepK4O3zS7Nllu54moKrhn7oM2PR4vC04="
+
+before_script:
+  - mysql -e 'SOURCE zekroBot2.sql'
+  - npm install
+
+script:
+  - 

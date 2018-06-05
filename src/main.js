@@ -18,6 +18,11 @@ exports.package = package
 exports.argv = process.argv
 exports.startupTime = Date.now()
 
+exports.TESTING_MODE = (() => {
+    var i = process.argv.indexOf('-test')
+    return (i > -1 && process.argv.length > 1)
+})()
+
 Logger.debug('Debug mode enabled')
 
 if (!fs.existsSync('tmp')){
@@ -45,4 +50,7 @@ exports.loadModLoader = () => {
 
 new CrashCollector('./crash_logs')
 
-exports.client.login(config.token)
+if (exports.TESTING_MODE)
+    exports.client.login(process.argv[1])
+else
+    exports.client.login(config.token)

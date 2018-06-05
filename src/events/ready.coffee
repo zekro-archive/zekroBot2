@@ -40,3 +40,6 @@ client.on 'ready', ->
     Main.loadModLoader()
 
     require('../commands/vote').load()
+
+    if Main.TESTING_MODE
+        process.exit 0

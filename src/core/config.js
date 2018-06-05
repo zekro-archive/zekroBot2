@@ -31,15 +31,48 @@ const CONF_TEMPLATE = {
     }
 }
 
+const TEST_CONF = {
+    token: "",
+    giphy_key: "",
+    youtube_api_key: "",
+    pastebin_api_key: "",
+    prefix: "zb:",
+    hostid: "221905671296253953",
+    logcmds: true,
+    mysql: {
+        host: "127.0.0.1",
+        user: "root",
+        password: "",
+        database: "zekroBot2"
+    },
+    exp: {
+        interval: 10,
+        xpinterval: 15,
+        xpmsgmultiplier: 150,
+        flatter: 100,
+        cap: 0.8,
+        delta: 1.2,
+        startlvl: 1000,
+        reports: [
+            10000,
+            5
+        ]
+    }
+}
+
 
 class Config {
 
-    constructor(conf_file) {
+    constructor(conf_file, testing) {
         this.conf_file = conf_file ? conf_file : "config.json"
-        this.load()
+        this.load(testing)
     }
 
-    load() {
+    load(testing) {
+        if (testing) {
+            this.config = TEST_CONF
+            return
+        }
         if (fs.existsSync(this.conf_file)) {
             let config_raw = fs.readFileSync(this.conf_file, 'utf8')
                 .replace(/\/\/[^\n]*/gm, '')

@@ -4,7 +4,7 @@
   "description": "Rework of the original JDA zekroBot",
   "main": "src/main.js",
   "scripts": {
-    "test": "node src/main.js -d",
+    "test": "node src/main.js -test $DISCORD_TOKEN",
     "start": "node src/main.js"
   },
   "author": "",
