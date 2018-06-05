@@ -40,3 +40,7 @@ client.on 'ready', ->
     Main.loadModLoader()
 
     require('../commands/vote').load()
+
+    Logger.debug("Testing complete. Shutting down...")
+    if Main.TESTING_MODE
+        process.exit 0

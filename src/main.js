@@ -18,10 +18,19 @@ exports.package = package
 exports.argv = process.argv
 exports.startupTime = Date.now()
 
+exports.TESTING_MODE = (() => {
+    var i = process.argv.indexOf('-test')
+    return (i > 1 && process.argv.length > 3)
+})()
+
 Logger.debug('Debug mode enabled')
 
+if (!fs.existsSync('tmp')){
+    fs.mkdirSync('tmp');
+}
+
 // Config loader
-var confHandler = new Config()
+var confHandler = new Config("config.json", exports.TESTING_MODE)
 var config = confHandler.getConfig()
 
 exports.mysql = new MySql(config.mysql)
@@ -41,4 +50,9 @@ exports.loadModLoader = () => {
 
 new CrashCollector('./crash_logs')
 
-exports.client.login(config.token)
+console.log(process.argv)
+
+if (exports.TESTING_MODE)
+    exports.client.login(process.argv[3])
+else
+    exports.client.login(config.token)

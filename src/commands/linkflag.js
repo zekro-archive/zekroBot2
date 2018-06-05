@@ -35,6 +35,12 @@ exports.ex = (msg, args) => {
             }
             let link = args[0]
             let mode = args[1]
+            if (['wl', 'white', 'w', 'whitelist'].includes(mode.toLowerCase()))
+                mode = '1'
+            else if (['bl', 'black', 'b', 'blacklist'].includes(mode.toLowerCase()))
+                mode = '0'
+            else if (['r', 'rem', 'remove'].includes(mode.toLowerCase()))
+                mode = '-'
             if (mode == '0' || mode == '1') {
                 Mysql.query(`UPDATE linkflag SET status = ${mode} WHERE pattern = '${link}' AND guild = '${guild.id}'`, (err, res) => {
                     if (!err && res) {

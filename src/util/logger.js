@@ -30,7 +30,7 @@ exports.info = (content) => {
  * @param {string} content
  */
 exports.debug = (content) => {
-    if (Main.argv.indexOf('-d') > -1 || Main.argv.indexOf('--debug') > -1) {
+    if (Main.argv.indexOf('-d') > -1 || Main.argv.indexOf('-test') > -1) {
         content.split('\n').forEach(s => {
             console.log(`${'[INFO]'.yellow} ${s}`)
         })
