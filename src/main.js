@@ -20,7 +20,7 @@ exports.startupTime = Date.now()
 
 exports.TESTING_MODE = (() => {
     var i = process.argv.indexOf('-test')
-    return (i > -1 && process.argv.length > 1)
+    return (i > 1 && process.argv.length > 3)
 })()
 
 Logger.debug('Debug mode enabled')
@@ -50,7 +50,9 @@ exports.loadModLoader = () => {
 
 new CrashCollector('./crash_logs')
 
+console.log(process.argv)
+
 if (exports.TESTING_MODE)
-    exports.client.login(process.argv[1])
+    exports.client.login(process.argv[3])
 else
     exports.client.login(config.token)
