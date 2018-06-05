@@ -6,6 +6,11 @@
 
 ---
 
+| | |
+|--|--|
+| Master | [![Build Status](https://travis-ci.org/zekroTJA/zekroBot2.svg?branch=master)](https://travis-ci.org/zekroTJA/zekroBot2) |
+| Dev | [![Build Status](https://travis-ci.org/zekroTJA/zekroBot2.svg?branch=dev)](https://travis-ci.org/zekroTJA/zekroBot2) |
+---
 
 If you want to reuse the code of this project, please read **[this](http://s.zekro.de/codepolicy)** before doing so!
 
