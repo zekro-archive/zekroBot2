@@ -30,7 +30,7 @@ if (!fs.existsSync('tmp')){
 }
 
 // Config loader
-var confHandler = new Config()
+var confHandler = new Config("config.json", exports.TESTING_MODE)
 var config = confHandler.getConfig()
 
 exports.mysql = new MySql(config.mysql)
