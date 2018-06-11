@@ -14,6 +14,7 @@ const EMOJIS = {
 }
 
 var lmsgs = {}
+var flaggedmsgs = []
 
 function getLinks(guild, cb) {
     mysql.query(`SELECT * FROM linkflag WHERE guild = '${guild.id}'`, (err, res) => {
@@ -75,11 +76,17 @@ function handler(msg) {
             }
             else {
                 checkIfLink(suspect, data => {
+                    console.log(flaggedmsgs, msg.id)
+                    if (flaggedmsgs.includes(msg.id))
+                        return
                     chan.send('', new RichEmbed()
                         .setColor(COLORS.deep_orange)
                         .setDescription('Unregistered Link detected: ```' + suspect + '```')
                     ).then(m => {
                         lmsgs[m.id] = { originmsg: msg, link: suspect }
+                        if (flaggedmsgs.length > 10)
+                            flaggedmsgs = []
+                        flaggedmsgs.push(msg.id)
                         m.react(EMOJIS.ACCEPT).then(() => {
                             m.react(EMOJIS.REMOVE).then(() => {
                                 m.react(EMOJIS.IGNORE).then(() => {

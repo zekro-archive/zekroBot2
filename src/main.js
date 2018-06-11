@@ -50,8 +50,6 @@ exports.loadModLoader = () => {
 
 new CrashCollector('./crash_logs')
 
-console.log(process.argv)
-
 if (exports.TESTING_MODE)
     exports.client.login(process.argv[3])
 else
