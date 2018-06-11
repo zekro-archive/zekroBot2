@@ -60,3 +60,4 @@ typings/
 config.json
 .vscode/*
 createcloc
+src/modules/helpparser.js
