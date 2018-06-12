@@ -7,7 +7,7 @@ Guildpres = require '../util/guildpres'
 client = Main.client
 
 client.on "message", (msg) ->
-    if msg.content.startsWith "<@#{Main.client.user.id}>"
+    if msg.content.startsWith "<@#{Main.client.user.id}>" || msg.content.startsWith "<@!#{Main.client.user.id}>"
         Guildpres.getGuild msg.member.guild, (res) ->
             pre = Main.config.prefix
             emb = new Discord.RichEmbed()

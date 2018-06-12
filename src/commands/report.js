@@ -5,6 +5,7 @@ const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const Statics = require('../util/statics')
 const Time = require('../util/timeutil')
+const Funcs = require('../util/funcs')
 
 
 exports.ex = (msg, args) => {
@@ -26,13 +27,17 @@ exports.ex = (msg, args) => {
         case 'show':
         case 'user':
         case 'info':
-            if (!args[1])
+            if (!args[1]) {
                 Embeds.error(chan, 'Please enter a member mention, ID or name to list reports of this member.')
                 return
-            inp = args[1].replace(/(<@!)|(<@)|>/g, '')
-            victim = guild.members.find(m => m.id == inp)
-            if (!victim)
-                victim = guild.members.find(m => m.displayName.toLowerCase().indexOf(inp.toLowerCase()) > -1)
+            }
+            // inp = args[1].replace(/(<@!)|(<@)|>/g, '')
+            // victim = guild.members.find(m => m.id == inp)
+            // if (!victim)
+            //     victim = guild.members.find(m => m.displayName.toLowerCase().indexOf(inp.toLowerCase()) > -1)
+            inp = args[1]
+            victim = Funcs.fetchMember(guild, inp)
+            console.log(victim)
             if (!victim)
                 Embeds.error(chan, `Can not parse any member to the identifier: \`\`\`${inp}\`\`\` `)
             else {
@@ -52,13 +57,17 @@ exports.ex = (msg, args) => {
                         else {
                             Embeds.default(chan, 'This user has a white west! :ok_hand:', `Reports on record for ${victim.displayName}`)
                         }
+                    else
+                        Embeds.error(chan, 'An error occured executing the database query: ```' + err + '```')
                 })
             }
             break
 
         default:
-            inp = args[0].replace(/(<@!)|(<@)|>/g, '')
-            victim = guild.members.find(m => m.id == inp)
+            // inp = args[0].replace(/(<@!)|(<@)|>/g, '')
+            // victim = guild.members.find(m => m.id == inp)
+            inp = args[0]
+            victim = Funcs.fetchMember(guild, inp)
             let reason = args.slice(1).join(' ')
             if (!victim)
                 Embeds.error(chan, `Can not parse any member to the id: \`\`\`${inp}\`\`\` `)

@@ -43,17 +43,6 @@ class CmdHandler {
                 this.cmd.type.GUILDADMIN,
                 3
             )
-            // BROADCAST COMMAND
-            .register(
-                require('../commands/broadcast').ex,
-                'broadcast',
-                ['bcast', 'bc'],
-                'Send messages to all servers or server owners',
-                `\`${prefix}broadcast owners <msg>\n` +
-                `\`${prefix}broadcast all <msg>`,
-                this.cmd.type.ADMIN,
-                999
-            )
             .register(
                 require('../commands/brainfuck').ex,
                 'bf',
@@ -516,6 +505,17 @@ class CmdHandler {
                 'CReate a lobby where people can join',
                 `\`${prefix}lobby (-t <title>) (-max <max participants>) (-expire <expire time in minutes>) <message>\`\n` +
                 `\`${prefix}lobby close\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
+            // LOBBY COMMAND
+            .register(
+                require('../commands/privatetalk').ex,
+                'private',
+                ['pt', 'meeting', 'privatetalk'],
+                'Create a private talk channel with invited members',
+                `\`${prefix}private <member1> <member2> <member3>\`\n` + 
+                `\`${prefix}private close\`\n`,
                 this.cmd.type.CHAT,
                 0
             )

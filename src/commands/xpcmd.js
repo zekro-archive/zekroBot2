@@ -3,6 +3,7 @@ const client = Main.client
 const Discord = require('discord.js')
 const Embeds = require('../util/embeds')
 const Xp = require('../core/xp')
+const Funcs = require('../util/funcs')
 
 
 exports.ex = (msg, args) => {
@@ -53,11 +54,12 @@ exports.ex = (msg, args) => {
             return
         }
 
-        let member = guild.members.find(m => m.id == args[0].replace(/(<@!)|(<@)|>/g))
-        if (!member)
-            member = guild.members.find(m => m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1)
+        // let member = guild.members.find(m => m.id == args[0].replace(/(<@!)|(<@)|>/g))
+        // if (!member)
+        //     member = guild.members.find(m => m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1)
+        let member = Funcs.fetchMember(guild, args[0])
         if (!member) {
-            Embeds.error(chan, 'Can not fetch any member to the identifier: ```' + args.join(' ') + '```')
+            Embeds.error(chan, 'Can not fetch any member to the identifier: ```' + args[0] + '```')
             return
         }
     }

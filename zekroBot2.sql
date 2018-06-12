@@ -1,3 +1,7 @@
+# LAST UPDATED:
+# COMMIT: DEV@237
+# DATE:   2018/06/11
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `zekroBot2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
@@ -47,7 +51,8 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `joinmsg` text NOT NULL,
   `leavemsg` text NOT NULL,
   `r6opsurl` text NOT NULL,
-  `disable_lewd` tinyint(4) NOT NULL DEFAULT '0'
+  `disable_lewd` tinyint(4) NOT NULL DEFAULT '0',
+  `enablelinkflagging` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `linkflag`;
@@ -60,7 +65,8 @@ CREATE TABLE IF NOT EXISTS `linkflag` (
 DROP TABLE IF EXISTS `membsets`;
 CREATE TABLE IF NOT EXISTS `membsets` (
   `id` text NOT NULL,
-  `bcignore` tinyint(4) NOT NULL
+  `bcignore` tinyint(4) NOT NULL,
+  `birthday` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `perms`;

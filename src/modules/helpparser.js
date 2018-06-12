@@ -1,16 +1,13 @@
 /*
-
 MODULE INFO:
 - name:         Help Parser
 - version:      1.3
 - creator:      zekro (github.com/zekrotja)
 - last edited:  2018/04/20
-
 MODULE DESCRIPTION:
 This module is just for creating an Markdown formatted file which contains 
 various information about commands, which can be implemented into the
 main Readme document.
-
 */
 
 

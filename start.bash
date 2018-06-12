@@ -133,6 +133,9 @@ then
         git checkout dev
         echo -e $INFO "Installing npm packages..."
         npm install
+
+        rm src/modules/helpparser.js
+
         echo -e $INFO "Staring bot to generate config..."
         npm start
         if [ -f /bin/nano ]; then

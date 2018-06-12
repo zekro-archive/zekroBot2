@@ -5,6 +5,7 @@ const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const util = require('util')
 const Statics = require('../util/statics')
+const Funcs = require('../util/funcs')
 
 
 const emojis = '\u0031\u20E3 \u0032\u20E3 \u0033\u20E3 \u0034\u20E3 \u0035\u20E3 \u0036\u20E3 \u0037\u20E3 \u0038\u20E3 \u0039\u20E3 \u0030\u20E3'.split(' ')
@@ -147,6 +148,7 @@ exports.ex = (msg, args) => {
 
     let memb = msg.member
     let chan = msg.channel
+    let guild = memb.guild
 
     if (args.length < 1) {
 
@@ -156,8 +158,23 @@ exports.ex = (msg, args) => {
             case 'close':
             case 'stop':
             case 'end':
-                if (memb.id in polls || Main.cmd.getPermLvl(memb) >= 4)
+                if (!args[1] && memb.id in polls)
                     polls[memb.id].close()
+                else if (args[1]) {
+                    if (Main.cmd.getPermLvl(memb) >= 4) {
+                        let rmemb = Funcs.fetchMember(guild, args[1])
+                        console.log(rmemb)
+                        if (rmemb)
+                            if (polls[rmemb.id])
+                                polls[rmemb.id].close()
+                            else
+                                Embeds.error(chan, `The user <@${rmemb.id}> has no open votes.`)
+                        else
+                            Embeds.error(chan, 'Could not fetch any member with the identifier ```' + args[1] + '```')
+                    }
+                    else
+                        Embeds.error(chan, 'You need at least permission level `4` to close other members votes.')
+                }
                 else
                     Embeds.error(chan, 'You can only close a vote if you created one before.')
                 break

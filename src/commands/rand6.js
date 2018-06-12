@@ -5,6 +5,7 @@ const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const Statics = require('../util/statics')
 const DL = require('../util/dl')
+const Funcs = require('../util/funcs')
 
 
 
@@ -140,7 +141,8 @@ function reroll(msg, args) {
     let notav = Object.keys(rands).map(k => rands[k])
 
     if (args && args.length > 1) {
-        memb = msg.member.guild.members.find(m => m.id == args[1].replace(/(<@!)|(<@)|>/g, ''))
+        // memb = msg.member.guild.members.find(m => m.id == args[1].replace(/(<@!)|(<@)|>/g, ''))
+        memb = Funcs.fetchMember(msg.member.guild, args[1])
         if (!memb) {
             Embeds.error(chan, 'Please enter a valid member via ID or mention!', 'Argument Error')
             return
