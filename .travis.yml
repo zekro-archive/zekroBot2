@@ -2,6 +2,7 @@ language: node_js
 
 node_js:
   - lts/*
+  - node
 
 services:
   - mysql
@@ -9,6 +10,7 @@ services:
 env:
   global:
     secure: "DMbAzwruIlRJFKE9aOuUpOkjvftKPX7cYOpEZOHTDrwuaiNx1Nczmo1vRuNrI+ZT8BtX31QhYXU+8Ol4gsKE0cEecFpTYn+5SIpc4dtOlke3Y++8xRXk49dCzwSO9l7T5+HeIU+IwU3Y4dkIE5ChtUDWsg2Zu6Nu1Jdy+AQ7bIlmZFogk4/Pl6FSNeJ8UaPupUzTvoLVS1Wxg51yDQyRsInVdUVucm2jzhDx/CqAk101sFX8ApkmdNYb9Yskq9y1BZntVMPGIeLw5I0P/tMNkeuBTT+e/7OeMrDLtxO7NvIQCCt6bxZmJud+LMfBdQRJeAK2SEhSsZaQNl0GqtG1IFhsNv1VLIBnE/gi31tazbpMbIjbc3V6RDoDJLzocgQAI/fzW+dI6CHknCWwAL5biHeSSvSq0ijdSshqls/BgBGSkZdIXPGSFb2CQ1ZvjqgLkSXB/dKugfEFh4tMfSdYzcM7d6SahQTBDdHIo/HvLocTZnC6EhLRy6x/Z7ey2fUmljc8QPeZWi3SzsOT99LX8XLvM6LgiX9urIlK43gt9tTyj1B9W/YqcMj3QZRxpdycOK3SGqZZhwXT5ejf/+eSN8mPpYF/WcNKAg/SOuhYTVcsUs7SoVUjMKbhpfhCdAxAFor5Ess26abepK4O3zS7Nllu54moKrhn7oM2PR4vC04="
+    secure: "aIs6+a7wtT0aFMJ56O2BrhHV3DqgK5DpnTTLLNcsWvc8kjyL+jIRoOZ6CF1dkZH4wa1fq1q3y+L12QT9Qj7Mz9wqjoiT9oF3NOKpXXOtBY1e1z6qdES7Ca/d/dwd2pqkr5p2UEWJwFsWIAULdVbBfQfq9YuPej5y3AkEq5z9Xv6ODCmrZCyOHHbOxKflIzpnsT7MW9cckWlzNqt68eW4SJPv0YyJUg3SU153eOdS/xDHSr5277IZyDSDB1XnzEyGDIvY6qgUWe5DTwfuz+/YR3b8SwwrwkmvS7lru2s7WJ5OTLJwMW5mgLKfRLOqG45ciil8AYC6WBoWtJR7PCfW0AtUPuIOqVSEhg/NF0FyG4CpL2HWEzrWpnhwzRm/h5OuN/+cNmQLghLjWRH/It28NxFrtPU0lIHlbMjQ7UDunQ9AVZFwlaK4wtvGX+gVWrg4PeoWDKhKyoQdXzYW6fsXWA1labCRy+FtXv2ql3Pa9W7WNwPI6ilDtEu4tfLi3QKRvbHlFEeKjMctgv2pS48VmqU39q9XtGSdaMyR40n0sNfJD1s9LtbVgTjzLimsjz8tPGHGLPW5CMAeeKygYOxTWG5gLPmXeXLWCqlVkUoeXjgcPrEJNGU6e5UorB0X3jkKpM6lXXHYslrG03KAXC+KZjk8nh6ipl+liCKCihYKjL4="
 
 before_script:
   - mysql -e 'SOURCE zekroBot2.sql'
@@ -16,3 +18,13 @@ before_script:
 
 script:
   - npm test
+
+after_success: |
+  if [ -n "$GITHUB_API_KEY" ]; then
+    git clone https://zekroTJA:$GITHUB_API_KEY@github.com/zekroTJA/zekroBot2.wiki.git
+    mv cmdlist.md zekroBot2.wiki/Commands.md
+    cd zekroBot2.wiki
+    git add .
+    git commit -c user.name="travis" -c user.email="travis" -m "automatically updated commands list"
+    git push
+  fi
