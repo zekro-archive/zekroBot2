@@ -10,6 +10,7 @@
 
 | | |
 |--|--|
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a4f894b878f14a41869ad7b6762ed7e7)](https://app.codacy.com/app/zekroTJA/zekroBot2?utm_source=github.com&utm_medium=referral&utm_content=zekroTJA/zekroBot2&utm_campaign=badger)
 | Master | [![Build Status](https://travis-ci.org/zekroTJA/zekroBot2.svg?branch=master)](https://travis-ci.org/zekroTJA/zekroBot2) |
 | Dev | [![Build Status](https://travis-ci.org/zekroTJA/zekroBot2.svg?branch=dev)](https://travis-ci.org/zekroTJA/zekroBot2) |
 ---
