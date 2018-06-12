@@ -5,7 +5,7 @@ const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const Logger = require('../util/logger')
 const Statics = require('../util/statics')
-const YTDL = require('ytdl-core')
+const ytDl = require('ytdl-core')
 const EventEmitter = require('events')
 const DL = require('../util/dl')
 
@@ -21,8 +21,8 @@ class Track extends EventEmitter {
     constructor(member, url) {
         super()
         this.member = member
-        this.audio = YTDL(url, { filter: 'audioonly' })
-        YTDL.getInfo(url, (err, info) => {
+        this.audio = ytDl(url, { filter: 'audioonly' })
+        ytDl.getInfo(url, (err, info) => {
             this.full_info = info
             this.info = {
                 length_r: this.full_info.length_seconds,

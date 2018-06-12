@@ -36,7 +36,7 @@ exports.ex = (msg, args) => {
         })
         res.on('end', () => {
             try {
-                jdata = JSON.parse(data)
+                let jdata = JSON.parse(data)
             }
             catch (err) {
                 Embeds.error(chan, `An error occured while parsing request answer:\n \`\`\`${err}\`\`\``)

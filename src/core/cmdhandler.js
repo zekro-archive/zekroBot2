@@ -521,6 +521,11 @@ class CmdHandler {
             )
 
 
+        if (Main.TESTING_MODE)
+            this.cmd.createDocs("./cmdlist.md", "md", () => {
+                Logger.info("Created commands list")
+            })
+
         this.cmd.on('commandFailed', (type, msg, err) => 
             console.log(type, err)
         )

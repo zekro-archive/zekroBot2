@@ -6,7 +6,7 @@ const Mysql = Main.mysql
 exports.getGame = (cb) => {
     Mysql.query(`SELECT * FROM gensets WHERE \`key\` = 'game.name' || \`key\` = 'game.type' || \`key\` = 'game.url'`, (err, res) => {
         if (!err && res) {
-            out = {}
+            var out = {}
             res.forEach(r => {
                 switch (r.key) {
                     case 'game.name':

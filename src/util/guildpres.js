@@ -4,7 +4,7 @@ const client = Main.client
 
 exports.get = (cb) => {
     Main.mysql.query("SELECT * FROM guilds", (err, res) => {
-        out = {}
+        var out = {}
         if (!err && res) {
             res.forEach(r => {
                 if (r.prefix.length > 0)

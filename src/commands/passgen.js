@@ -7,7 +7,7 @@ const Statics = require('../util/statics')
 
 const ASCII_CHARSET = (() => {
     var out = ''
-    for (i = 32; i < 128; i++) {
+    for (var i = 32; i < 128; i++) {
         out += (String.fromCharCode(i))
     }
     return out
@@ -52,7 +52,7 @@ exports.ex = (msg, args) => {
 
     var result = ''
 
-    for (i = 0; i < length; i++)
+    for (var i = 0; i < length; i++)
         result += charset[Math.floor(Math.random() * charset.length)]
     
     memb.createDM().then(dm => {
