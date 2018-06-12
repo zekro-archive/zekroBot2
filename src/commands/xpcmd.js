@@ -59,7 +59,7 @@ exports.ex = (msg, args) => {
         //     member = guild.members.find(m => m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1)
         let member = Funcs.fetchMember(guild, args[0])
         if (!member) {
-            Embeds.error(chan, 'Can not fetch any member to the identifier: ```' + args[0]) + '```')
+            Embeds.error(chan, 'Can not fetch any member to the identifier: ```' + args[0] + '```')
             return
         }
     }
