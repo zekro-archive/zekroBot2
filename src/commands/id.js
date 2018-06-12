@@ -27,7 +27,7 @@ exports.ex = (msg, args) => {
     }
 
     if (parseInt(args[0]) > 10000000) {
-        for (k in cats) {
+        for (var k in cats) {
             var res = cats[k].find(o => o.id == args[0])
             if (res) {
                 chan.send('', new Discord.RichEmbed()

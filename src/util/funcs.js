@@ -21,7 +21,7 @@ exports.fetchMember = (guild, identifier, bots) => {
         (m) => m.displayName.toLowerCase().includes(identifier)
     ]
 
-    for (method of methods) {
+    for (var method of methods) {
         let out = guild.members.find(method)
         console.log(method, out)
         if (out && (!out.user.bot || bots))

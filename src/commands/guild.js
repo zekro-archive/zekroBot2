@@ -15,7 +15,7 @@ exports.ex = (msg, args) => {
     let roles = guild.roles
     let owner = guild.owner
 
-    emb = new  Discord.RichEmbed()
+    var emb = new  Discord.RichEmbed()
         .setTitle(guild.name + ' - Guild Info')
         .setColor(guild.owner.highestRole.color)
         .addField('ID', `\`\`\`${guild.id}\`\`\``)
