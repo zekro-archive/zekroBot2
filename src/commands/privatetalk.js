@@ -3,23 +3,7 @@ const client = Main.client
 const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const Statics = require('../util/statics')
-
-
-function fetchMember(guild, identifier) {
-    identifier = identifier.toLowerCase()
-    return guild.members.find(m => {
-        return !m.user.bot && (
-               m.id == identifier ||
-               m.id == identifier.replace(/[<@!>]/gm, "") ||
-               m.user.username.toLowerCase() == identifier ||
-               m.user.username.toLowerCase().startsWith(identifier) ||
-               m.user.username.toLowerCase().includes(identifier) ||
-               m.displayName.toLowerCase() == identifier ||
-               m.displayName.toLowerCase().startsWith(identifier) ||
-               m.displayName.toLowerCase().includes(identifier)
-        )
-    })
-}
+const Funcs = require('../util/funcs')
 
 
 exports.ex = (msg, args) => {
@@ -44,7 +28,7 @@ exports.ex = (msg, args) => {
 
     var members = []
     args.forEach(a => {
-        let m = fetchMember(guild, a)
+        let m = Funcs.fetchMember(guild, a)
         if (m)
             members.push(m)
     })

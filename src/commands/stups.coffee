@@ -4,6 +4,7 @@ client = Main.client
 Discord = require 'discord.js'
 Embeds = require '../util/embeds'
 Statics = require '../util/statics'
+Funcs = require '../util/funcs'
 
 
 exports.ex = (msg, args) ->
@@ -18,11 +19,12 @@ exports.ex = (msg, args) ->
         Embeds.invalidInput chan, 'stups'
         return
 
-    receiver = guild.members.find (m) -> m.id == args[0].replace /(<@)|>/gm, ''
+    # receiver = guild.members.find (m) -> m.id == args[0].replace /(<@)|>/gm, ''
+    # if !receiver
+    #     receiver = guild.members.find (m) -> m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1
+    receiver = Funcs.fetchMember guild, args[0]
     if !receiver
-        receiver = guild.members.find (m) -> m.displayName.toLowerCase().indexOf(args.join(' ').toLowerCase()) > -1
-    if !receiver
-        Embeds.error chan, "Can not fetch any members to the entered identifier: ```#{args.join(' ')}```", 'INVALID INPUT'
+        Embeds.error chan, "Can not fetch any members to the entered identifier: ```#{args[0]}```", 'INVALID INPUT'
     else
         emb = new Discord.RichEmbed()
             .setColor Statics.COLORS.main

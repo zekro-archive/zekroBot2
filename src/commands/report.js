@@ -5,6 +5,7 @@ const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const Statics = require('../util/statics')
 const Time = require('../util/timeutil')
+const Funcs = require('../util/funcs')
 
 
 exports.ex = (msg, args) => {
@@ -29,10 +30,12 @@ exports.ex = (msg, args) => {
             if (!args[1])
                 Embeds.error(chan, 'Please enter a member mention, ID or name to list reports of this member.')
                 return
-            inp = args[1].replace(/(<@!)|(<@)|>/g, '')
-            victim = guild.members.find(m => m.id == inp)
-            if (!victim)
-                victim = guild.members.find(m => m.displayName.toLowerCase().indexOf(inp.toLowerCase()) > -1)
+            // inp = args[1].replace(/(<@!)|(<@)|>/g, '')
+            // victim = guild.members.find(m => m.id == inp)
+            // if (!victim)
+            //     victim = guild.members.find(m => m.displayName.toLowerCase().indexOf(inp.toLowerCase()) > -1)
+            inp = args[0]
+            victim = Funcs.fetchMember(guild, args[1])
             if (!victim)
                 Embeds.error(chan, `Can not parse any member to the identifier: \`\`\`${inp}\`\`\` `)
             else {
