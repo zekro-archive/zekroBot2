@@ -7,7 +7,7 @@
     "test": "node src/main.js -test $DISCORD_TOKEN",
     "start": "node src/main.js"
   },
-  "author": "",
+  "author": "zekro <contact@zekro.de>",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.3.2",

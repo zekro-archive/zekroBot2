@@ -25,6 +25,6 @@ after_success: |
     mv cmdlist.md zekroBot2.wiki/Commands.md
     cd zekroBot2.wiki
     git add .
-    git commit -c user.name="travis" -c user.email="travis" -m "automatically updated commands list"
+    git -c user.name="travis" -c user.email="travis" commit -m "automatically updated commands list"
     git push
   fi
