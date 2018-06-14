@@ -508,7 +508,7 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
-            // LOBBY COMMAND
+            // PRIVATETALK COMMAND
             .register(
                 require('../commands/privatetalk').ex,
                 'private',
@@ -516,6 +516,16 @@ class CmdHandler {
                 'Create a private talk channel with invited members',
                 `\`${prefix}private <member1> <member2> <member3>\`\n` + 
                 `\`${prefix}private close\`\n`,
+                this.cmd.type.CHAT,
+                0
+            )
+            // API COMMAND
+            .register(
+                require('../commands/apis').ex,
+                'apis',
+                ['api'],
+                'Check API status',
+                `\`${prefix}api\`\n`,
                 this.cmd.type.CHAT,
                 0
             )
