@@ -8,11 +8,12 @@ const https = require('https')
 
 
 const ENDPOINTS = {
-    "zekro.de":            "https://zekro.de/api/cats/",
-    "github.com":          "https://api.github.com/",
-    "giphy.com":           "https://api.giphy.com/v1/",
-    "dict.cc":             "https://www.dict.cc/",
-    "urbandictionary.com": "https://api.urbandictionary.com/"
+    "zekro.de":             "https://zekro.de/api/cats/",
+    "github.com":           "https://api.github.com/",
+    "giphy.com":            "https://api.giphy.com/v1/",
+    "dict.cc":              "https://www.dict.cc/",
+    "urbandictionary.com":  "https://api.urbandictionary.com/",
+    "tombstonebuilder.com": "http://www.tombstonebuilder.com/generate.php"
 }
 
 
@@ -60,8 +61,4 @@ exports.ex = (msg, args) => {
         })
 
     })
-
-
-   
-
 }

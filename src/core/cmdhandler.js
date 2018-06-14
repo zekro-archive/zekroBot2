@@ -526,7 +526,19 @@ class CmdHandler {
                 ['api'],
                 'Check API status',
                 `\`${prefix}api\`\n`,
-                this.cmd.type.CHAT,
+                this.cmd.type.MISC,
+                0
+            )
+            // TOMBSTONE COMMAND
+            .register(
+                require('../commands/tombstone').ex,
+                'tombstone',
+                ['tomb', 'ts'],
+                'Check API status',
+                `\`${prefix}tombstone <line1>\`\n` + 
+                `\`<line2>\`\n` + 
+                `\`...\`\n`,
+                this.cmd.type.FUN,
                 0
             )
 
