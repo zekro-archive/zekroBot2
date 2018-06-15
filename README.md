@@ -3,7 +3,8 @@
      <h1>~ zekroBot v2 ~</h1>
      <strong>A rework of the original zekroBot in node.js</strong><br><br>
      <img src="https://forthebadge.com/images/badges/made-with-javascript.svg" height="30" />&nbsp;
-     <img src="https://forthebadge.com/images/badges/built-with-love.svg" height="30" />
+     <img src="https://forthebadge.com/images/badges/built-with-love.svg" height="30" />&nbsp;
+     <a href="https://zekro.de/discord"><img src="https://img.shields.io/discord/307084334198816769.svg?logo=discord&style=for-the-badge"></a>
  </div>
 
 ---
