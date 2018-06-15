@@ -6,8 +6,6 @@ const Funcs = require('../util/funcs')
 
 exports.ex = (msg, args) => {
 
-    // Embeds.default(msg.channel, `${args[0]} => ${Funcs.fetchMember(msg.member.guild, args[0], true)}`)
-
     var chan = msg.channel
     var memb = msg.member
     var guild = memb.guild
@@ -19,7 +17,7 @@ exports.ex = (msg, args) => {
         if (muteRole) {
             let tmp = guild.members
                 .filter(m => m.roles.find(r => r.id == muteRole.id) != null)
-            if (tmp && tmp.length > 0)
+            if (tmp && tmp.array().length > 0)
                 muted = tmp.map(m => `${m.displayName} (${m.user.tag})`).join('\n')
         }
         Embeds.default(chan, '```' + muted + '```', 'Muted members on this guild')
@@ -42,10 +40,12 @@ exports.ex = (msg, args) => {
     if (victim.roles.find(r => r.id == muteRole.id)) {
         victim.removeRole(muteRole)
         Embeds.default(chan, `Unmuted <@${victim.id}>.`)
+        Embeds.default(victim, `You got unmuted in all text channels on guild \`${guild.name}\`.`, null, Statics.COLORS.orange)
     }
     else {
         victim.addRole(muteRole, "MUTED")
         Embeds.default(chan, `Muted <@${victim.id}>.`)
+        Embeds.default(victim, `You got muted in all text channels on guild \`${guild.name}\`.`, null, Statics.COLORS.orange)
 
         guild.channels
             .filter(c => c.type == 'text')

@@ -541,6 +541,17 @@ class CmdHandler {
                 this.cmd.type.FUN,
                 0
             )
+            // MUTE COMMAND
+            .register(
+                require('../commands/mute').ex,
+                'mute',
+                ['unmute'],
+                'Mute users that they can not write anymore in text channels',
+                `\`${prefix}mute\`\n` + 
+                `\`${prefix}mute <member>\`\n`,
+                this.cmd.type.MODERATION,
+                3
+            )
 
 
         if (Main.TESTING_MODE)
