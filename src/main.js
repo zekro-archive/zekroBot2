@@ -10,6 +10,7 @@ const { CmdHandler } = require('./core/cmdhandler')
 const { MySql } = require('./core/mysql')
 const { Config } = require('./core/config')
 const { CrashCollector } = require('./util/crashCollector')
+const PromiseCatcher = require('./util/promiseCatcher')
 
 const package = require('../package.json')
 
@@ -22,6 +23,9 @@ exports.TESTING_MODE = (() => {
     var i = process.argv.indexOf('-test')
     return (i > 1 && process.argv.length > 3)
 })()
+
+new CrashCollector('./crash_logs')
+new PromiseCatcher('./crash_logs')
 
 Logger.debug('Debug mode enabled')
 
@@ -47,8 +51,6 @@ require('./core/xp')
 exports.loadModLoader = () => {
     exports.modloader = require('./core/modloader')
 }
-
-new CrashCollector('./crash_logs')
 
 if (exports.TESTING_MODE)
     exports.client.login(process.argv[3])

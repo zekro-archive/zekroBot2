@@ -4,7 +4,7 @@ const Embeds = require('../util/embeds')
 const Discord = require('discord.js')
 const Statics = require('../util/statics')
 const https = require('https')
-
+const http = require('http')
 
 
 const ENDPOINTS = {
@@ -18,10 +18,15 @@ const ENDPOINTS = {
 
 
 function checkApi(url, cb) {
-    let req = https.get(url, res => {
+    var req
+    var resHandler = (res) => {
         res.on('data', () => {})
         res.on('end', () => cb(true))
-    }).on('error', () => cb(false))
+    }
+    req = url.startsWith('https://') ? 
+        https.get(url, resHandler) : 
+        http.get(url, resHandler)
+    req.on('error', () => cb(false))
     req.end()
 }
 
@@ -53,12 +58,12 @@ exports.ex = (msg, args) => {
         Object.keys(ENDPOINTS).forEach(api => {
             let url = ENDPOINTS[api]
             status[api] = "checking..."
-            tmsg.edit('', buildMessageEmbed(status))
+            tmsg.edit('', buildMessageEmbed(status)).save()
             checkApi(url, ok => {
                 status[api] = ok ? `OK` : 'FAIL'
-                tmsg.edit('', buildMessageEmbed(status))
+                tmsg.edit('', buildMessageEmbed(status)).save()
             })
         })
 
-    })
+    }).save()
 }

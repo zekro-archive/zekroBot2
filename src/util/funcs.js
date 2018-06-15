@@ -42,3 +42,24 @@ exports.fetchMember = (guild, identifier, bots) => {
     //     )
     // })
 }
+
+/**
+ * Get date and time as formated string.
+ * @param   {boolean} [forFile] Create string with underscores for file name
+ * @returns {string}            Formated sate time string
+ */
+exports.getTime = (forFile) => {
+    function btf(inp) {
+    	if (inp < 10)
+	    return "0" + inp;
+    	return inp;
+    }
+    var date = new Date(),
+        y = date.getFullYear(),
+        m = btf(date.getMonth() + 1),
+	    d = btf(date.getDate()),
+	    h = btf(date.getHours()),
+	    min = btf(date.getMinutes()),
+	    s = btf(date.getSeconds());
+    return forFile ? `${y}-${m}-${d}_${h}-${min}-${s}` : `${m}/${d}/${y} - ${h}:${min}:${s}`;
+}
