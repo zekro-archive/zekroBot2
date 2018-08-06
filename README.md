@@ -4,16 +4,13 @@
      <strong>A rework of the original zekroBot in node.js</strong><br><br>
      <img src="https://forthebadge.com/images/badges/made-with-javascript.svg" height="30" />&nbsp;
      <img src="https://forthebadge.com/images/badges/built-with-love.svg" height="30" />&nbsp;
-     <a href="https://travis-ci.org/zekroTJA/knechtV3"><img src="https://travis-ci.org/zekroTJA/knechtV3.svg?branch=master"></a>&nbsp;
      <a href="https://zekro.de/discord"><img src="https://img.shields.io/discord/307084334198816769.svg?logo=discord&style=for-the-badge" height="30"></a>
+     <br>
+     <a href="https://travis-ci.org/zekroTJA/knechtV3"><img src="https://travis-ci.org/zekroTJA/knechtV3.svg?branch=master"></a>
  </div>
 
 ---
 
-| | |
-|--|--|
-| Master | [![Build Status](https://travis-ci.org/zekroTJA/zekroBot2.svg?branch=master)](https://travis-ci.org/zekroTJA/zekroBot2) |
-| Dev | [![Build Status](https://travis-ci.org/zekroTJA/zekroBot2.svg?branch=dev)](https://travis-ci.org/zekroTJA/zekroBot2) |
 ---
 
 If you want to reuse the code of this project, please read **[this](http://s.zekro.de/codepolicy)** before doing so!
