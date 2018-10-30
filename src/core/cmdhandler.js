@@ -508,7 +508,7 @@ class CmdHandler {
                 this.cmd.type.CHAT,
                 0
             )
-            // LOBBY COMMAND
+            // PRIVATETALK COMMAND
             .register(
                 require('../commands/privatetalk').ex,
                 'private',
@@ -518,6 +518,39 @@ class CmdHandler {
                 `\`${prefix}private close\`\n`,
                 this.cmd.type.CHAT,
                 0
+            )
+            // API COMMAND
+            .register(
+                require('../commands/apis').ex,
+                'apis',
+                ['api'],
+                'Check API status',
+                `\`${prefix}api\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
+            // TOMBSTONE COMMAND
+            .register(
+                require('../commands/tombstone').ex,
+                'tombstone',
+                ['tomb', 'ts'],
+                'Check API status',
+                `\`${prefix}tombstone <line1>\`\n` + 
+                `\`<line2>\`\n` + 
+                `\`...\`\n`,
+                this.cmd.type.FUN,
+                0
+            )
+            // MUTE COMMAND
+            .register(
+                require('../commands/mute').ex,
+                'mute',
+                ['unmute'],
+                'Mute users that they can not write anymore in text channels',
+                `\`${prefix}mute\`\n` + 
+                `\`${prefix}mute <member>\`\n`,
+                this.cmd.type.MODERATION,
+                3
             )
 
 

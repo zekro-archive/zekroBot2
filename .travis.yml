@@ -1,9 +1,5 @@
 language: node_js
 
-node_js:
-  - lts/*
-  - node
-
 services:
   - mysql
 
@@ -16,15 +12,19 @@ before_script:
   - mysql -e 'SOURCE zekroBot2.sql'
   - npm install
 
-script:
-  - npm test
 
-after_success: |
-  if [ -n "$GITHUB_API_KEY" ]; then
-    git clone https://zekroTJA:$GITHUB_API_KEY@github.com/zekroTJA/zekroBot2.wiki.git
-    mv cmdlist.md zekroBot2.wiki/Commands.md
-    cd zekroBot2.wiki
-    git add .
-    git -c user.name="travis" -c user.email="travis" commit -m "automatically updated commands list"
-    git push
-  fi
+matrix:
+  include:
+    - node_js: node
+      script: npm test
+    - node_js: lts/*
+      script: npm test
+      after_success: |
+        if [ -n "$GITHUB_API_KEY" ]; then
+          git clone https://zekroTJA:$GITHUB_API_KEY@github.com/zekroTJA/zekroBot2.wiki.git
+          mv cmdlist.md zekroBot2.wiki/Commands.md
+          cd zekroBot2.wiki
+          git add .
+          git -c user.name="travis" -c user.email="travis" commit -m "automatically updated commands list"
+          git push
+        fi

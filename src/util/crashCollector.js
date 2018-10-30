@@ -1,4 +1,5 @@
 const fs = require('fs')
+const Funcs = require('./funcs')
 
 // Console Colors Statics
 const CLR = {
@@ -29,23 +30,6 @@ const CLR = {
     BgWhite: "\x1b[47m"
 }
 
-// Function to get current time and pars it for log and file names
-function getTime(forFile) {
-    function btf(inp) {
-    	if (inp < 10)
-	    return "0" + inp;
-    	return inp;
-    }
-    var date = new Date(),
-        y = date.getFullYear(),
-        m = btf(date.getMonth() + 1),
-	    d = btf(date.getDate()),
-	    h = btf(date.getHours()),
-	    min = btf(date.getMinutes()),
-	    s = btf(date.getSeconds());
-    return forFile ? `${y}-${m}-${d}_${h}-${min}-${s}` : `${m}/${d}/${y} - ${h}:${min}:${s}`;
-}
-
 
 class CrashCollector {
     /**
@@ -67,10 +51,10 @@ class CrashCollector {
         this.exec = functionAfterCrash
         process.on('uncaughtException', (err) => {
 
-            const save_file = `${this.location}/${getTime(true)}_crash.log`
+            const save_file = `${this.location}/${Funcs.getTime(true)}_crash.log`
 
             fs.writeFileSync(save_file, 
-                `TIME:      ${getTime()}\n` + 
+                `TIME:      ${Funcs.getTime()}\n` + 
                 `TYPE:      ${err.name}\n` + 
                 `MESSAGE:   ${err.message}\n\n\n` + 
                 `STACK TRACE:\n\n${err.stack}\n`
@@ -79,7 +63,7 @@ class CrashCollector {
             const BAR = CLR.FgRed + '|' + CLR.Reset
             console.error(`\n${CLR.FgRed}---------------------------------------- - - - - - -${CLR.Reset}\n` +
                 `${BAR} ${CLR.BgRed}< AN UNEXPECTED ERROR OCCURED >${CLR.Reset}\n` +
-                `${BAR} TIME:    ${getTime()}\n` +
+                `${BAR} TIME:    ${Funcs.getTime()}\n` +
                 `${BAR} TYPE:    ${CLR.FgCyan + err.name + CLR.Reset}\n` +
                 `${BAR} MESSAGE: ${CLR.FgCyan + err.message + CLR.Reset}\n${BAR}\n` +
                 `${BAR} STACK STRACE:\n` +
