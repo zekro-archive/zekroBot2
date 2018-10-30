@@ -14,6 +14,10 @@ var polls = {}
 exports.load = () => Poll.load()
 
 
+function escapeString(string) {
+    return string.replace(/"/gm, '\\"')
+}
+
 class Poll {
 
     constructor(memb, chan, topic, poss, ans) {
@@ -83,8 +87,8 @@ class Poll {
                 member: this.msg.member.id
             },
             member: this.memb.id,
-            topic: this.topic.replace(/\n/gm, '--nl--'),
-            poss: this.poss.map(p => p.replace(/\n/gm, '--nl--')),
+            topic: escapeString(this.topic).replace(/\n/gm, '--nl--'),
+            poss: this.poss.map(p => escapeString(p).replace(/\n/gm, '--nl--')),
             ans: this.ans
         }
         Mysql.query(`UPDATE votes SET data = '${JSON.stringify(saveState)}' WHERE membid = '${this.memb.id}'`, (err, res) => {

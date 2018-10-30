@@ -35,7 +35,6 @@ function get_ua(url, cb) {
         });
         res.on('end', () => {
             cb(null, data)
-            console.log(options)
         }).on('error', (err) => {
             if (cb)
                 cb(err)
