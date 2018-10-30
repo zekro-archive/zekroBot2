@@ -21,6 +21,8 @@ function getLinks(guild, cb) {
         var links = {}
         if (!err && res)
             res.forEach(r => links[r.pattern] = r.status)
+        if (Object.keys(links).length < 1)
+            links = {'*': 1}
         cb(links)
     })
 }
@@ -45,8 +47,6 @@ function handler(msg) {
 
     if (chan.type != 'text' || memb.id == client.user.id)
         return
-
-    // var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?\w{1,}\.\w{1,4}(?=(.?)(\/|$))/gm)
 
     // Match all possible links
     var matched_links = msg.content.match(/(https?:\/\/)?(www\.)?((\w)+\.)+([a-zA-Z]{2,}(?!\())(:\d+)?(\/\S+)?(?!\w)/gm)

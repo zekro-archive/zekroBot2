@@ -9,6 +9,8 @@ function getLinks(guild, cb) {
         var links = {}
         if (!err && res)
             res.forEach(r => links[r.pattern] = r.status)
+        if (Object.keys(links).length < 1)
+            links = {'*': 1}
         cb(links)
     })
 }
@@ -19,12 +21,23 @@ exports.ex = (msg, args) => {
     var chan = msg.channel
     var guild = msg.member.guild
 
+    if (args[0] && args[0].toLowerCase() == 'purge') {
+        Mysql.query(`DELETE FROM linkflag WHERE guild = '${guild.id}'`, (err, res) => {
+            if (err) {
+                Embeds.error(chan, 'Failed accessing database: ```\n' + err + '\n```')
+                return
+            }
+            Embeds.default(chan, 'Successfully purged set link rules.')
+        })
+        return
+    }
+
     getLinks(guild, links => {
 
         if (!args[0]) {
-            Embeds.default(chan, '```' + Object.keys(links).map(l => {
+            chan.send('**LINK FLAGS**\n```' + Object.keys(links).map(l => {
                 return `${links[l] == 0 ? '[ FORBIDDEN ]' : '[  ALLOWED  ]'} ${l}`
-            }).join('\n') + '```', 'LINK FLAGS')
+            }).join('\n') + '```')
             return
         }
 

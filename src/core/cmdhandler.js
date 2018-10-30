@@ -471,6 +471,7 @@ class CmdHandler {
                 ['lf', 'flag'],
                 'Get, add or remove linkflags',
                 `\`${prefix}linkflag\`\n` +
+                `\`${prefix}linkflag purge\`\n` +
                 `\`${prefix}linkflag <current_link_pattern> <new_link_pattern>\`\n` +
                 `\`${prefix}linkflag <link_pattern> 0/1/-\`\n` +
                 '`0` - will set the link flag to `FORBIT`\n`1` - will set the link flag to `ALLOW`\n`-` - will remove the link from list\n',
