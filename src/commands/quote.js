@@ -16,11 +16,18 @@ exports.ex = (msg, args) => {
         return
     }
 
+    if (args[0].startsWith('https://discordapp.com/channels/')) {
+        let split = args[0].split('/')
+        args[0] = split[split.length - 1]
+        console.log("REPLACED:",args[0])
+    }
+
     function _edit(ans, quoteMsg) {
+        console.log(quoteMsg.url);
         ans.edit('', new Discord.RichEmbed()
             .setColor(Statics.COLORS.cyan)
-            .setAuthor(quoteMsg.member.displayName, quoteMsg.author.avatarURL)
-            .setDescription(quoteMsg.content)
+            .setAuthor(quoteMsg.member.displayName, quoteMsg.author.avatarURL, quoteMsg.url)
+            .setDescription(quoteMsg.content + `\n\n[:link:](${quoteMsg.url})`)
             .setFooter('#' + quoteMsg.channel.name)
             .setTimestamp(quoteMsg.createdAt)
         )
