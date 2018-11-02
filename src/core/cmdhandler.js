@@ -553,6 +553,17 @@ class CmdHandler {
                 this.cmd.type.MODERATION,
                 3
             )
+            // ORGA COMMAND
+            .register(
+                require('../commands/ghorga').ex,
+                'orga',
+                ['ghorga', 'orgs', 'org', 'orgas'],
+                'Automatically send organization invites to people by command',
+                `\`${prefix}mute\`\n` + 
+                `\`${prefix}mute <member>\`\n`,
+                this.cmd.type.MISC,
+                0
+            )
 
 
         if (Main.TESTING_MODE)
