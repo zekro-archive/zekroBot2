@@ -139,7 +139,7 @@ exports.ex = (msg, args) => {
     var chan = msg.channel
 
     if (!args[0]) {
-        return Embeds.invalidInput('orga');
+        return Embeds.invalidInput(chan, 'orga');
     }
 
     switch (args[0]) {

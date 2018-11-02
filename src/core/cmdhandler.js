@@ -559,8 +559,9 @@ class CmdHandler {
                 'orga',
                 ['ghorga', 'orgs', 'org', 'orgas'],
                 'Automatically send organization invites to people by command',
-                `\`${prefix}mute\`\n` + 
-                `\`${prefix}mute <member>\`\n`,
+                `\`${prefix}orga <username>\`\n` + 
+                `\`${prefix}orga setup\`\n` + 
+                `\`${prefix}orga remove\`\n`,
                 this.cmd.type.MISC,
                 0
             )
