@@ -184,9 +184,17 @@ exports.ex = (msg, args) => {
                 break
 
             default:
-                let cont = args.join(' ').split(/( *\| *)/gm).filter((a, i) => i % 2 == 0)
+                let cont = args.join(' ')
+                    .split(/(\s*\|\s*)/gm)
+                    .filter((a) => a && a.length > 0 && !a.includes('|'))
+                    .slice(0, 10)
                 if (!(memb.id in polls)) {
-                    let poll = new Poll(memb, chan, cont[0], cont.slice(1))
+                    let poss = cont.slice(1)
+                    if (poss.length < 2) {
+                        Embeds.error(chan, 'Creating a vote with les than 2 choises is kind of useless, isn\'t it? :thinking:')
+                        return
+                    }
+                    let poll = new Poll(memb, chan, cont[0], poss)
                     polls[memb.id] = poll
                 }
                 else {
