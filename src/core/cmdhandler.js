@@ -273,7 +273,7 @@ class CmdHandler {
                 require('../commands/bug').ex,
                 'bug',
                 ['suggestion', 'bugreport', 'issue'],
-                'Get info how to submit a bug or suggestion',
+                'Submit an issue on GitHub with the bot',
                 `\`${prefix}bug\`\n`,
                 this.cmd.type.MISC,
                 0

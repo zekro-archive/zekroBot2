@@ -23,6 +23,12 @@ module.exports = {
 
     invalidInput(chan, cmd) {
         this.error(chan, `Please enter \`help ${cmd}\` to get information how to use this command.`, "INVALID INPUT")
+    },
+
+    getEmbed(cont, color) {
+        return new Discord.RichEmbed()
+            .setDescription(cont)
+            .setColor(color ? color : Statics.COLORS.main)
     }
 
 }
