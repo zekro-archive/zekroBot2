@@ -60,3 +60,7 @@ typings/
 config.json
 .vscode/*
 createcloc
+
+node_modules/*
+dist/*
+private.*
